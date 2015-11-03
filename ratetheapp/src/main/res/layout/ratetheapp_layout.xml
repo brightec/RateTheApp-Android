@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ratetheapp_title"
+        android:id="@+id/textView"
+        style="@style/RateTheAppText"/>
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_below="@+id/text"
+        android:layout_centerHorizontal="true"
+        style="@style/RatingBar"/>
+
+</LinearLayout>
