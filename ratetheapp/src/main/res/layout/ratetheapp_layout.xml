@@ -6,16 +6,14 @@
               android:gravity="center_horizontal">
 
     <TextView
+        android:id="@+id/ratingTitleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ratetheapp_title"
-        android:id="@+id/textView"
-        style="@style/RateTheAppText"/>
+        style="@style/RateTheAppTitleTextAppearance"/>
 
     <RatingBar
         android:id="@+id/ratingBar"
-        android:layout_below="@+id/text"
-        android:layout_centerHorizontal="true"
         style="@style/RatingBar"/>
 
 </LinearLayout>

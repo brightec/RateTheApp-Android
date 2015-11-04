@@ -7,12 +7,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 public class RateTheApp extends LinearLayout {
 
@@ -20,28 +22,38 @@ public class RateTheApp extends LinearLayout {
     public static final String PREF_RATETHEAPP_SHOW = "ratetheapp_show";
     public static final String PREF_RATETHEAPP_RATING = "ratetheapp_rating";
 
+    private String mTitleText;
+    private int mTitleTextAppearanceResId;
+
     public RateTheApp(Context context) {
-        super(context);
-        init();
+        this(context, null);
     }
 
     public RateTheApp(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
+        this(context, attrs, 0);
     }
 
     public RateTheApp(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        init();
+        this(context, attrs, defStyleAttr, 0);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public RateTheApp(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init();
+        init(attrs, defStyleAttr, defStyleRes);
     }
 
-    private void init()  {
+    private void init(AttributeSet attrs, int defStyleAttr, int defStyleRes)  {
+        // Load attributes
+        final TypedArray a = getContext().obtainStyledAttributes(
+                attrs, R.styleable.RateTheApp, defStyleAttr, defStyleRes);
+
+        // Title Text Appearance
+        mTitleTextAppearanceResId = a.getResourceId(R.styleable.RateTheApp_rateTheAppTitleTextAppearance, R.style.RateTheAppTitleTextAppearance);
+        mTitleText = a.getString(R.styleable.RateTheApp_rateTheAppTitleText);
+
+        a.recycle();
+
         if (!isInEditMode() && !shouldShow()) {
             this.setVisibility(GONE);
             return;
@@ -50,12 +62,35 @@ public class RateTheApp extends LinearLayout {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         inflater.inflate(R.layout.ratetheapp_layout, this, true);
 
+        // Initialise the title
+        initTitle();
+
         RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 
         float rating = getSavedRating();
         ratingBar.setRating(rating);
 
         ratingBar.setOnRatingBarChangeListener(ratingChangeListener);
+    }
+
+    private void initTitle() {
+        TextView title = (TextView) findViewById(R.id.ratingTitleText);
+        // Hide the title if an empty title text attribute was provided
+        if (mTitleText != null && mTitleText.isEmpty()) {
+            title.setVisibility(GONE);
+        }
+        else {
+            // Set the title text if provided
+            if (mTitleText != null) {
+                title.setText(mTitleText);
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                title.setTextAppearance(mTitleTextAppearanceResId);
+            }
+            else {
+                title.setTextAppearance(getContext(), mTitleTextAppearanceResId);
+            }
+        }
     }
 
     private boolean shouldShow() {

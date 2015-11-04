@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="RateTheAppText">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/RateTheAppText</item>
-    </style>
+    <style name="RateTheAppTitleTextAppearance" parent="TextAppearance.AppCompat.Body1"/>
 
     <style name="RatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/ratetheapp_stars</item>
