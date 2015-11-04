@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">RateTheApp-Android</string>
+    <string name="app_name">RateTheApp Demo</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Brightec Developer Details -->
+    <string name="madeByBrightec">Made by Brightec</string>
+    <string name="brightecWebsite">brightec.co.uk</string>
+    <string name="brightecUrl">http://brightec.co.uk</string>
+
+    <!-- Demo2 -->
+    <string name="demo2_ratetheapp_title">How many stars would you give this app?</string>
 </resources>
