@@ -6,5 +6,8 @@
         <attr name="rateTheAppTitleTextAppearance" format="reference"/>
         <attr name="rateTheAppSelectedStarTint" format="color"/>
         <attr name="rateTheAppUnselectedStarTint" format="color"/>
+        <attr name="rateTheAppNumberOfStars" format="integer"/>
+        <attr name="rateTheAppStepSize" format="float"/>
+        <attr name="rateTheAppDefaultRating" format="float"/>
     </declare-styleable>
 </resources>

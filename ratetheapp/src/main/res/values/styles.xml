@@ -8,9 +8,5 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">16dp</item>
         <item name="android:gravity">center</item>
-        <item name="android:max">5</item>
-        <item name="android:numStars">5</item>
-        <item name="android:rating">0</item>
-        <item name="android:stepSize">1</item>
     </style>
 </resources>

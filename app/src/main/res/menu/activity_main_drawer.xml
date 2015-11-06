@@ -16,5 +16,8 @@
         <item
             android:id="@+id/nav_demo4"
             android:title="Multiple Ratings"/>
+        <item
+            android:id="@+id/nav_demo5"
+            android:title="Other examples"/>
     </group>
 </menu>

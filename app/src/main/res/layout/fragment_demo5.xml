@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              tools:context="uk.co.brightec.ratetheapp_android.fragments.DefaultFragment"
+              android:gravity="center">
+
+    <uk.co.brightec.ratetheapp.RateTheApp
+        app:rateTheAppName="ratingBar2stars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:rateTheAppSelectedStarTint="@color/colorPrimaryDark"
+        app:rateTheAppUnselectedStarTint="@color/colorPrimary"
+        app:rateTheAppTitleText="Number of stars set to 2"
+        app:rateTheAppNumberOfStars="2"/>
+
+    <uk.co.brightec.ratetheapp.RateTheApp
+        app:rateTheAppName="ratingBar3OutOfFive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:rateTheAppSelectedStarTint="@color/colorPrimaryDark"
+        app:rateTheAppUnselectedStarTint="@color/colorPrimary"
+        app:rateTheAppTitleText="Starts with 3 out of 5 stars"
+        app:rateTheAppNumberOfStars="5"
+        app:rateTheAppDefaultRating="3"/>
+
+    <uk.co.brightec.ratetheapp.RateTheApp
+        app:rateTheAppName="ratingBar6step2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:rateTheAppSelectedStarTint="@android:color/holo_purple"
+        app:rateTheAppTitleText="Six stars, step size of 0.5"
+        app:rateTheAppNumberOfStars="6"
+        app:rateTheAppDefaultRating="3"
+        app:rateTheAppStepSize="0.5"/>
+
+</LinearLayout>

@@ -18,6 +18,7 @@ import uk.co.brightec.ratetheapp_android.fragments.Demo1Fragment;
 import uk.co.brightec.ratetheapp_android.fragments.Demo2Fragment;
 import uk.co.brightec.ratetheapp_android.fragments.Demo3Fragment;
 import uk.co.brightec.ratetheapp_android.fragments.Demo4Fragment;
+import uk.co.brightec.ratetheapp_android.fragments.Demo5Fragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -122,6 +123,9 @@ public class MainActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_demo4) {
             getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, Demo4Fragment.newInstance()).commit();
+        }
+        else if (id == R.id.nav_demo5) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, Demo5Fragment.newInstance()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
@@ -21,10 +22,15 @@ import android.widget.TextView;
 
 public class RateTheApp extends LinearLayout {
 
-    private static final int MIN_GOOD_RATING = 3;
     public static final String PREF_RATETHEAPP_PREFIX = "ratetheapp";
     public static final String PREF_RATETHEAPP_SHOW_SUFFIX = "_show";
     public static final String PREF_RATETHEAPP_RATING_SUFFIX = "_rating";
+
+    private static final int DEFAULT_NUMBER_OF_STARS = 5;
+    private static final float DEFAULT_STEP_SIZE = 1f;
+    private static final float DEFAULT_RATING = 0.0f;
+
+    private static final int MIN_GOOD_RATING = 3;
 
     private String mInstanceName;
     private String mTitleText;
@@ -32,6 +38,10 @@ public class RateTheApp extends LinearLayout {
     private int mSelectedStarColour;
     private int mUnselectedStarColour;
     private RatingBar mRatingBar;
+    private int mNumberOfStars;
+    private float mStepSize;
+    private float mDefaultRating;
+    private float mRating;
 
     public RateTheApp(Context context) {
         this(context, null);
@@ -67,7 +77,10 @@ public class RateTheApp extends LinearLayout {
         mTitleTextAppearanceResId = a.getResourceId(R.styleable.RateTheApp_rateTheAppTitleTextAppearance, R.style.RateTheAppTitleTextAppearance);
         mTitleText = a.getString(R.styleable.RateTheApp_rateTheAppTitleText);
 
-        // Star colors
+        // Stars & Rating
+        mNumberOfStars = a.getInt(R.styleable.RateTheApp_rateTheAppNumberOfStars, DEFAULT_NUMBER_OF_STARS);
+        mStepSize = a.getFloat(R.styleable.RateTheApp_rateTheAppStepSize, DEFAULT_STEP_SIZE);
+        mDefaultRating = a.getFloat(R.styleable.RateTheApp_rateTheAppDefaultRating, DEFAULT_RATING);
         mSelectedStarColour = a.getColor(R.styleable.RateTheApp_rateTheAppSelectedStarTint, getColor(R.color.RateTheApp_SelectedStarColor));
         mUnselectedStarColour = a.getColor(R.styleable.RateTheApp_rateTheAppUnselectedStarTint, getColor(R.color.RateTheApp_UnselectedStarColor));
 
@@ -82,6 +95,8 @@ public class RateTheApp extends LinearLayout {
         inflater.inflate(R.layout.ratetheapp_layout, this, true);
 
         mRatingBar = (RatingBar) findViewById(R.id.ratingBar);
+        mRatingBar.setNumStars(mNumberOfStars);
+        mRatingBar.setStepSize(mStepSize);
 
         // Initialise the title
         initTitle();
@@ -89,8 +104,13 @@ public class RateTheApp extends LinearLayout {
         // Initialise the stars
         initStars();
 
-        float rating = getSavedRating();
-        mRatingBar.setRating(rating);
+        // Set previously saved rating (else use default rating)
+        mRating = getSavedRating(-1f);
+        if (mRating == -1f) {
+            mRating = mDefaultRating;
+        }
+
+        mRatingBar.setRating(mRating);
 
         mRatingBar.setOnRatingBarChangeListener(ratingChangeListener);
     }
@@ -129,6 +149,12 @@ public class RateTheApp extends LinearLayout {
         Drawable progress2 = drawable.getDrawable(2);
         DrawableCompat.setTint(progress2, mSelectedStarColour);
 
+        Drawable progress1 = drawable.getDrawable(1);
+        DrawableCompat.setTintMode(progress1, PorterDuff.Mode.DST_ATOP);
+        DrawableCompat.setTint(progress1, mSelectedStarColour);
+        DrawableCompat.setTintMode(progress1, PorterDuff.Mode.SRC_ATOP);
+        DrawableCompat.setTint(progress1, mUnselectedStarColour);
+
         Drawable progress = drawable.getDrawable(0);
         DrawableCompat.setTint(progress, mUnselectedStarColour);
     }
@@ -146,8 +172,8 @@ public class RateTheApp extends LinearLayout {
         Utils.saveSharedSetting(getContext(), mInstanceName + PREF_RATETHEAPP_RATING_SUFFIX, rating);
     }
 
-    private float getSavedRating() {
-        return Utils.readSharedSetting(getContext(), mInstanceName + PREF_RATETHEAPP_RATING_SUFFIX, 0.0f);
+    private float getSavedRating(float defaultRating) {
+        return Utils.readSharedSetting(getContext(), mInstanceName + PREF_RATETHEAPP_RATING_SUFFIX, defaultRating);
     }
 
     private RatingBar.OnRatingBarChangeListener ratingChangeListener = new RatingBar.OnRatingBarChangeListener() {
