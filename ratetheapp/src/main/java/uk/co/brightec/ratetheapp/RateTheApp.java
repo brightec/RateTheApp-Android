@@ -42,6 +42,7 @@ public class RateTheApp extends LinearLayout {
     private float mStepSize;
     private float mDefaultRating;
     private float mRating;
+    private boolean mSaveRating;
 
     public RateTheApp(Context context) {
         this(context, null);
@@ -83,6 +84,8 @@ public class RateTheApp extends LinearLayout {
         mDefaultRating = a.getFloat(R.styleable.RateTheApp_rateTheAppDefaultRating, DEFAULT_RATING);
         mSelectedStarColour = a.getColor(R.styleable.RateTheApp_rateTheAppSelectedStarTint, getColor(R.color.RateTheApp_SelectedStarColor));
         mUnselectedStarColour = a.getColor(R.styleable.RateTheApp_rateTheAppUnselectedStarTint, getColor(R.color.RateTheApp_UnselectedStarColor));
+
+        mSaveRating = a.getBoolean(R.styleable.RateTheApp_rateTheAppSaveRating, true);
 
         a.recycle();
 
@@ -180,7 +183,10 @@ public class RateTheApp extends LinearLayout {
 
         @Override
         public void onRatingChanged(RatingBar ratingBar, final float rating, boolean fromUser) {
-            saveRating(rating);
+            if (mSaveRating) {
+                saveRating(rating);
+            }
+
             if (rating > MIN_GOOD_RATING) {
                 String message = getContext().getString(R.string.ratetheapp_goodrating_text);
                 final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());

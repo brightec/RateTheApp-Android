@@ -9,5 +9,6 @@
         <attr name="rateTheAppNumberOfStars" format="integer"/>
         <attr name="rateTheAppStepSize" format="float"/>
         <attr name="rateTheAppDefaultRating" format="float"/>
+        <attr name="rateTheAppSaveRating" format="boolean"/>
     </declare-styleable>
 </resources>
