@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="RateTheApp.SelectedStarColor">#FEDB31</color>
+    <color name="RateTheApp.UnselectedStarColor">#C6C6C6</color>
+</resources>

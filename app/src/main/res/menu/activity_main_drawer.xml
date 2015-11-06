@@ -5,10 +5,13 @@
             android:id="@+id/nav_default"
             android:title="Default appearance"/>
         <item
+            android:id="@+id/nav_demo2"
+            android:title="No Text"/>
+        <item
             android:id="@+id/nav_demo1"
             android:title="Customised Text"/>
         <item
-            android:id="@+id/nav_demo2"
-            android:title="No Text"/>
+            android:id="@+id/nav_demo3"
+            android:title="Customised Stars"/>
     </group>
 </menu>

@@ -8,8 +8,13 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Build;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
@@ -24,6 +29,9 @@ public class RateTheApp extends LinearLayout {
 
     private String mTitleText;
     private int mTitleTextAppearanceResId;
+    private int mSelectedStarColour;
+    private int mUnselectedStarColour;
+    private RatingBar mRatingBar;
 
     public RateTheApp(Context context) {
         this(context, null);
@@ -52,6 +60,10 @@ public class RateTheApp extends LinearLayout {
         mTitleTextAppearanceResId = a.getResourceId(R.styleable.RateTheApp_rateTheAppTitleTextAppearance, R.style.RateTheAppTitleTextAppearance);
         mTitleText = a.getString(R.styleable.RateTheApp_rateTheAppTitleText);
 
+        // Star colors
+        mSelectedStarColour = a.getColor(R.styleable.RateTheApp_rateTheAppSelectedStarTint, getColor(R.color.RateTheApp_SelectedStarColor));
+        mUnselectedStarColour = a.getColor(R.styleable.RateTheApp_rateTheAppUnselectedStarTint, getColor(R.color.RateTheApp_UnselectedStarColor));
+
         a.recycle();
 
         if (!isInEditMode() && !shouldShow()) {
@@ -62,15 +74,27 @@ public class RateTheApp extends LinearLayout {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         inflater.inflate(R.layout.ratetheapp_layout, this, true);
 
+        mRatingBar = (RatingBar) findViewById(R.id.ratingBar);
+
         // Initialise the title
         initTitle();
 
-        RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        // Initialise the stars
+        initStars();
 
         float rating = getSavedRating();
-        ratingBar.setRating(rating);
+        mRatingBar.setRating(rating);
 
-        ratingBar.setOnRatingBarChangeListener(ratingChangeListener);
+        mRatingBar.setOnRatingBarChangeListener(ratingChangeListener);
+    }
+
+    private int getColor(int colorResId) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return getResources().getColor(colorResId, null);
+        }
+        else {
+            return getResources().getColor(colorResId);
+        }
     }
 
     private void initTitle() {
@@ -91,6 +115,15 @@ public class RateTheApp extends LinearLayout {
                 title.setTextAppearance(getContext(), mTitleTextAppearanceResId);
             }
         }
+    }
+
+    private void initStars() {
+        LayerDrawable drawable = (LayerDrawable) mRatingBar.getProgressDrawable();
+        Drawable progress2 = drawable.getDrawable(2);
+        DrawableCompat.setTint(progress2, mSelectedStarColour);
+
+        Drawable progress = drawable.getDrawable(0);
+        DrawableCompat.setTint(progress, mUnselectedStarColour);
     }
 
     private boolean shouldShow() {

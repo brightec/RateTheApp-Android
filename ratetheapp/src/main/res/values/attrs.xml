@@ -3,5 +3,7 @@
     <declare-styleable name="RateTheApp">
         <attr name="rateTheAppTitleText" format="string"/>
         <attr name="rateTheAppTitleTextAppearance" format="reference"/>
+        <attr name="rateTheAppSelectedStarTint" format="color"/>
+        <attr name="rateTheAppUnselectedStarTint" format="color"/>
     </declare-styleable>
 </resources>
