@@ -8,8 +8,6 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
@@ -24,9 +22,11 @@ import android.widget.TextView;
 public class RateTheApp extends LinearLayout {
 
     private static final int MIN_GOOD_RATING = 3;
-    public static final String PREF_RATETHEAPP_SHOW = "ratetheapp_show";
-    public static final String PREF_RATETHEAPP_RATING = "ratetheapp_rating";
+    public static final String PREF_RATETHEAPP_PREFIX = "ratetheapp";
+    public static final String PREF_RATETHEAPP_SHOW_SUFFIX = "_show";
+    public static final String PREF_RATETHEAPP_RATING_SUFFIX = "_rating";
 
+    private String mInstanceName;
     private String mTitleText;
     private int mTitleTextAppearanceResId;
     private int mSelectedStarColour;
@@ -55,6 +55,13 @@ public class RateTheApp extends LinearLayout {
         // Load attributes
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.RateTheApp, defStyleAttr, defStyleRes);
+
+        // Instance name for this rating bar
+        mInstanceName = PREF_RATETHEAPP_PREFIX;
+        String instanceName = a.getString(R.styleable.RateTheApp_rateTheAppName);
+        if (instanceName != null) {
+            mInstanceName += "_" + instanceName;
+        }
 
         // Title Text Appearance
         mTitleTextAppearanceResId = a.getResourceId(R.styleable.RateTheApp_rateTheAppTitleTextAppearance, R.style.RateTheAppTitleTextAppearance);
@@ -127,20 +134,20 @@ public class RateTheApp extends LinearLayout {
     }
 
     private boolean shouldShow() {
-        return Utils.readSharedSetting(getContext(), PREF_RATETHEAPP_SHOW, true);
+        return Utils.readSharedSetting(getContext(), mInstanceName + PREF_RATETHEAPP_SHOW_SUFFIX, true);
     }
 
     private void hidePermanently () {
-        Utils.saveSharedSetting(getContext(), PREF_RATETHEAPP_SHOW, false);
+        Utils.saveSharedSetting(getContext(), mInstanceName + PREF_RATETHEAPP_SHOW_SUFFIX, false);
         this.setVisibility(GONE);
     }
 
     private void saveRating(float rating) {
-        Utils.saveSharedSetting(getContext(), PREF_RATETHEAPP_RATING, rating);
+        Utils.saveSharedSetting(getContext(), mInstanceName + PREF_RATETHEAPP_RATING_SUFFIX, rating);
     }
 
     private float getSavedRating() {
-        return Utils.readSharedSetting(getContext(), PREF_RATETHEAPP_RATING, 0.0f);
+        return Utils.readSharedSetting(getContext(), mInstanceName + PREF_RATETHEAPP_RATING_SUFFIX, 0.0f);
     }
 
     private RatingBar.OnRatingBarChangeListener ratingChangeListener = new RatingBar.OnRatingBarChangeListener() {

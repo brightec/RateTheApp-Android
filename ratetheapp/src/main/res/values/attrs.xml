@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="RateTheApp">
+        <attr name="rateTheAppName" format="string"/>
         <attr name="rateTheAppTitleText" format="string"/>
         <attr name="rateTheAppTitleTextAppearance" format="reference"/>
         <attr name="rateTheAppSelectedStarTint" format="color"/>

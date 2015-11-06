@@ -23,6 +23,7 @@
         app:menu="@menu/activity_main_drawer">
 
         <uk.co.brightec.ratetheapp.RateTheApp
+            app:rateTheAppName="rateTheDemo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
