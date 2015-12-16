@@ -7,25 +7,24 @@
               tools:context="uk.co.brightec.ratetheapp_android.fragments.DefaultFragment"
               android:gravity="center">
 
+
     <uk.co.brightec.ratetheapp.RateTheApp
-        android:id="@+id/ratingBar1"
+        android:id="@+id/noAction"
+        app:rateTheAppTitleText="No action when rating change"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <uk.co.brightec.ratetheapp.RateTheApp
-        android:id="@+id/ratingBar2"
-        app:rateTheAppName="ratingBarTwo"
+        android:id="@+id/customAction"
+        app:rateTheAppTitleText="Custom behaviour"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:rateTheAppSelectedStarColor="@color/colorAccent"
-        app:rateTheAppUnselectedStarColor="@color/colorPrimary"/>
+        android:layout_height="wrap_content"/>
 
-    <uk.co.brightec.ratetheapp.RateTheApp
-        android:id="@+id/ratingBar3"
-        app:rateTheAppName="ratingBarThree"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:rateTheAppSelectedStarColor="@color/colorPrimaryDark"
-        app:rateTheAppUnselectedStarColor="@color/colorPrimary"/>
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal"/>
+
 
 </LinearLayout>

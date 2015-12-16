@@ -19,5 +19,8 @@
         <item
             android:id="@+id/nav_demo5"
             android:title="Other examples"/>
+        <item
+            android:id="@+id/nav_demo6"
+            android:title="Custom behaviour"/>
     </group>
 </menu>

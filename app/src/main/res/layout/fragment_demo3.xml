@@ -10,7 +10,7 @@
     <uk.co.brightec.ratetheapp.RateTheApp
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:rateTheAppSelectedStarTint="@color/colorPrimaryDark"
-        app:rateTheAppUnselectedStarTint="@color/colorPrimary"/>
+        app:rateTheAppSelectedStarColor="@color/colorPrimaryDark"
+        app:rateTheAppUnselectedStarColor="@color/colorPrimary"/>
 
 </LinearLayout>
