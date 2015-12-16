@@ -1,17 +1,11 @@
 package uk.co.brightec.ratetheapp;
 
 import android.annotation.TargetApi;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.net.Uri;
 import android.os.Build;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.AttributeSet;
@@ -30,8 +24,6 @@ public class RateTheApp extends LinearLayout {
     private static final float DEFAULT_STEP_SIZE = 1f;
     private static final float DEFAULT_RATING = 0.0f;
 
-    private static final int MIN_GOOD_RATING = 3;
-
     private String mInstanceName;
     private String mTitleText;
     private int mTitleTextAppearanceResId;
@@ -43,6 +35,20 @@ public class RateTheApp extends LinearLayout {
     private float mDefaultRating;
     private float mRating;
     private boolean mSaveRating;
+
+    public interface OnRatingChangeListener {
+        void onRatingChanged(RateTheApp rateTheApp, float rating, boolean fromUser);
+    }
+
+    private OnRatingChangeListener mRatingChangeListener;
+
+    public OnRatingChangeListener getRatingChangeListener() {
+        return mRatingChangeListener;
+    }
+
+    public void setRatingChangeListener(OnRatingChangeListener ratingChangeListener) {
+        mRatingChangeListener = ratingChangeListener;
+    }
 
     public RateTheApp(Context context) {
         this(context, null);
@@ -82,8 +88,8 @@ public class RateTheApp extends LinearLayout {
         mNumberOfStars = a.getInt(R.styleable.RateTheApp_rateTheAppNumberOfStars, DEFAULT_NUMBER_OF_STARS);
         mStepSize = a.getFloat(R.styleable.RateTheApp_rateTheAppStepSize, DEFAULT_STEP_SIZE);
         mDefaultRating = a.getFloat(R.styleable.RateTheApp_rateTheAppDefaultRating, DEFAULT_RATING);
-        mSelectedStarColour = a.getColor(R.styleable.RateTheApp_rateTheAppSelectedStarTint, getColor(R.color.RateTheApp_SelectedStarColor));
-        mUnselectedStarColour = a.getColor(R.styleable.RateTheApp_rateTheAppUnselectedStarTint, getColor(R.color.RateTheApp_UnselectedStarColor));
+        mSelectedStarColour = a.getColor(R.styleable.RateTheApp_rateTheAppSelectedStarColor, getColor(R.color.RateTheApp_SelectedStarColor));
+        mUnselectedStarColour = a.getColor(R.styleable.RateTheApp_rateTheAppUnselectedStarColor, getColor(R.color.RateTheApp_UnselectedStarColor));
 
         mSaveRating = a.getBoolean(R.styleable.RateTheApp_rateTheAppSaveRating, true);
 
@@ -116,6 +122,9 @@ public class RateTheApp extends LinearLayout {
         mRatingBar.setRating(mRating);
 
         mRatingBar.setOnRatingBarChangeListener(ratingChangeListener);
+
+        // Set the default RateChangeListener
+        setRatingChangeListener(DefaultOnRatingChangeListener.createDefaultInstance(getContext()));
     }
 
     private int getColor(int colorResId) {
@@ -162,11 +171,11 @@ public class RateTheApp extends LinearLayout {
         DrawableCompat.setTint(progress, mUnselectedStarColour);
     }
 
-    private boolean shouldShow() {
+    public boolean shouldShow() {
         return Utils.readSharedSetting(getContext(), mInstanceName + PREF_RATETHEAPP_SHOW_SUFFIX, true);
     }
 
-    private void hidePermanently () {
+    public void hidePermanently () {
         Utils.saveSharedSetting(getContext(), mInstanceName + PREF_RATETHEAPP_SHOW_SUFFIX, false);
         this.setVisibility(GONE);
     }
@@ -179,79 +188,23 @@ public class RateTheApp extends LinearLayout {
         return Utils.readSharedSetting(getContext(), mInstanceName + PREF_RATETHEAPP_RATING_SUFFIX, defaultRating);
     }
 
+    public float getRating() {
+        return mRatingBar.getRating();
+    }
+
     private RatingBar.OnRatingBarChangeListener ratingChangeListener = new RatingBar.OnRatingBarChangeListener() {
 
         @Override
         public void onRatingChanged(RatingBar ratingBar, final float rating, boolean fromUser) {
-            if (mSaveRating) {
-                saveRating(rating);
-            }
+        // Save the rating
+        if (mSaveRating) {
+            saveRating(rating);
+        }
 
-            if (rating > MIN_GOOD_RATING) {
-                String message = getContext().getString(R.string.ratetheapp_goodrating_text);
-                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-                alertDialog.setTitle(R.string.ratetheapp_goodrating_title);
-                alertDialog.setMessage(message);
-                alertDialog.setPositiveButton(R.string.ratetheapp_positive_button, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        hidePermanently();
-                        gotoAppStore();
-                    }
-                });
-                alertDialog.setNegativeButton(R.string.ratetheapp_negative_button, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        hidePermanently();
-                    }
-                });
-                alertDialog.create().show();
-            } else {
-                String message = getContext().getString(R.string.ratetheapp_badrating_text);
-                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-                alertDialog.setTitle(R.string.ratetheapp_badrating_title);
-                alertDialog.setMessage(message);
-                alertDialog.setPositiveButton(R.string.ratetheapp_positive_button, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        sendEmail((int) rating);
-                    }
-                });
-                alertDialog.setNegativeButton(R.string.ratetheapp_negative_button, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // nothing to do..
-                    }
-                });
-                alertDialog.create().show();
-            }
+        // If a rateChangeListener was provided, call it
+        if (mRatingChangeListener != null) {
+            mRatingChangeListener.onRatingChanged(RateTheApp.this, rating, fromUser);
+        }
         }
     };
-
-    private void gotoAppStore() {
-        final String appPackageName = getContext().getPackageName(); // getPackageName() from Context or Activity object
-        try {
-            getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-        } catch (android.content.ActivityNotFoundException anfe) {
-            getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + appPackageName)));
-        }
-    }
-
-    private void sendEmail(int numStars) {
-        PackageInfo pInfo = null;
-        try {
-            pInfo = getContext().getPackageManager().getPackageInfo(getContext().getPackageName(), 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        String version = pInfo != null ? pInfo.versionName : "Unknown";
-
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("message/rfc822");
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{getResources().getString(R.string.ratetheapp_feedback_emailaddress)});
-        intent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.ratetheapp_feedback_subject));
-        intent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.ratetheapp_feedback_extra_information, numStars, Utils.getDeviceName(), Build.VERSION.SDK_INT, version));
-
-        getContext().startActivity(Intent.createChooser(intent, "Send Email"));
-    }
 }
