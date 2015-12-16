@@ -36,40 +36,53 @@ public class RateTheApp extends LinearLayout {
     private float mRating;
     private boolean mSaveRating;
 
-    public interface OnRatingChangeListener {
-        void onRatingChanged(RateTheApp rateTheApp, float rating, boolean fromUser);
+    public interface OnUserSelectedRatingListener {
+        void onRatingChanged(RateTheApp rateTheApp, float rating);
     }
 
-    private OnRatingChangeListener mRatingChangeListener;
+    private OnUserSelectedRatingListener mOnUserSelectedRatingListener;
 
-    public OnRatingChangeListener getRatingChangeListener() {
-        return mRatingChangeListener;
+    public OnUserSelectedRatingListener getOnUserSelectedRatingListener() {
+        return mOnUserSelectedRatingListener;
     }
 
-    public void setRatingChangeListener(OnRatingChangeListener ratingChangeListener) {
-        mRatingChangeListener = ratingChangeListener;
+    public void setOnUserSelectedRatingListener(OnUserSelectedRatingListener onUserSelectedRatingListener) {
+        mOnUserSelectedRatingListener = onUserSelectedRatingListener;
     }
 
     public RateTheApp(Context context) {
-        this(context, null);
+        super(context);
+        init();
     }
 
     public RateTheApp(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+        super(context, attrs);
+        loadAttributes(attrs);
+        init();
     }
 
     public RateTheApp(Context context, AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr, 0);
+        super(context, attrs, defStyleAttr);
+        loadAttributes(attrs, defStyleAttr);
+        init();
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public RateTheApp(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init(attrs, defStyleAttr, defStyleRes);
+        loadAttributes(attrs, defStyleAttr, defStyleRes);
+        init();
     }
 
-    private void init(AttributeSet attrs, int defStyleAttr, int defStyleRes)  {
-        // Load attributes
+    private void loadAttributes(AttributeSet attrs){
+        loadAttributes(attrs, 0, 0);
+    }
+
+    private void loadAttributes(AttributeSet attrs, int defStyleAttr){
+        loadAttributes(attrs, defStyleAttr, 0);
+    }
+
+    private void loadAttributes(AttributeSet attrs, int defStyleAttr, int defStyleRes){
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.RateTheApp, defStyleAttr, defStyleRes);
 
@@ -94,7 +107,9 @@ public class RateTheApp extends LinearLayout {
         mSaveRating = a.getBoolean(R.styleable.RateTheApp_rateTheAppSaveRating, true);
 
         a.recycle();
+    }
 
+    private void init() {
         if (!isInEditMode() && !shouldShow()) {
             this.setVisibility(GONE);
             return;
@@ -124,14 +139,13 @@ public class RateTheApp extends LinearLayout {
         mRatingBar.setOnRatingBarChangeListener(ratingChangeListener);
 
         // Set the default RateChangeListener
-        setRatingChangeListener(DefaultOnRatingChangeListener.createDefaultInstance(getContext()));
+        setOnUserSelectedRatingListener(DefaultOnUserSelectedRatingListener.createDefaultInstance(getContext()));
     }
 
     private int getColor(int colorResId) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return getResources().getColor(colorResId, null);
-        }
-        else {
+        } else {
             return getResources().getColor(colorResId);
         }
     }
@@ -141,16 +155,14 @@ public class RateTheApp extends LinearLayout {
         // Hide the title if an empty title text attribute was provided
         if (mTitleText != null && mTitleText.isEmpty()) {
             title.setVisibility(GONE);
-        }
-        else {
+        } else {
             // Set the title text if provided
             if (mTitleText != null) {
                 title.setText(mTitleText);
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 title.setTextAppearance(mTitleTextAppearanceResId);
-            }
-            else {
+            } else {
                 title.setTextAppearance(getContext(), mTitleTextAppearanceResId);
             }
         }
@@ -175,7 +187,7 @@ public class RateTheApp extends LinearLayout {
         return Utils.readSharedSetting(getContext(), mInstanceName + PREF_RATETHEAPP_SHOW_SUFFIX, true);
     }
 
-    public void hidePermanently () {
+    public void hidePermanently() {
         Utils.saveSharedSetting(getContext(), mInstanceName + PREF_RATETHEAPP_SHOW_SUFFIX, false);
         this.setVisibility(GONE);
     }
@@ -188,23 +200,31 @@ public class RateTheApp extends LinearLayout {
         return Utils.readSharedSetting(getContext(), mInstanceName + PREF_RATETHEAPP_RATING_SUFFIX, defaultRating);
     }
 
+    public void setRating(float rating) {
+        mRatingBar.setRating(rating);
+    }
+
     public float getRating() {
         return mRatingBar.getRating();
+    }
+
+    public void reset() {
+        mRatingBar.setRating(0);
     }
 
     private RatingBar.OnRatingBarChangeListener ratingChangeListener = new RatingBar.OnRatingBarChangeListener() {
 
         @Override
         public void onRatingChanged(RatingBar ratingBar, final float rating, boolean fromUser) {
-        // Save the rating
-        if (mSaveRating) {
-            saveRating(rating);
-        }
+            // Save the rating
+            if (mSaveRating) {
+                saveRating(rating);
+            }
 
-        // If a rateChangeListener was provided, call it
-        if (mRatingChangeListener != null) {
-            mRatingChangeListener.onRatingChanged(RateTheApp.this, rating, fromUser);
-        }
+            // If a rateChangeListener was provided, call it
+            if (mOnUserSelectedRatingListener != null && fromUser) {
+                mOnUserSelectedRatingListener.onRatingChanged(RateTheApp.this, rating);
+            }
         }
     };
 }
