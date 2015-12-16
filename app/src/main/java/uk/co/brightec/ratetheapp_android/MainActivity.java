@@ -21,6 +21,9 @@ import uk.co.brightec.ratetheapp_android.fragments.Demo4Fragment;
 import uk.co.brightec.ratetheapp_android.fragments.Demo5Fragment;
 import uk.co.brightec.ratetheapp_android.fragments.Demo6Fragment;
 
+/**
+ * Demo app to show the RateTheApp control being used.
+ */
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
