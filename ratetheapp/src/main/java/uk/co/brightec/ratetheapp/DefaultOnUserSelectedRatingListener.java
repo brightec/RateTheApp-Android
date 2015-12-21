@@ -13,7 +13,7 @@ import android.os.Build;
  * The default OnRatingChangeListener that offers to take the user to the play store if a good rating was given, otherwise it prompts
  * the user to email the app developer to provide feedback.
  */
-public class DefaultOnRatingChangeListener implements RateTheApp.OnRatingChangeListener {
+public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSelectedRatingListener {
     private static final float DEFAULT_MIN_GOOD_RATING = 3;
 
     private float mMinGoodRating;
@@ -27,8 +27,8 @@ public class DefaultOnRatingChangeListener implements RateTheApp.OnRatingChangeL
     private String mFeedbackEmailSubject;
     private String mFeedbackEmailMessage;
 
-    public static DefaultOnRatingChangeListener createDefaultInstance(Context context) {
-        return new DefaultOnRatingChangeListener(
+    public static DefaultOnUserSelectedRatingListener createDefaultInstance(Context context) {
+        return new DefaultOnUserSelectedRatingListener(
                 DEFAULT_MIN_GOOD_RATING,
                 context.getString(R.string.ratetheapp_negative_button),
                 context.getString(R.string.ratetheapp_positive_button),
@@ -41,7 +41,7 @@ public class DefaultOnRatingChangeListener implements RateTheApp.OnRatingChangeL
                 null);
     }
 
-    public DefaultOnRatingChangeListener(float minGoodRating, String negativeButtonText, String positiveButtonText, String goodRatingTitle, String goodRatingMessage, String badRatingTitle, String badRatingMessage, String feedbackEmailTo, String feedbackEmailSubject, String feedbackEmailMessage) {
+    public DefaultOnUserSelectedRatingListener(float minGoodRating, String negativeButtonText, String positiveButtonText, String goodRatingTitle, String goodRatingMessage, String badRatingTitle, String badRatingMessage, String feedbackEmailTo, String feedbackEmailSubject, String feedbackEmailMessage) {
         mMinGoodRating = minGoodRating;
         mNegativeButtonText = negativeButtonText;
         mPositiveButtonText = positiveButtonText;
@@ -127,7 +127,7 @@ public class DefaultOnRatingChangeListener implements RateTheApp.OnRatingChangeL
     }
 
     @Override
-    public void onRatingChanged(final RateTheApp rateTheApp, final float rating, boolean fromUser) {
+    public void onRatingChanged(final RateTheApp rateTheApp, final float rating) {
         final Context context = rateTheApp.getContext();
         if (rating >= mMinGoodRating) {
             final AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);

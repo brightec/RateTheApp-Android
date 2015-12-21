@@ -35,9 +35,9 @@ public class Demo6Fragment extends Fragment {
 
         // Add a custom OnRateChangeListener
         RateTheApp rta = (RateTheApp) view.findViewById(R.id.customAction);
-        rta.setRatingChangeListener(new RateTheApp.OnRatingChangeListener() {
+        rta.setOnUserSelectedRatingListener(new RateTheApp.OnUserSelectedRatingListener() {
             @Override
-            public void onRatingChanged(RateTheApp rateTheApp, float rating, boolean fromUser) {
+            public void onRatingChanged(RateTheApp rateTheApp, float rating) {
                 textView.setText("Rating: " + rating);
             }
         });
@@ -45,7 +45,7 @@ public class Demo6Fragment extends Fragment {
 
         // Remove the OnRateChangeListener
         rta = (RateTheApp) view.findViewById(R.id.noAction);
-        rta.setRatingChangeListener(null);
+        rta.setOnUserSelectedRatingListener(null);
 
         return view;
     }
