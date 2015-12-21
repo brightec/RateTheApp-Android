@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import uk.co.brightec.ratetheapp.DefaultOnUserSelectedRatingListener;
 import uk.co.brightec.ratetheapp.RateTheApp;
 import uk.co.brightec.ratetheapp.Utils;
 import uk.co.brightec.ratetheapp_android.fragments.CustomAppearanceFragment;
@@ -26,6 +27,7 @@ import uk.co.brightec.ratetheapp_android.fragments.DefaultFragment;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final float MIN_GOOD_RATING = 3.0f;
     private NavigationView mNavigationView;
 
     @Override
@@ -46,8 +48,29 @@ public class MainActivity extends AppCompatActivity
 
         initHeaderView();
 
+        initDemoRatingWidget();
+
         // Start with default demo
         getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, DefaultFragment.newInstance()).commit();
+    }
+
+    /**
+     * Helper method to setup a rating widget for the demo app with customised text
+     */
+    private void initDemoRatingWidget() {
+        RateTheApp demoRating = (RateTheApp) findViewById(R.id.demoRating);
+        demoRating.setOnUserSelectedRatingListener(
+            new DefaultOnUserSelectedRatingListener(
+                    MIN_GOOD_RATING,
+                    getString(uk.co.brightec.ratetheapp.R.string.ratetheapp_negative_button),
+                    getString(uk.co.brightec.ratetheapp.R.string.ratetheapp_positive_button),
+                    getString(R.string.demo_goodrating_title),
+                    getString(R.string.demo_goodrating_text),
+                    getString(uk.co.brightec.ratetheapp.R.string.ratetheapp_badrating_title),
+                    getString(R.string.demo_badrating_text),
+                    getString(R.string.demo_feedback_emailaddress),
+                    getString(R.string.demo_feedback_subject),
+                    null));
     }
 
     private void initHeaderView() {
