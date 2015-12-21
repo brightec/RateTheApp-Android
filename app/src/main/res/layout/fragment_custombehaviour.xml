@@ -65,7 +65,7 @@
                 <!-- A custom rateTheAppName is used to stop this instance of the widget being hidden if the default widget is hidden -->
                 <uk.co.brightec.ratetheapp.RateTheApp
                     android:id="@+id/noAction"
-                    app:rateTheAppName="noActionToPreventHiding"
+                    app:rateTheAppName="noActionWidget"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"/>
@@ -108,7 +108,7 @@
                 <!-- A custom rateTheAppName is used to stop this instance of the widget being hidden if the default widget is hidden -->
                 <uk.co.brightec.ratetheapp.RateTheApp
                     android:id="@+id/customAction"
-                    app:rateTheAppName="customActionToPreventHiding"
+                    app:rateTheAppName="customActionWidget"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"/>

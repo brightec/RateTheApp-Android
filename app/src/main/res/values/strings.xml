@@ -2,7 +2,7 @@
     <string name="app_name">RateTheApp Demo</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_resetdemo">Reset demo data</string>
     <string name="drawermenu_introduction_text">Introduction to RateTheApp</string>
     <string name="drawermenu_appearance_text">Changing the appearance</string>
     <string name="drawermenu_behaviour_text">Changing the behaviour</string>

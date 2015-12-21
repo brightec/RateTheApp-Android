@@ -61,8 +61,10 @@
                     android:paddingBottom="16dp"
                     android:text="@string/demo1_description"/>
 
+                <!-- A custom rateTheAppName is used to stop this instance of the widget being hidden if the default widget is hidden -->
                 <uk.co.brightec.ratetheapp.RateTheApp
                     xmlns:app="http://schemas.android.com/apk/res-auto"
+                    app:rateTheAppName="customisedTitleWidget"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -94,8 +96,10 @@
                     android:paddingBottom="16dp"
                     android:text="@string/demo2_description"/>
 
+                <!-- A custom rateTheAppName is used to stop this instance of the widget being hidden if the default widget is hidden -->
                 <uk.co.brightec.ratetheapp.RateTheApp
                     xmlns:app="http://schemas.android.com/apk/res-auto"
+                    app:rateTheAppName="noTitleWidget"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -126,8 +130,10 @@
                     android:paddingBottom="16dp"
                     android:text="@string/demo3_description"/>
 
+                <!-- A custom rateTheAppName is used to stop this instance of the widget being hidden if the default widget is hidden -->
                 <uk.co.brightec.ratetheapp.RateTheApp
                     xmlns:app="http://schemas.android.com/apk/res-auto"
+                    app:rateTheAppName="customisedStarColourWidget"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"

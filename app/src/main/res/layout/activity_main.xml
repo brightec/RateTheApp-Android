@@ -22,6 +22,7 @@
         android:fitsSystemWindows="true"
         app:menu="@menu/activity_main_drawer">
 
+        <!-- A custom rateTheAppName is used to stop this instance of the widget being hidden if the default widget is hidden -->
         <uk.co.brightec.ratetheapp.RateTheApp
             app:rateTheAppName="rateTheDemo"
             android:layout_width="match_parent"
