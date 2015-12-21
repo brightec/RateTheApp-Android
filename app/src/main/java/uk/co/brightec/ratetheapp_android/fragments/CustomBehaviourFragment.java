@@ -1,5 +1,7 @@
 package uk.co.brightec.ratetheapp_android.fragments;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -31,7 +33,18 @@ public class CustomBehaviourFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_custombehaviour, container, false);
-        final TextView textView = (TextView) view.findViewById(R.id.textView);
+
+        // Add action for View Sourcecode button
+        View button = view.findViewById(R.id.btn_viewsource);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = getString(R.string.custom_behaviour_viewSourceURL);
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
 
         // Demo 4, Remove the OnRateChangeListener
         RateTheApp rta = (RateTheApp) view.findViewById(R.id.noAction);
@@ -41,6 +54,7 @@ public class CustomBehaviourFragment extends Fragment {
         rta = (RateTheApp) view.findViewById(R.id.customAction);
 
         // Initialise the text view to the current rating
+        final TextView textView = (TextView) view.findViewById(R.id.textView);
         textView.setText(getString(R.string.current_rating) + " " + rta.getRating());
 
         // Add a custom OnUserSelectedRatingListener to update the text view
