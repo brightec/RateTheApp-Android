@@ -5,8 +5,8 @@
             android:id="@+id/nav_default"
             android:title="Default appearance"/>
         <item
-            android:id="@+id/nav_demo3"
-            android:title="Customised Stars"/>
+            android:id="@+id/nav_custom_appearance"
+            android:title="Custom appearance"/>
         <item
             android:id="@+id/nav_demo4"
             android:title="Multiple Ratings"/>

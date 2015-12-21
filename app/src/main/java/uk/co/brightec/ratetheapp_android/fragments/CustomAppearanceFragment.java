@@ -9,13 +9,13 @@ import android.view.ViewGroup;
 import uk.co.brightec.ratetheapp_android.R;
 
 
-public class Demo3Fragment extends Fragment {
+public class CustomAppearanceFragment extends Fragment {
 
-    public static Demo3Fragment newInstance() {
-        return new Demo3Fragment();
+    public static CustomAppearanceFragment newInstance() {
+        return new CustomAppearanceFragment();
     }
 
-    public Demo3Fragment() {
+    public CustomAppearanceFragment() {
         // Required empty public constructor
     }
 
@@ -28,6 +28,6 @@ public class Demo3Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_demo3, container, false);
+        return inflater.inflate(R.layout.fragment_customappearance, container, false);
     }
 }

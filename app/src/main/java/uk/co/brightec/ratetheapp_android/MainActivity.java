@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import uk.co.brightec.ratetheapp_android.fragments.DefaultFragment;
-import uk.co.brightec.ratetheapp_android.fragments.Demo3Fragment;
+import uk.co.brightec.ratetheapp_android.fragments.CustomAppearanceFragment;
 import uk.co.brightec.ratetheapp_android.fragments.Demo4Fragment;
 import uk.co.brightec.ratetheapp_android.fragments.Demo5Fragment;
 import uk.co.brightec.ratetheapp_android.fragments.Demo6Fragment;
@@ -116,8 +116,8 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_default) {
             getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, DefaultFragment.newInstance()).commit();
         }
-        else if (id == R.id.nav_demo3) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, Demo3Fragment.newInstance()).commit();
+        else if (id == R.id.nav_custom_appearance) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, CustomAppearanceFragment.newInstance()).commit();
         }
         else if (id == R.id.nav_demo4) {
             getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, Demo4Fragment.newInstance()).commit();
