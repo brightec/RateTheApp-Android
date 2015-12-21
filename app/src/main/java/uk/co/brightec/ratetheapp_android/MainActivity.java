@@ -13,11 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import uk.co.brightec.ratetheapp_android.fragments.DefaultFragment;
 import uk.co.brightec.ratetheapp_android.fragments.CustomAppearanceFragment;
-import uk.co.brightec.ratetheapp_android.fragments.Demo4Fragment;
-import uk.co.brightec.ratetheapp_android.fragments.Demo5Fragment;
-import uk.co.brightec.ratetheapp_android.fragments.Demo6Fragment;
+import uk.co.brightec.ratetheapp_android.fragments.CustomBehaviourFragment;
+import uk.co.brightec.ratetheapp_android.fragments.DefaultFragment;
 
 /**
  * Demo app to show the RateTheApp control being used.
@@ -119,14 +117,8 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.nav_custom_appearance) {
             getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, CustomAppearanceFragment.newInstance()).commit();
         }
-        else if (id == R.id.nav_demo4) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, Demo4Fragment.newInstance()).commit();
-        }
-        else if (id == R.id.nav_demo5) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, Demo5Fragment.newInstance()).commit();
-        }
-        else if (id == R.id.nav_demo6) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, Demo6Fragment.newInstance()).commit();
+        else if (id == R.id.nav_custom_behaviour) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, CustomBehaviourFragment.newInstance()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
