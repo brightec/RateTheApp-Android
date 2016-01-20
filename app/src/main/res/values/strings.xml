@@ -20,7 +20,7 @@
     <string name="demo_goodrating_text">Thanks, that\'s great to hear!  Would you mind rating us or leaving a review on the Google Play Store?\n\nThanks again,\nThe Brightec Team</string>
 
     <!-- Demo Introduction Screen -->
-    <string name="demo_introduction">This is a demonstration app for RateTheApp.\n\nRateTheApp is a custom component made by Brightec for Android developers.  It displays a rating bar and a title and provides customised behaviour depending on the rating selected.\n\nThe default behaviour for a low rating is to prompt the user to email the developer.  The default behaviour for a high rating is to prompt the user to leave a rating on the Play Store and then hide itself.</string>
+    <string name="demo_introduction">This is a demonstration of RateTheApp.\n\nRateTheApp is a custom component made by Brightec for Android developers.  It displays a rating bar and a title and provides customised behaviour depending on the rating selected.\n\nThe default behaviour for a low rating is to prompt the user to email the developer.  The default behaviour for a high rating is to prompt the user to leave a rating on the Play Store and then hide itself.</string>
     <string name="learnmore_button">Learn More</string>
     <string name="learnMoreURL">https://github.com/brightec/RateTheApp-Android/blob/dev/README.md</string>
     <string name="default_description">The default appearance of RateTheApp, showing the default title, star colours and rating behaviour.</string>
