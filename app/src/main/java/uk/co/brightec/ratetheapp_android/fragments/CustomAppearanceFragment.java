@@ -10,13 +10,14 @@ import android.view.ViewGroup;
 
 import uk.co.brightec.ratetheapp_android.R;
 
-public class DefaultFragment extends Fragment {
 
-    public static DefaultFragment newInstance() {
-        return new DefaultFragment();
+public class CustomAppearanceFragment extends Fragment {
+
+    public static CustomAppearanceFragment newInstance() {
+        return new CustomAppearanceFragment();
     }
 
-    public DefaultFragment() {
+    public CustomAppearanceFragment() {
         // Required empty public constructor
     }
 
@@ -29,14 +30,14 @@ public class DefaultFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_default, container, false);
+        View view = inflater.inflate(R.layout.fragment_customappearance, container, false);
 
-        // Add action for Learn More button
-        View button = view.findViewById(R.id.btn_learnmore);
+        // Add action for View Sourcecode button
+        View button = view.findViewById(R.id.btn_viewsource);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = getString(R.string.learnMoreURL);
+                String url = getString(R.string.custom_appearance_viewSourceURL);
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
                 startActivity(i);

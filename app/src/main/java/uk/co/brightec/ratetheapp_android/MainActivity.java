@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,13 +14,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import uk.co.brightec.ratetheapp.DefaultOnUserSelectedRatingListener;
+import uk.co.brightec.ratetheapp.RateTheApp;
+import uk.co.brightec.ratetheapp.Utils;
+import uk.co.brightec.ratetheapp_android.fragments.CustomAppearanceFragment;
+import uk.co.brightec.ratetheapp_android.fragments.CustomBehaviourFragment;
 import uk.co.brightec.ratetheapp_android.fragments.DefaultFragment;
-import uk.co.brightec.ratetheapp_android.fragments.Demo1Fragment;
-import uk.co.brightec.ratetheapp_android.fragments.Demo2Fragment;
-import uk.co.brightec.ratetheapp_android.fragments.Demo3Fragment;
-import uk.co.brightec.ratetheapp_android.fragments.Demo4Fragment;
-import uk.co.brightec.ratetheapp_android.fragments.Demo5Fragment;
-import uk.co.brightec.ratetheapp_android.fragments.Demo6Fragment;
 
 /**
  * Demo app to show the RateTheApp control being used.
@@ -27,6 +27,7 @@ import uk.co.brightec.ratetheapp_android.fragments.Demo6Fragment;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final float MIN_GOOD_RATING = 3.0f;
     private NavigationView mNavigationView;
 
     @Override
@@ -47,8 +48,29 @@ public class MainActivity extends AppCompatActivity
 
         initHeaderView();
 
+        initDemoRatingWidget();
+
         // Start with default demo
         getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, DefaultFragment.newInstance()).commit();
+    }
+
+    /**
+     * Helper method to setup a rating widget for the demo app with customised text
+     */
+    private void initDemoRatingWidget() {
+        RateTheApp demoRating = (RateTheApp) findViewById(R.id.demoRating);
+        demoRating.setOnUserSelectedRatingListener(
+            new DefaultOnUserSelectedRatingListener(
+                    MIN_GOOD_RATING,
+                    getString(uk.co.brightec.ratetheapp.R.string.ratetheapp_negative_button),
+                    getString(uk.co.brightec.ratetheapp.R.string.ratetheapp_positive_button),
+                    getString(R.string.demo_goodrating_title),
+                    getString(R.string.demo_goodrating_text),
+                    getString(uk.co.brightec.ratetheapp.R.string.ratetheapp_badrating_title),
+                    getString(R.string.demo_badrating_text),
+                    getString(R.string.demo_feedback_emailaddress),
+                    getString(R.string.demo_feedback_subject),
+                    null));
     }
 
     private void initHeaderView() {
@@ -101,12 +123,58 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_resetdemo) {
+            resetDemoData();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Helper method to reset the demo data (widget ratings and visiblity)
+     */
+    private void resetDemoData() {
+        // Reset the default widget
+        resetWidget(null);
+
+        // Reset the Custom Appearance widgets
+        resetWidget("customisedTitleWidget");
+        resetWidget("noTitleWidget");
+        resetWidget("customisedStarColourWidget");
+
+        // Reset the Custom Behaviour widgets
+        resetWidget("noActionWidget");
+        resetWidget("customActionWidget");
+
+        // Reload the current fragment to show reset data
+        Fragment demoHolder = getSupportFragmentManager().findFragmentById(R.id.demoHolder);
+        if (demoHolder != null) {
+            if (demoHolder instanceof DefaultFragment) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, DefaultFragment.newInstance()).commit();
+            }
+            else if (demoHolder instanceof CustomAppearanceFragment) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, CustomAppearanceFragment.newInstance()).commit();
+            }
+            else if (demoHolder instanceof CustomBehaviourFragment) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, CustomBehaviourFragment.newInstance()).commit();
+            }
+        }
+    }
+
+    /**
+     * Helper method to reset a RateTheApp widget's rating and visibility.
+     * @param rateTheAppName
+     */
+    private void resetWidget(String rateTheAppName) {
+        String instanceName = RateTheApp.PREF_RATETHEAPP_PREFIX;
+        if (rateTheAppName != null) {
+            instanceName += "_" + rateTheAppName;
+        }
+        // Reset the widget visibility to true
+        Utils.saveSharedSetting(this, instanceName + RateTheApp.PREF_RATETHEAPP_SHOW_SUFFIX, true);
+        // Rest the widget rating to zero
+        Utils.saveSharedSetting(this, instanceName + RateTheApp.PREF_RATETHEAPP_RATING_SUFFIX, 0f);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -117,22 +185,12 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_default) {
             getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, DefaultFragment.newInstance()).commit();
-        } else if (id == R.id.nav_demo1) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, Demo1Fragment.newInstance()).commit();
-        } else if (id == R.id.nav_demo2) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, Demo2Fragment.newInstance()).commit();
         }
-        else if (id == R.id.nav_demo3) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, Demo3Fragment.newInstance()).commit();
+        else if (id == R.id.nav_custom_appearance) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, CustomAppearanceFragment.newInstance()).commit();
         }
-        else if (id == R.id.nav_demo4) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, Demo4Fragment.newInstance()).commit();
-        }
-        else if (id == R.id.nav_demo5) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, Demo5Fragment.newInstance()).commit();
-        }
-        else if (id == R.id.nav_demo6) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, Demo6Fragment.newInstance()).commit();
+        else if (id == R.id.nav_custom_behaviour) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, CustomBehaviourFragment.newInstance()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

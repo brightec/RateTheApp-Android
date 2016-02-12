@@ -22,11 +22,14 @@
         android:fitsSystemWindows="true"
         app:menu="@menu/activity_main_drawer">
 
+        <!-- A custom rateTheAppName is used to stop this instance of the widget being hidden if the default widget is hidden -->
         <uk.co.brightec.ratetheapp.RateTheApp
+            android:id="@+id/demoRating"
             app:rateTheAppName="rateTheDemo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            android:paddingBottom="16dp"
             app:rateTheAppTitleText="How would you rate this demo?"/>
 
         </android.support.design.widget.NavigationView>

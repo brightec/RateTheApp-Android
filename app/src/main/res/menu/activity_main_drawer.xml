@@ -3,24 +3,12 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_default"
-            android:title="Default appearance"/>
+            android:title="@string/drawermenu_introduction_text"/>
         <item
-            android:id="@+id/nav_demo2"
-            android:title="No Text"/>
+            android:id="@+id/nav_custom_appearance"
+            android:title="@string/drawermenu_appearance_text"/>
         <item
-            android:id="@+id/nav_demo1"
-            android:title="Customised Text"/>
-        <item
-            android:id="@+id/nav_demo3"
-            android:title="Customised Stars"/>
-        <item
-            android:id="@+id/nav_demo4"
-            android:title="Multiple Ratings"/>
-        <item
-            android:id="@+id/nav_demo5"
-            android:title="Other examples"/>
-        <item
-            android:id="@+id/nav_demo6"
-            android:title="Custom behaviour"/>
+            android:id="@+id/nav_custom_behaviour"
+            android:title="@string/drawermenu_behaviour_text"/>
     </group>
 </menu>
