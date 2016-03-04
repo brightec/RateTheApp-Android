@@ -102,10 +102,6 @@ The colour of the stars can be changed using the *rateTheAppSelectedStarColor* a
     <color name="colorPrimaryDark">#0091EA</color>
 ```
 
-#### Changing the AlertDialog text
-
-#### Changing the email template text
-
 ## Changing the behaviour
 
 An interface *OnUserSelectedRatingListener* provides the behaviour when a user selects a rating.
@@ -179,6 +175,45 @@ It is possible to have no action once a user has rated your app, just set the *O
    RateTheApp rta = (RateTheApp) view.findViewById(R.id.noAction);
    rta.setOnUserSelectedRatingListener(null);
 ```
+
+## Customising the default behaviour
+
+The class *DefaultOnUserSelectedRatingListener* provides the default behaviour but custom implementations can also be provided.
+
+#### Changing the AlertDialog text
+
+There are a couple of ways of changing the AlertDialog Title, Message and Button texts.
+- The simpliest way is to override the string constants used by the default *DefaultOnUserSelectedRatingListener* class
+- Alternatively, in code, you can set the strings on the *DefaultOnUserSelectedRatingListener* class
+
+###### Default AlertDialog text definitions from ratetheapp/strings.xml
+```sh
+    <string name="ratetheapp_goodrating_title">Thanks!</string>
+    <string name="ratetheapp_goodrating_text">Thanks so much!  Would you mind rating us or leaving a review at the App Store?</string>
+    <string name="ratetheapp_positive_button">Sure</string>
+    <string name="ratetheapp_negative_button">No Thanks</string>
+    <string name="ratetheapp_badrating_title">Hi There!</string>
+    <string name="ratetheapp_badrating_text">I’m really sorry to hear that you don’t like our app. Would you mind sending me your thoughts on how we can improve the app? I’ll respond directly. Thanks for your help.</string>
+```
+
+###### Example overriding some strings - from the demo app, strings.xml
+```sh
+    <string name="demo_badrating_text">We\'re sorry to hear that you don\'t like our demo. Would you mind sending us your thoughts on how we can improve it?\n\nThanks for your help,\nThe Brightec Team</string>
+    <string name="demo_goodrating_title">Thank you!</string>
+    <string name="demo_goodrating_text">Thanks, that\'s great to hear!  Would you mind rating us or leaving a review on the Google Play Store?\n\nThanks again,\nThe Brightec Team</string>
+```
+<img src="images/demoapp-lowrating.png" alt="Customised low Rating" width="400"/>
+<img src="images/demoapp-positiverating.png" alt="Customised positive Rating" width="400"/>
+
+###### Example showing how to change the text in code.
+```sh
+ RateTheApp rta = (RateTheApp) view.findViewById(R.id.noAction);
+ DefaultOnUserSelectedRatingListener defaultListener = (DefaultOnUserSelectedRatingListener) rta.getOnUserSelectedRatingListener();
+ defaultListener.setGoodRatingTitle("Man, we're glad you liked our app.");
+ defaultListener.setGoodRatingMessage("We'd love it if you'd rate us on the Play Store so others may also benefit.");
+```
+
+#### Changing the email template text
 
 ## Displaying multiple instances of RateTheApp
 
