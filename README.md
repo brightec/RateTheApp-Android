@@ -217,7 +217,7 @@ where *XX* is the value of the *rateTheAppName* attribute (which defaults to *ra
 
 Feel free to use and improve this project - contributions are welcome.
 
-If you find a problem, please create an issue here (alternatively, fix the code and create a pull request) ;-)
+If you find a problem, please create an issue https://github.com/brightec/RateTheApp-Android/issues (alternatively, fix the code and create a pull request) ;-)
 
 ## License
 
