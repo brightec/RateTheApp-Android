@@ -198,9 +198,9 @@ There are a couple of ways of changing the AlertDialog Title, Message and Button
 
 ###### Example overriding some strings - from the demo app, strings.xml
 ```sh
-    <string name="demo_badrating_text">We\'re sorry to hear that you don\'t like our demo. Would you mind sending us your thoughts on how we can improve it?\n\nThanks for your help,\nThe Brightec Team</string>
-    <string name="demo_goodrating_title">Thank you!</string>
-    <string name="demo_goodrating_text">Thanks, that\'s great to hear!  Would you mind rating us or leaving a review on the Google Play Store?\n\nThanks again,\nThe Brightec Team</string>
+    <string name="ratetheapp_badrating_text">We\'re sorry to hear that you don\'t like our demo. Would you mind sending us your thoughts on how we can improve it?\n\nThanks for your help,\nThe Brightec Team</string>
+    <string name="ratetheapp_goodrating_title">Thank you!</string>
+    <string name="ratetheapp_goodrating_text">Thanks, that\'s great to hear!  Would you mind rating us or leaving a review on the Google Play Store?\n\nThanks again,\nThe Brightec Team</string>
 ```
 <img src="images/demoapp-lowrating.png" alt="Customised low Rating" width="400"/>
 <img src="images/demoapp-positiverating.png" alt="Customised positive Rating" width="400"/>
@@ -216,6 +216,23 @@ There are a couple of ways of changing the AlertDialog Title, Message and Button
 <img src="images/code-customised-thankyou.png" alt="Customised thankyou in code" width="400"/>
 
 #### Changing the email template text
+
+As for the AlertDialog text, there are a couple of ways of changing the email template.
+- The simpliest way is to override the string constants used by the default *DefaultOnUserSelectedRatingListener* class
+- Alternatively, in code, you can set the strings on the *DefaultOnUserSelectedRatingListener* class
+
+###### Default email template from ratetheapp/strings.xml
+```sh
+    <string name="ratetheapp_feedback_emailaddress">mobile@website.com</string>
+    <string name="ratetheapp_feedback_subject">App Feedback: Android</string>
+    <string name="ratetheapp_feedback_extra_information" formatted="false">\n\n\n\n\n// Please reply above this line\nInformation that helps us:\n%d stars, Android %s, Platform %s, App Version %s</string>
+```
+
+###### Example overriding some strings - from the demo app, strings.xml
+```sh
+    <string name="ratetheapp_feedback_emailaddress">support@brightec.co.uk</string>
+    <string name="ratetheapp_feedback_subject">RateTheApp Demo Feedback</string>
+```
 
 ## Displaying multiple instances of RateTheApp
 
