@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Brightec Ltd
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+    <string name="app_name">Rate The App</string>
+
+    <!-- Rate the App -->
+    <string name="ratetheapp_title">Rate this app?</string>
+    <string name="ratetheapp_goodrating_title">Thanks!</string>
+    <string name="ratetheapp_goodrating_text">Thanks so much!  Would you mind rating us or leaving a review at the App Store?</string>
+    <string name="ratetheapp_positive_button">Sure</string>
+    <string name="ratetheapp_negative_button">No Thanks</string>
+    <string name="ratetheapp_badrating_title">Hi There!</string>
+    <string name="ratetheapp_badrating_text">I’m really sorry to hear that you don’t like our app. Would you mind sending me your thoughts on how we can improve the app? I’ll respond directly. Thanks for your help.</string>
+
+    <string name="ratetheapp_feedback_emailaddress">mobile@website.com</string>
+    <string name="ratetheapp_feedback_subject">App Feedback: Android</string>
+    <string name="ratetheapp_feedback_extra_information" formatted="false">\n\n\n\n\n// Please reply above this line\nInformation that helps us:\n%d stars, Android %s, Platform %s, App Version %s</string>
+
+</resources>

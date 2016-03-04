@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Brightec Ltd
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+    <string name="app_name">RateTheApp Demo</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_resetdemo">Reset demo data</string>
+    <string name="drawermenu_introduction_text">Introduction to RateTheApp</string>
+    <string name="drawermenu_appearance_text">Changing the appearance</string>
+    <string name="drawermenu_behaviour_text">Changing the behaviour</string>
+
+    <!-- Brightec Developer Details -->
+    <string name="madeByBrightec">Made by Brightec</string>
+    <string name="brightecWebsite">brightec.co.uk</string>
+    <string name="brightecUrl">http://brightec.co.uk</string>
+
+    <!-- Demo rating widget -->
+    <string name="demo_badrating_text">We\'re sorry to hear that you don\'t like our demo. Would you mind sending us your thoughts on how we can improve it?\n\nThanks for your help,\nThe Brightec Team</string>
+    <string name="demo_feedback_emailaddress">support@brightec.co.uk</string>
+    <string name="demo_feedback_subject">RateTheApp Demo Feedback</string>
+    <string name="demo_goodrating_title">Thank you!</string>
+    <string name="demo_goodrating_text">Thanks, that\'s great to hear!  Would you mind rating us or leaving a review on the Google Play Store?\n\nThanks again,\nThe Brightec Team</string>
+
+    <!-- Demo Introduction Screen -->
+    <string name="demo_introduction">This is a demonstration of RateTheApp.\n\nRateTheApp is a custom component made by Brightec for Android developers.  It displays a rating bar and a title and provides customised behaviour depending on the rating selected.\n\nThe default behaviour for a low rating is to prompt the user to email the developer.  The default behaviour for a high rating is to prompt the user to leave a rating on the Play Store and then hide itself.</string>
+    <string name="learnmore_button">Learn More</string>
+    <string name="learnMoreURL">https://github.com/brightec/RateTheApp-Android/blob/dev/README.md</string>
+    <string name="default_description">The default appearance of RateTheApp, showing the default title, star colours and rating behaviour.</string>
+
+    <!-- Customised Appearance Screen -->
+    <string name="custom_appearance_introduction">The appearance of RateTheApp can be customised to change the title text, title style and the star colours.\n\nThe source code for these examples can be found on the RateTheApp website.</string>
+    <string name="custom_appearance_button">View Sourcecode</string>
+    <string name="custom_appearance_viewSourceURL">https://github.com/brightec/RateTheApp-Android</string>
+    <string name="demo1_description">A customised title with custom text and style.</string>
+    <string name="demo1_customised_title">Would you like to rate this app?</string>
+    <string name="demo2_description">Customised to have no title.</string>
+    <string name="demo3_description">A customised star colour for selected and unselected stars.</string>
+
+    <!-- Customised Behaviour Screen -->
+    <string name="custom_behaviour_introduction">An OnUserSelectedRatingListener provides the behaviour for RateTheApp when the rating changes.  A default implementation is provided, but custom implementations can be written to change the default behaviour.\n\nThe source code for these examples can be found on the RateTheApp website.</string>
+    <string name="custom_behaviour_button">View Sourcecode</string>
+    <string name="custom_behaviour_viewSourceURL">https://github.com/brightec/RateTheApp-Android</string>
+    <string name="demo4_description">The OnUserSelectedRatingListener has been removed so there is no action when the rating changes.</string>
+    <string name="demo5_description">A custom OnUserSelectedRatingListener has been added that updates a TextField with the current rating.</string>
+    <string name="current_rating">Current rating: </string>
+</resources>
