@@ -21,9 +21,9 @@ Depending on the user's rating, an AlertDialog prompts the user for further acti
 
 <img src="images/demoapp-positiverating.png" alt="Positive Rating" width="400"/>
 
-## Customising the appearance and behaviour
+## Changing the appearance
 
-### Changing the title
+#### Changing the title
 
 The title text and appearance can be changed using the *rateTheAppTitleText* and *rateTheAppTitleTextAppearance* attributes.
 
@@ -35,19 +35,24 @@ The title text and appearance can be changed using the *rateTheAppTitleText* and
    android:layout_width="wrap_content"
    android:layout_height="wrap_content"
    android:layout_gravity="center_horizontal"
-   app:rateTheAppTitleText="Would you like to rate this app?"
+   app:rateTheAppTitleText="@string/demo1_customised_title"
    app:rateTheAppTitleTextAppearance="@style/Demo.1.TextAppearance"
   />
 ```
 
+###### Title text defined in strings.xml
 ```sh
-Extract from from demo app styles.xml
+    <string name="demo1_customised_title">Would you like to rate this app?</string>
+```
+
+###### Title style defined in styles.xml
+```sh
     <style name="Demo.1.TextAppearance" parent="TextAppearance.AppCompat.Subhead">
         <item name="android:textColor">@color/colorPrimaryDark</item>
     </style>
 ```
 
-### Removing the title
+#### Removing the title
 
 The title can be removed altogether by setting a blank *rateTheAppTitleText* attribute.
 
@@ -63,7 +68,7 @@ The title can be removed altogether by setting a blank *rateTheAppTitleText* att
   />
 ```
 
-### Changing the stars
+#### Changing the star colours
 
 The colour of the stars can be changed using the *rateTheAppSelectedStarColor* and *rateTheAppUnselectedStarColor* attributes.
 
@@ -80,7 +85,13 @@ The colour of the stars can be changed using the *rateTheAppSelectedStarColor* a
   />
 ```
 
-### Changing the behaviour
+###### Star colours defined in colors.xml
+```sh
+    <color name="colorPrimary">#2FBCED</color>
+    <color name="colorPrimaryDark">#0091EA</color>
+```
+
+## Changing the behaviour
 
 TODO
 
