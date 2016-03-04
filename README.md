@@ -21,7 +21,9 @@ Depending on the user's rating, an AlertDialog prompts the user for further acti
 
 <img src="images/demoapp-positiverating.png" alt="Positive Rating" width="400"/>
 
-## Changing the title
+## Customising the appearance and behaviour
+
+### Changing the title
 
 The title text and appearance can be changed using the *rateTheAppTitleText* and *rateTheAppTitleTextAppearance* attributes.
 
@@ -45,7 +47,9 @@ Extract from from demo app styles.xml
     </style>
 ```
 
-Remove the title altogether by setting a blank *rateTheAppTitleText* attribute.
+### Removing the title
+
+The title can be removed altogether by setting a blank *rateTheAppTitleText* attribute.
 
 <img src="images/demoapp-notitle.png" alt="No title" width="400"/>
 
@@ -59,7 +63,7 @@ Remove the title altogether by setting a blank *rateTheAppTitleText* attribute.
   />
 ```
 
-## Changing the stars
+### Changing the stars
 
 The colour of the stars can be changed using the *rateTheAppSelectedStarColor* and *rateTheAppUnselectedStarColor* attributes.
 
@@ -76,18 +80,20 @@ The colour of the stars can be changed using the *rateTheAppSelectedStarColor* a
   />
 ```
 
-## Changing behaviour
+### Changing the behaviour
 
-
-## Installation
-
-Clone this repo and add to your Android Studio project as a Library Module.
+TODO
 
 ## Project Structure
 
 This project is made up of 
-- a *ratetheapp folder* - an Android Library containing the custom View and
-- an *app folder* a demo app showing what the RateTheApp looks like and how you can use it and customise it.
+
+- an *app folder*  - containing a demo app with code examples showing how to use and customise RateTheApp
+- a *ratetheapp folder* - an Android Library containing the RateTheApp Android View
+
+## Installation
+
+Clone this repo and import the *ratetheapp* folder as a Library Module in your Android Studio project.
 
 ## Contributors
 
