@@ -21,17 +21,6 @@ Depending on the user's rating, an AlertDialog prompts the user for further acti
 
 <img src="images/default-thankyou.png" alt="Default Positive Rating" width="400"/>
 
-## Installation
-
-Clone this repo and import the *ratetheapp* folder as a Library Module in your Android Studio project.
-
-## Project Structure
-
-This project is made up of 
-
-- an *app folder*  - containing a demo app with code examples showing how to use and customise RateTheApp
-- a *ratetheapp folder* - an Android Library containing the RateTheApp Android View
-
 ## Changing the appearance
 
 #### Changing the title
@@ -100,6 +89,60 @@ The colour of the stars can be changed using the *rateTheAppSelectedStarColor* a
 ```sh
     <color name="colorPrimary">#2FBCED</color>
     <color name="colorPrimaryDark">#0091EA</color>
+```
+
+#### Changing the AlertDialog text
+
+The class *DefaultOnUserSelectedRatingListener* provides the default behaviour of showing an AlertDialog.  There are a couple of ways of changing the text on the AlertDialog.
+- The simpliest way is to override the string definitions used by the *DefaultOnUserSelectedRatingListener* class
+- Alternatively, in code, you can set the strings on the *DefaultOnUserSelectedRatingListener* class
+
+###### String definitions from ratetheapp/strings.xml used by the default AlertDialog
+```sh
+    <string name="ratetheapp_goodrating_title">Thanks!</string>
+    <string name="ratetheapp_goodrating_text">Thanks so much!  Would you mind rating us or leaving a review at the App Store?</string>
+    <string name="ratetheapp_positive_button">Sure</string>
+    <string name="ratetheapp_negative_button">No Thanks</string>
+    <string name="ratetheapp_badrating_title">Hi There!</string>
+    <string name="ratetheapp_badrating_text">I’m really sorry to hear that you don’t like our app. Would you mind sending me your thoughts on how we can improve the app? I’ll respond directly. Thanks for your help.</string>
+```
+
+###### Example overriding some string definitions - from the demo app, strings.xml
+```sh
+    <string name="ratetheapp_badrating_text">We\'re sorry to hear that you don\'t like our demo. Would you mind sending us your thoughts on how we can improve it?\n\nThanks for your help,\nThe Brightec Team</string>
+    <string name="ratetheapp_goodrating_title">Thank you!</string>
+    <string name="ratetheapp_goodrating_text">Thanks, that\'s great to hear!  Would you mind rating us or leaving a review on the Google Play Store?\n\nThanks again,\nThe Brightec Team</string>
+```
+<img src="images/demoapp-lowrating.png" alt="Customised low Rating" width="400"/>
+<img src="images/demoapp-positiverating.png" alt="Customised positive Rating" width="400"/>
+
+###### Example showing how to set the text in code.
+```sh
+ RateTheApp rta = (RateTheApp) view.findViewById(R.id.noAction);
+ DefaultOnUserSelectedRatingListener defaultListener = (DefaultOnUserSelectedRatingListener) rta.getOnUserSelectedRatingListener();
+ defaultListener.setGoodRatingTitle("Man, we're glad you liked our app.");
+ defaultListener.setGoodRatingMessage("We'd love it if you'd rate us on the Play Store so others may also benefit.");
+```
+
+<img src="images/code-customised-thankyou.png" alt="Customised thankyou in code" width="400"/>
+
+#### Changing the email template text
+
+As with the AlertDialog, the class *DefaultOnUserSelectedRatingListener* provides the default email behaviour.  There are a couple of ways of changing the email template.
+- The simpliest way is to override the string definitions used by the *DefaultOnUserSelectedRatingListener* class
+- Alternatively, in code, you can set the strings on the *DefaultOnUserSelectedRatingListener* class
+
+###### String definitions from ratetheapp/strings.xml used by the email template
+```sh
+    <string name="ratetheapp_feedback_emailaddress">mobile@website.com</string>
+    <string name="ratetheapp_feedback_subject">App Feedback: Android</string>
+    <string name="ratetheapp_feedback_extra_information" formatted="false">\n\n\n\n\n// Please reply above this line\nInformation that helps us:\n%d stars, Android %s, Platform %s, App Version %s</string>
+```
+
+###### Example overriding some strings definitions - from the demo app, strings.xml
+```sh
+    <string name="ratetheapp_feedback_emailaddress">support@brightec.co.uk</string>
+    <string name="ratetheapp_feedback_subject">RateTheApp Demo Feedback</string>
 ```
 
 ## Changing the behaviour
@@ -176,64 +219,6 @@ It is possible to have no action once a user has rated your app, just set the *O
    rta.setOnUserSelectedRatingListener(null);
 ```
 
-## Customising the default behaviour
-
-The class *DefaultOnUserSelectedRatingListener* provides the default behaviour but custom implementations can also be provided.
-
-#### Changing the AlertDialog text
-
-There are a couple of ways of changing the AlertDialog Title, Message and Button texts.
-- The simpliest way is to override the string constants used by the default *DefaultOnUserSelectedRatingListener* class
-- Alternatively, in code, you can set the strings on the *DefaultOnUserSelectedRatingListener* class
-
-###### Default AlertDialog text definitions from ratetheapp/strings.xml
-```sh
-    <string name="ratetheapp_goodrating_title">Thanks!</string>
-    <string name="ratetheapp_goodrating_text">Thanks so much!  Would you mind rating us or leaving a review at the App Store?</string>
-    <string name="ratetheapp_positive_button">Sure</string>
-    <string name="ratetheapp_negative_button">No Thanks</string>
-    <string name="ratetheapp_badrating_title">Hi There!</string>
-    <string name="ratetheapp_badrating_text">I’m really sorry to hear that you don’t like our app. Would you mind sending me your thoughts on how we can improve the app? I’ll respond directly. Thanks for your help.</string>
-```
-
-###### Example overriding some strings - from the demo app, strings.xml
-```sh
-    <string name="ratetheapp_badrating_text">We\'re sorry to hear that you don\'t like our demo. Would you mind sending us your thoughts on how we can improve it?\n\nThanks for your help,\nThe Brightec Team</string>
-    <string name="ratetheapp_goodrating_title">Thank you!</string>
-    <string name="ratetheapp_goodrating_text">Thanks, that\'s great to hear!  Would you mind rating us or leaving a review on the Google Play Store?\n\nThanks again,\nThe Brightec Team</string>
-```
-<img src="images/demoapp-lowrating.png" alt="Customised low Rating" width="400"/>
-<img src="images/demoapp-positiverating.png" alt="Customised positive Rating" width="400"/>
-
-###### Example showing how to change the text in code.
-```sh
- RateTheApp rta = (RateTheApp) view.findViewById(R.id.noAction);
- DefaultOnUserSelectedRatingListener defaultListener = (DefaultOnUserSelectedRatingListener) rta.getOnUserSelectedRatingListener();
- defaultListener.setGoodRatingTitle("Man, we're glad you liked our app.");
- defaultListener.setGoodRatingMessage("We'd love it if you'd rate us on the Play Store so others may also benefit.");
-```
-
-<img src="images/code-customised-thankyou.png" alt="Customised thankyou in code" width="400"/>
-
-#### Changing the email template text
-
-As for the AlertDialog text, there are a couple of ways of changing the email template.
-- The simpliest way is to override the string constants used by the default *DefaultOnUserSelectedRatingListener* class
-- Alternatively, in code, you can set the strings on the *DefaultOnUserSelectedRatingListener* class
-
-###### Default email template from ratetheapp/strings.xml
-```sh
-    <string name="ratetheapp_feedback_emailaddress">mobile@website.com</string>
-    <string name="ratetheapp_feedback_subject">App Feedback: Android</string>
-    <string name="ratetheapp_feedback_extra_information" formatted="false">\n\n\n\n\n// Please reply above this line\nInformation that helps us:\n%d stars, Android %s, Platform %s, App Version %s</string>
-```
-
-###### Example overriding some strings - from the demo app, strings.xml
-```sh
-    <string name="ratetheapp_feedback_emailaddress">support@brightec.co.uk</string>
-    <string name="ratetheapp_feedback_subject">RateTheApp Demo Feedback</string>
-```
-
 ## Displaying multiple instances of RateTheApp
 
 To use RateTheApp more than once within an app, a unique *rateTheAppName* attribute should be set each time.
@@ -266,6 +251,18 @@ The information is stored using the following User Preferences keys
 - *ratetheapp_XX_show* stores whether RateTheApp should be displayed as a boolean value
 
 where *XX* is the value of the *rateTheAppName* attribute (which defaults to *rate_the_app* if not specified).  This means that unless the *rateTheAppName* attribute is changed from the default, all instances of the RateTheApp will share the same rating and display values.
+
+## Installation
+
+Clone this repo and import the *ratetheapp* folder as a Library Module in your Android Studio project.
+
+## Project Structure
+
+This project is made up of 
+
+- an *app folder*  - containing a demo app with code examples showing how to use and customise RateTheApp
+- a *ratetheapp folder* - an Android Library containing the RateTheApp Android View
+
 
 ## Contributors
 
