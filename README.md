@@ -21,6 +21,17 @@ Depending on the user's rating, an AlertDialog prompts the user for further acti
 
 <img src="images/demoapp-positiverating.png" alt="Positive Rating" width="400"/>
 
+## Installation
+
+Clone this repo and import the *ratetheapp* folder as a Library Module in your Android Studio project.
+
+## Project Structure
+
+This project is made up of 
+
+- an *app folder*  - containing a demo app with code examples showing how to use and customise RateTheApp
+- a *ratetheapp folder* - an Android Library containing the RateTheApp Android View
+
 ## Changing the appearance
 
 #### Changing the title
@@ -91,20 +102,73 @@ The colour of the stars can be changed using the *rateTheAppSelectedStarColor* a
     <color name="colorPrimaryDark">#0091EA</color>
 ```
 
+#### Changing the AlertDialog text
+
+#### Changing the email template text
+
 ## Changing the behaviour
 
-TODO
+An interface *OnUserSelectedRatingListener* provides the behaviour when a user selects a rating.
 
-## Project Structure
+```sh
+    public interface OnUserSelectedRatingListener {
+        void onRatingChanged(RateTheApp rateTheApp, float rating);
+    }
+```
 
-This project is made up of 
+The class *DefaultOnUserSelectedRatingListener* provides the default behaviour but custom implementations can also be provided.
 
-- an *app folder*  - containing a demo app with code examples showing how to use and customise RateTheApp
-- a *ratetheapp folder* - an Android Library containing the RateTheApp Android View
+#### Example - removing any behaviour
 
-## Installation
+It is possible to have no action once a user has rated your app, just set the *OnUserSelectedRatingListener* to null.
 
-Clone this repo and import the *ratetheapp* folder as a Library Module in your Android Studio project.
+###### Example from demo app - fragment_custombehaviour.xml
+```sh
+   <uk.co.brightec.ratetheapp.RateTheApp
+       android:id="@+id/noAction"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_gravity="center_horizontal"/>
+```
+
+###### Example from demo app - CustomBehaviourFragment.java
+```sh
+   RateTheApp rta = (RateTheApp) view.findViewById(R.id.noAction);
+   rta.setOnUserSelectedRatingListener(null);
+```
+
+## Displaying multiple instances of RateTheApp
+
+To use RateTheApp more than once within an app, a unique *rateTheAppName* attribute should be set each time.
+
+###### Example from demo app - showing different rateTheAppName settings 
+```sh
+ <uk.co.brightec.ratetheapp.RateTheApp
+ android:id="@+id/noAction"
+ app:rateTheAppName="noActionWidget"
+ android:layout_width="wrap_content"
+ android:layout_height="wrap_content"
+ android:layout_gravity="center_horizontal"/>
+ 
+<uk.co.brightec.ratetheapp.RateTheApp
+android:id="@+id/customAction"
+app:rateTheAppName="customActionWidget"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="center_horizontal"/>
+```
+
+##### Why is it necessary to specify a unique name?
+
+The user's rating and whether RateTheApp should be displayed or not are stored as user preferences so that the correct number of stars are remembered the next time the user sees the screen.  The *rateTheAppName* attribute is used as a key when storing user preferences.
+
+##### How is the information stored?
+
+The information is stored using the following User Preferences keys
+- *ratetheapp_XX_rating* stores the user's rating as a float value
+- *ratetheapp_XX_show* stores whether RateTheApp should be displayed as a boolean value
+
+where *XX* is the value of the *rateTheAppName* attribute (which defaults to *rate_the_app* if not specified).  This means that unless the *rateTheAppName* attribute is changed from the default, all instances of the RateTheApp will share the same rating and display values.
 
 ## Contributors
 
