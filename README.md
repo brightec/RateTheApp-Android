@@ -16,10 +16,10 @@ RateTheApp allows users to rate your app prompting them for further action depen
 Depending on the user's rating, an AlertDialog prompts the user for further action.
 - If a rating of 0, 1 or 2 stars is selected, the user is prompted whether they would like to email the app developer with any issues they might have.  RateTheApp will remain visible so the user can re-rate your app once their issues have been resolved.
 
-<img src="images/demoapp-lowrating.png" alt="Low Rating" width="400"/>
+<img src="images/default-sorry.png" alt="Default Low Rating" width="400"/>
 - If a rating of 3, 4 or 5 is selected, the user is prompted whether they would like to also leave a rating on the Play Store.  After a positive rating, RateTheApp is removed from view so as not to distract the user from using your app.
 
-<img src="images/demoapp-positiverating.png" alt="Positive Rating" width="400"/>
+<img src="images/default-thankyou.png" alt="Default Positive Rating" width="400"/>
 
 ## Installation
 
@@ -212,6 +212,8 @@ There are a couple of ways of changing the AlertDialog Title, Message and Button
  defaultListener.setGoodRatingTitle("Man, we're glad you liked our app.");
  defaultListener.setGoodRatingMessage("We'd love it if you'd rate us on the Play Store so others may also benefit.");
 ```
+
+<img src="images/code-customised-thankyou.png" alt="Customised thankyou in code" width="400"/>
 
 #### Changing the email template text
 
