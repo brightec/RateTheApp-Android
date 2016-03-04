@@ -1,5 +1,8 @@
-![Image of RateTheApp]
-(images/ratetheapp.png)
+# RateTheApp
+
+RateTheApp is an Android View that allows users to rate your app
+
+<img src="images/ratetheapp.png" alt="RateTheApp" width="400"/>
 
 ```sh
  <uk.co.brightec.ratetheapp.RateTheApp
@@ -9,10 +12,6 @@
     android:layout_height="wrap_content"
     />
 ```
-
-# RateTheApp
-
-RateTheApp is an Android View that allows users to rate your app
 
 Its appearance and behaviour are customisable, but by default it displays a 5-star rating control and depending on what rating the user gives, does one of two things:
 - If a rating of 0, 1 or 2 stars is selected, the user is prompted whether they would like to email the app developer with any issues they might have.  The user can choose to re-rate the app once their issues have been resolved.
