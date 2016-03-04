@@ -46,19 +46,19 @@ The title text and appearance can be changed using the *rateTheAppTitleText* and
    android:layout_width="wrap_content"
    android:layout_height="wrap_content"
    android:layout_gravity="center_horizontal"
-   app:rateTheAppTitleText="@string/demo1_customised_title"
-   app:rateTheAppTitleTextAppearance="@style/Demo.1.TextAppearance"
+   app:rateTheAppTitleText="@string/demo_customised_title"
+   app:rateTheAppTitleTextAppearance="@style/Demo.TextAppearance"
   />
 ```
 
 ###### Title text defined in strings.xml
 ```sh
-    <string name="demo1_customised_title">Would you like to rate this app?</string>
+    <string name="demo_customised_title">Would you like to rate this app?</string>
 ```
 
 ###### Title style defined in styles.xml
 ```sh
-    <style name="Demo.1.TextAppearance" parent="TextAppearance.AppCompat.Subhead">
+    <style name="Demo.TextAppearance" parent="TextAppearance.AppCompat.Subhead">
         <item name="android:textColor">@color/colorPrimaryDark</item>
     </style>
 ```
@@ -117,6 +117,49 @@ An interface *OnUserSelectedRatingListener* provides the behaviour when a user s
 ```
 
 The class *DefaultOnUserSelectedRatingListener* provides the default behaviour but custom implementations can also be provided.
+
+#### Example - displaying the current rating as a number
+
+The following example, taken from the demo app, displays a TextView showing the number of stars awarded to your app.
+
+###### Example from demo app - fragment_custombehaviour.xml
+```sh
+   <TextView
+       android:id="@+id/textView"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_gravity="center_horizontal"
+       android:paddingBottom="16dp"
+       style="@style/Demo.TextAppearance"/>
+       
+   <uk.co.brightec.ratetheapp.RateTheApp
+       android:id="@+id/customAction"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_gravity="center_horizontal"/>
+```
+
+###### Example from demo app - CustomBehaviourFragment.java
+```sh
+   // Find the RateTheApp widget
+   RateTheApp rta = (RateTheApp) view.findViewById(R.id.customAction);
+   // Initialise the text view to the current rating
+   final TextView textView = (TextView) view.findViewById(R.id.textView);
+   textView.setText(getString(R.string.current_rating) + " " + rta.getRating());
+
+   // Add a custom OnUserSelectedRatingListener to update the text view
+   rta.setOnUserSelectedRatingListener(new RateTheApp.OnUserSelectedRatingListener() {
+       @Override
+       public void onRatingChanged(RateTheApp rateTheApp, float rating) {
+           textView.setText(getString(R.string.current_rating) + " " + rating);
+       }
+   });
+```
+
+###### TextView text defined in strings.xml
+```sh
+        <string name="current_rating">Current rating: </string>
+```
 
 #### Example - removing any behaviour
 
