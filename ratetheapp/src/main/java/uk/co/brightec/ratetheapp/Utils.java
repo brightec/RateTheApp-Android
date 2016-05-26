@@ -20,13 +20,26 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 
+import com.google.common.annotations.VisibleForTesting;
+
 public class Utils {
 
     private static final String PREFERENCES_FILE = "ratetheapp_settings";
 
     public static String getDeviceName() {
-        String manufacturer = Build.MANUFACTURER;
-        String model = Build.MODEL;
+        return formatDeviceName(Build.MANUFACTURER, Build.MODEL);
+    }
+
+    /**
+     * Formats the manufacturer and model strings into a human readable device name
+     *
+     * @param manufacturer String e.g. Build.MANUFACTURER
+     * @param model        String e.g. Build.MODEL
+     * @return String Human readable device name e.g. Samsung S6
+     */
+    @VisibleForTesting
+    static String formatDeviceName(String manufacturer, String model) {
+        // FIXME: alistairsykes 26/05/2016 : If model is "" we might not want "manufacturer " (space)
         if (model.startsWith(manufacturer)) {
             return capitalize(model);
         } else {
@@ -34,9 +47,16 @@ public class Utils {
         }
     }
 
-    private static String capitalize(String s) {
+    /**
+     * Capitalize function will make the first letter of the first word of the given string to a capital. Only tested in for UK English language. Only the first char will be made upper case.
+     *
+     * @param s String
+     * @return String The capitalized string. null or "" will return "". " t" will return " t".
+     */
+    @VisibleForTesting
+    static String capitalize(String s) {
         if (s == null || s.length() == 0) {
-            return "";
+            return ""; //Should this really return empty for a null?
         }
         char first = s.charAt(0);
         if (Character.isUpperCase(first)) {
