@@ -24,7 +24,7 @@ public class UtilsUnitTest {
     public void formatDeviceName_nullInputs() throws Exception {
         Map<String[], String> testCases = new HashMap<>();
         testCases.put(new String[]{"", "S6"}, "S6"); // empty manufacturer
-        testCases.put(new String[]{"Samsung", ""}, "Samsung "); // empty model
+        testCases.put(new String[]{"Samsung", ""}, "Samsung"); // empty model
         testCases.put(new String[]{"", ""}, ""); // empty model
 
         for (String[] input : testCases.keySet()) {

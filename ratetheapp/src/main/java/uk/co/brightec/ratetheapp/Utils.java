@@ -19,8 +19,10 @@ package uk.co.brightec.ratetheapp;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.support.annotation.NonNull;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Preconditions;
 
 public class Utils {
 
@@ -38,13 +40,23 @@ public class Utils {
      * @return String Human readable device name e.g. Samsung S6
      */
     @VisibleForTesting
-    static String formatDeviceName(String manufacturer, String model) {
-        // FIXME: alistairsykes 26/05/2016 : If model is "" we might not want "manufacturer " (space)
+    static String formatDeviceName(@NonNull String manufacturer, @NonNull String model) {
+        Preconditions.checkNotNull(manufacturer, "Cannot pass a null object for manufacturer in Utils.formatDeviceName()");
+        Preconditions.checkNotNull(model, "Cannot pass a null object for model in Utils.formatDeviceName()");
+
+        StringBuilder stringBuilder = new StringBuilder();
+
         if (model.startsWith(manufacturer)) {
-            return capitalize(model);
+            stringBuilder.append(capitalize(model));
         } else {
-            return capitalize(manufacturer) + " " + model;
+            stringBuilder.append(capitalize(manufacturer));
+            if (!stringBuilder.toString().isEmpty() && !model.isEmpty()) {
+                stringBuilder.append(" ");
+            }
+            stringBuilder.append(capitalize(model));
         }
+
+        return stringBuilder.toString();
     }
 
     /**
