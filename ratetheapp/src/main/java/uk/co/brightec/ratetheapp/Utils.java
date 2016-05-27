@@ -97,6 +97,14 @@ public class Utils {
     }
 
     /**
+     * Helper method to read an app preference
+     */
+    public static Boolean readSharedSetting(Context ctx, String settingName, Boolean defaultValue) {
+        SharedPreferences sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
+        return sharedPref.getBoolean(settingName, defaultValue);
+    }
+
+    /**
      * Helper method to save an app preference
      */
     public static void saveSharedSetting(Context ctx, String settingName, Boolean settingValue) {
@@ -104,13 +112,5 @@ public class Utils {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean(settingName, settingValue);
         editor.apply();
-    }
-
-    /**
-     * Helper method to read an app preference
-     */
-    public static Boolean readSharedSetting(Context ctx, String settingName, Boolean defaultValue) {
-        SharedPreferences sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
-        return sharedPref.getBoolean(settingName, defaultValue);
     }
 }
