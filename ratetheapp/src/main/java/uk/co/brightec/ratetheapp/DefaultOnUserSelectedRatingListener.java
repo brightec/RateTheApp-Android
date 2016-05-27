@@ -25,6 +25,8 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 
+import com.google.common.annotations.VisibleForTesting;
+
 /**
  * The default OnRatingChangeListener that offers to take the user to the play store if a good rating was given, otherwise it prompts
  * the user to email the app developer to provide feedback.
@@ -193,24 +195,32 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
     }
 
     private void sendEmail(Context context, int numStars) {
-        PackageInfo pInfo = null;
-        try {
-            pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        String version = pInfo != null ? pInfo.versionName : "Unknown";
-
-        if (mFeedbackEmailMessage == null) {
-            mFeedbackEmailMessage = context.getString(R.string.ratetheapp_feedback_extra_information, numStars, Utils.getDeviceName(), Build.VERSION.SDK_INT, version);
-        }
-
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("message/rfc822");
         intent.putExtra(Intent.EXTRA_EMAIL, new String[]{mFeedbackEmailTo});
         intent.putExtra(Intent.EXTRA_SUBJECT, mFeedbackEmailSubject);
+        if (mFeedbackEmailMessage == null) {
+            mFeedbackEmailMessage = getDefaultEmailMessage(context, numStars);
+        }
         intent.putExtra(Intent.EXTRA_TEXT, mFeedbackEmailMessage);
 
         context.startActivity(Intent.createChooser(intent, "Send Email"));
+    }
+
+    /**
+     * Method for obtaining a default feedback email message
+     * @param context A context to get package info and strings against
+     * @param numStars The star rating the user clicked so that this can be addeed to the email
+     * @return String The a message to put into the email body
+     */
+    @VisibleForTesting
+    String getDefaultEmailMessage(Context context, int numStars) {
+        String version = "Unknown";
+        try {
+            version = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException ignored) {
+        }
+
+        return context.getString(R.string.ratetheapp_feedback_extra_information, numStars, Utils.getDeviceName(), Build.VERSION.SDK_INT, version);
     }
 }
