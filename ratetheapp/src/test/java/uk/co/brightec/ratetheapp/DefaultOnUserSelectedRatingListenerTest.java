@@ -39,5 +39,6 @@ public class DefaultOnUserSelectedRatingListenerTest {
 //
 //        DefaultOnUserSelectedRatingListener defaultOnUserSelectedRatingListener = DefaultOnUserSelectedRatingListener.createDefaultInstance(mMockContext);
 //        Assert.assertEquals(FAKE_EMAIL_BODY, defaultOnUserSelectedRatingListener.getDefaultEmailMessage(mMockContext, 1));
+        
     }
 }
