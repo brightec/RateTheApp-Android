@@ -23,6 +23,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -90,15 +91,15 @@ public class RateTheApp extends LinearLayout {
         init();
     }
 
-    private void loadAttributes(AttributeSet attrs){
+    private void loadAttributes(AttributeSet attrs) {
         loadAttributes(attrs, 0, 0);
     }
 
-    private void loadAttributes(AttributeSet attrs, int defStyleAttr){
+    private void loadAttributes(AttributeSet attrs, int defStyleAttr) {
         loadAttributes(attrs, defStyleAttr, 0);
     }
 
-    private void loadAttributes(AttributeSet attrs, int defStyleAttr, int defStyleRes){
+    private void loadAttributes(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.RateTheApp, defStyleAttr, defStyleRes);
 
@@ -117,8 +118,8 @@ public class RateTheApp extends LinearLayout {
         mNumberOfStars = a.getInt(R.styleable.RateTheApp_rateTheAppNumberOfStars, DEFAULT_NUMBER_OF_STARS);
         mStepSize = a.getFloat(R.styleable.RateTheApp_rateTheAppStepSize, DEFAULT_STEP_SIZE);
         mDefaultRating = a.getFloat(R.styleable.RateTheApp_rateTheAppDefaultRating, DEFAULT_RATING);
-        mSelectedStarColour = a.getColor(R.styleable.RateTheApp_rateTheAppSelectedStarColor, getColor(R.color.RateTheApp_SelectedStarColor));
-        mUnselectedStarColour = a.getColor(R.styleable.RateTheApp_rateTheAppUnselectedStarColor, getColor(R.color.RateTheApp_UnselectedStarColor));
+        mSelectedStarColour = a.getColor(R.styleable.RateTheApp_rateTheAppSelectedStarColor, ContextCompat.getColor(getContext(), R.color.RateTheApp_SelectedStarColor));
+        mUnselectedStarColour = a.getColor(R.styleable.RateTheApp_rateTheAppUnselectedStarColor, ContextCompat.getColor(getContext(), R.color.RateTheApp_UnselectedStarColor));
 
         mSaveRating = a.getBoolean(R.styleable.RateTheApp_rateTheAppSaveRating, true);
 
@@ -156,14 +157,6 @@ public class RateTheApp extends LinearLayout {
 
         // Set the default RateChangeListener
         setOnUserSelectedRatingListener(DefaultOnUserSelectedRatingListener.createDefaultInstance(getContext()));
-    }
-
-    private int getColor(int colorResId) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return getResources().getColor(colorResId, null);
-        } else {
-            return getResources().getColor(colorResId);
-        }
     }
 
     private void initTitle() {
