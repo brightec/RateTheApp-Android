@@ -6,14 +6,14 @@ ext {
 
     publishedGroupId = 'uk.co.brightec.ratetheapp'
     libraryName = 'RateTheApp'
-    artifact = 'rate-the-app'
+    artifact = 'ratetheapp'
 
     libraryDescription = 'RateTheApp is an Android component that allows users to rate your app prompting them for further action depending on the rating they gave.'
 
     siteUrl = 'https://github.com/brightec/RateTheApp-Android'
     gitUrl = 'https://github.com/brightec/RateTheApp-Android.git'
 
-    libraryVersion = '1.0'
+    libraryVersion = '0.9'
 
     developerId = 'nickh'
     developerName = 'Nick Holcombe'
@@ -32,7 +32,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName "0.9"
     }
     buildTypes {
         release {
