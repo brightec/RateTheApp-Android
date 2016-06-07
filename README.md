@@ -252,7 +252,22 @@ where *XX* is the value of the *rateTheAppName* attribute (which defaults to *ra
 
 ## Installation
 
-Clone this repo and import the *ratetheapp* folder as a Library Module in your Android Studio project.
+```sh
+Using Gradle:
+
+dependencies {
+  compile 'uk.co.brightec.ratetheapp:ratetheapp:0.9'
+}
+
+Or Maven:
+
+<dependency>
+  <groupId>uk.co.brightec.ratetheapp</groupId>
+  <artifactId>ratetheapp</artifactId>
+  <version>0.9</version>
+  <type>pom</type>
+</dependency>
+```
 
 ## Project Structure
 
