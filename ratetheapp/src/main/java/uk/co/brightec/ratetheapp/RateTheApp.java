@@ -41,7 +41,7 @@ public class RateTheApp extends LinearLayout {
     private static final float DEFAULT_RATING = 0.0f;
 
     private String mInstanceName;
-    private String mTitleText;
+    private String mTitleTextStr;
     private int mTitleTextAppearanceResId;
     private int mSelectedStarColour;
     private int mUnselectedStarColour;
@@ -51,6 +51,8 @@ public class RateTheApp extends LinearLayout {
     private float mDefaultRating;
     private float mRating;
     private boolean mSaveRating;
+
+    private TextView mTextTitle;
 
     public interface OnUserSelectedRatingListener {
         void onRatingChanged(RateTheApp rateTheApp, float rating);
@@ -111,7 +113,7 @@ public class RateTheApp extends LinearLayout {
 
         // Title Text Appearance
         mTitleTextAppearanceResId = a.getResourceId(R.styleable.RateTheApp_rateTheAppTitleTextAppearance, R.style.RateTheAppTitleTextAppearance);
-        mTitleText = a.getString(R.styleable.RateTheApp_rateTheAppTitleText);
+        mTitleTextStr = a.getString(R.styleable.RateTheApp_rateTheAppTitleText);
 
         // Stars & Rating
         mNumberOfStars = a.getInt(R.styleable.RateTheApp_rateTheAppNumberOfStars, DEFAULT_NUMBER_OF_STARS);
@@ -167,19 +169,19 @@ public class RateTheApp extends LinearLayout {
     }
 
     private void initTitle() {
-        TextView title = (TextView) findViewById(R.id.ratingTitleText);
+        mTextTitle = (TextView) findViewById(R.id.ratingTitleText);
         // Hide the title if an empty title text attribute was provided
-        if (mTitleText != null && mTitleText.isEmpty()) {
-            title.setVisibility(GONE);
+        if (mTitleTextStr != null && mTitleTextStr.isEmpty()) {
+            mTextTitle.setVisibility(GONE);
         } else {
             // Set the title text if provided
-            if (mTitleText != null) {
-                title.setText(mTitleText);
+            if (mTitleTextStr != null) {
+                mTextTitle.setText(mTitleTextStr);
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                title.setTextAppearance(mTitleTextAppearanceResId);
+                mTextTitle.setTextAppearance(mTitleTextAppearanceResId);
             } else {
-                title.setTextAppearance(getContext(), mTitleTextAppearanceResId);
+                mTextTitle.setTextAppearance(getContext(), mTitleTextAppearanceResId);
             }
         }
     }
@@ -243,4 +245,12 @@ public class RateTheApp extends LinearLayout {
             }
         }
     };
+
+    /**
+     * This method returns the TextView which represents the title in the layout. This method is provided for specific use cases where this library has not provided the exact config needed.
+     * @return TextView mTextTitle - The TextView associated with the title
+     */
+    public TextView getTitleTextView() {
+        return mTextTitle;
+    }
 }
