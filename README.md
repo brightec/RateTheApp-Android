@@ -87,6 +87,28 @@ The colour of the stars can be changed using the *rateTheAppSelectedStarColor* a
 <color name="colorPrimaryDark">#0091EA</color>
 ```
 
+#### Changing the star drawables
+
+The drawables of the stars can be changed using the *rateTheAppStarSelectedDrawable* and *rateTheAppStarUnSelectedDrawable* attributes.
+
+<img src="images/demoapp-customisedstars.png" alt="Changing the stars" width="400"/>
+
+```sh
+ <uk.co.brightec.ratetheapp.RateTheApp
+ xmlns:app="http://schemas.android.com/apk/res-auto"
+ android:layout_width="wrap_content"
+ android:layout_height="wrap_content"
+ android:layout_gravity="center_horizontal"
+ app:rateTheAppStarSelectedDrawable="@drawable/ic_android_selected"
+ app:rateTheAppStarUnSelectedDrawable="@drawable/ic_android_unselected"/>
+```
+
+###### Star drawables found in drawable folder
+```sh
+ic_android_selected.png
+ic_android_unselected.png
+```
+
 #### Changing the AlertDialog text
 
 The class *DefaultOnUserSelectedRatingListener* provides the default behaviour of showing an AlertDialog.  There are a couple of ways of changing the text on the AlertDialog.
