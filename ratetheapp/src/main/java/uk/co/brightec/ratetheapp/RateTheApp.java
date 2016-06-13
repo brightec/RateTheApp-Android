@@ -265,6 +265,15 @@ public class RateTheApp extends LinearLayout {
         mRatingBar.setRating(0);
     }
 
+    /**
+     * This method returns the TextView which represents the title in the layout. This method is provided for specific use cases where this library has not provided the exact config needed.
+     *
+     * @return TextView mTextTitle - The TextView associated with the title
+     */
+    public TextView getTitleTextView() {
+        return mTextTitle;
+    }
+
     public interface OnUserSelectedRatingListener {
         void onRatingChanged(RateTheApp rateTheApp, float rating);
     }
