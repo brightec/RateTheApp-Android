@@ -274,6 +274,15 @@ public class RateTheApp extends LinearLayout {
         return mTextTitle;
     }
 
+    /**
+     * This method returns the TextView which represents the message in the layout. This method is provided for specific use cases where this library has not provided the exact config needed.
+     *
+     * @return TextView mTextMessage - The TextView associated with the message
+     */
+    public TextView getMessageTextView() {
+        return mTextMessage;
+    }
+
     public interface OnUserSelectedRatingListener {
         void onRatingChanged(RateTheApp rateTheApp, float rating);
     }
