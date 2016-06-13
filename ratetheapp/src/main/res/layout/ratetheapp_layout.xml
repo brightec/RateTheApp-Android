@@ -38,6 +38,6 @@
     <RatingBar
         android:id="@+id/rating_bar"
         style="@style/RatingBar"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp" />
 
 </LinearLayout>

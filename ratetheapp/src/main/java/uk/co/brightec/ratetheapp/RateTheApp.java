@@ -53,20 +53,22 @@ public class RateTheApp extends LinearLayout {
     private boolean mSaveRating;
 
     private TextView mTextTitle, mTextMessage;
-
-    public interface OnUserSelectedRatingListener {
-        void onRatingChanged(RateTheApp rateTheApp, float rating);
-    }
-
     private OnUserSelectedRatingListener mOnUserSelectedRatingListener;
+    private RatingBar.OnRatingBarChangeListener ratingChangeListener = new RatingBar.OnRatingBarChangeListener() {
 
-    public OnUserSelectedRatingListener getOnUserSelectedRatingListener() {
-        return mOnUserSelectedRatingListener;
-    }
+        @Override
+        public void onRatingChanged(RatingBar ratingBar, final float rating, boolean fromUser) {
+            // Save the rating
+            if (mSaveRating) {
+                saveRating(rating);
+            }
 
-    public void setOnUserSelectedRatingListener(OnUserSelectedRatingListener onUserSelectedRatingListener) {
-        mOnUserSelectedRatingListener = onUserSelectedRatingListener;
-    }
+            // If a rateChangeListener was provided, call it
+            if (mOnUserSelectedRatingListener != null && fromUser) {
+                mOnUserSelectedRatingListener.onRatingChanged(RateTheApp.this, rating);
+            }
+        }
+    };
 
     public RateTheApp(Context context) {
         super(context);
@@ -92,15 +94,23 @@ public class RateTheApp extends LinearLayout {
         init();
     }
 
-    private void loadAttributes(AttributeSet attrs){
+    public OnUserSelectedRatingListener getOnUserSelectedRatingListener() {
+        return mOnUserSelectedRatingListener;
+    }
+
+    public void setOnUserSelectedRatingListener(OnUserSelectedRatingListener onUserSelectedRatingListener) {
+        mOnUserSelectedRatingListener = onUserSelectedRatingListener;
+    }
+
+    private void loadAttributes(AttributeSet attrs) {
         loadAttributes(attrs, 0, 0);
     }
 
-    private void loadAttributes(AttributeSet attrs, int defStyleAttr){
+    private void loadAttributes(AttributeSet attrs, int defStyleAttr) {
         loadAttributes(attrs, defStyleAttr, 0);
     }
 
-    private void loadAttributes(AttributeSet attrs, int defStyleAttr, int defStyleRes){
+    private void loadAttributes(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.RateTheApp, defStyleAttr, defStyleRes);
 
@@ -243,31 +253,19 @@ public class RateTheApp extends LinearLayout {
         return Utils.readSharedSetting(getContext(), mInstanceName + PREF_RATETHEAPP_RATING_SUFFIX, defaultRating);
     }
 
-    public void setRating(float rating) {
-        mRatingBar.setRating(rating);
-    }
-
     public float getRating() {
         return mRatingBar.getRating();
+    }
+
+    public void setRating(float rating) {
+        mRatingBar.setRating(rating);
     }
 
     public void reset() {
         mRatingBar.setRating(0);
     }
 
-    private RatingBar.OnRatingBarChangeListener ratingChangeListener = new RatingBar.OnRatingBarChangeListener() {
-
-        @Override
-        public void onRatingChanged(RatingBar ratingBar, final float rating, boolean fromUser) {
-            // Save the rating
-            if (mSaveRating) {
-                saveRating(rating);
-            }
-
-            // If a rateChangeListener was provided, call it
-            if (mOnUserSelectedRatingListener != null && fromUser) {
-                mOnUserSelectedRatingListener.onRatingChanged(RateTheApp.this, rating);
-            }
-        }
-    };
+    public interface OnUserSelectedRatingListener {
+        void onRatingChanged(RateTheApp rateTheApp, float rating);
+    }
 }

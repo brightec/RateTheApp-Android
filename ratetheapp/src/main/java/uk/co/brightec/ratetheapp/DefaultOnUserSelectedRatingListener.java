@@ -43,6 +43,19 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
     private String mFeedbackEmailSubject;
     private String mFeedbackEmailMessage;
 
+    public DefaultOnUserSelectedRatingListener(float minGoodRating, String negativeButtonText, String positiveButtonText, String goodRatingTitle, String goodRatingMessage, String badRatingTitle, String badRatingMessage, String feedbackEmailTo, String feedbackEmailSubject, String feedbackEmailMessage) {
+        mMinGoodRating = minGoodRating;
+        mNegativeButtonText = negativeButtonText;
+        mPositiveButtonText = positiveButtonText;
+        mGoodRatingTitle = goodRatingTitle;
+        mGoodRatingMessage = goodRatingMessage;
+        mBadRatingTitle = badRatingTitle;
+        mBadRatingMessage = badRatingMessage;
+        mFeedbackEmailTo = feedbackEmailTo;
+        mFeedbackEmailSubject = feedbackEmailSubject;
+        mFeedbackEmailMessage = feedbackEmailMessage;
+    }
+
     public static DefaultOnUserSelectedRatingListener createDefaultInstance(Context context) {
         return new DefaultOnUserSelectedRatingListener(
                 DEFAULT_MIN_GOOD_RATING,
@@ -55,19 +68,6 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
                 context.getString(R.string.ratetheapp_feedback_emailaddress),
                 context.getString(R.string.ratetheapp_feedback_subject),
                 null);
-    }
-
-    public DefaultOnUserSelectedRatingListener(float minGoodRating, String negativeButtonText, String positiveButtonText, String goodRatingTitle, String goodRatingMessage, String badRatingTitle, String badRatingMessage, String feedbackEmailTo, String feedbackEmailSubject, String feedbackEmailMessage) {
-        mMinGoodRating = minGoodRating;
-        mNegativeButtonText = negativeButtonText;
-        mPositiveButtonText = positiveButtonText;
-        mGoodRatingTitle = goodRatingTitle;
-        mGoodRatingMessage = goodRatingMessage;
-        mBadRatingTitle = badRatingTitle;
-        mBadRatingMessage = badRatingMessage;
-        mFeedbackEmailTo = feedbackEmailTo;
-        mFeedbackEmailSubject = feedbackEmailSubject;
-        mFeedbackEmailMessage = feedbackEmailMessage;
     }
 
     public float getMinGoodRating() {

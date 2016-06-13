@@ -78,11 +78,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    app:rateTheAppMessageText="@string/demo1_customised_message"
+                    app:rateTheAppMessageTextAppearance="@style/Demo.1.MessageTextAppearance"
                     app:rateTheAppName="customisedTitleWidget"
                     app:rateTheAppTitleText="@string/demo1_customised_title"
-                    app:rateTheAppTitleTextAppearance="@style/Demo.1.TitleTextAppearance"
-                    app:rateTheAppMessageText="@string/demo1_customised_message"
-                    app:rateTheAppMessageTextAppearance="@style/Demo.1.MessageTextAppearance"/>
+                    app:rateTheAppTitleTextAppearance="@style/Demo.1.TitleTextAppearance" />
 
             </LinearLayout>
 
@@ -112,9 +112,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    app:rateTheAppMessageText=""
                     app:rateTheAppName="noTitleWidget"
-                    app:rateTheAppTitleText=""
-                    app:rateTheAppMessageText=""/>
+                    app:rateTheAppTitleText="" />
 
             </LinearLayout>
 
