@@ -75,7 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="16dp"
-                    android:text="@string/demo4_description"/>
+                    android:text="@string/demo5_description"/>
 
                 <!-- A custom rateTheAppName is used to stop this instance of the widget being hidden if the default widget is hidden -->
                 <uk.co.brightec.ratetheapp.RateTheApp
@@ -108,7 +108,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="16dp"
-                    android:text="@string/demo5_description"/>
+                    android:text="@string/demo6_description"/>
 
                 <TextView
                     android:id="@+id/textView"

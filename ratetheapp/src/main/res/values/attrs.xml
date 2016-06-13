@@ -24,5 +24,7 @@
         <attr name="rateTheAppStepSize" format="float"/>
         <attr name="rateTheAppDefaultRating" format="float"/>
         <attr name="rateTheAppSaveRating" format="boolean"/>
+        <attr name="rateTheAppStarSelectedDrawable" format="reference"/>
+        <attr name="rateTheAppStarUnSelectedDrawable" format="reference"/>
     </declare-styleable>
 </resources>

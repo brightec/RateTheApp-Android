@@ -48,12 +48,13 @@
     <string name="demo1_customised_title">Would you like to rate this app?</string>
     <string name="demo2_description">Customised to have no title.</string>
     <string name="demo3_description">A customised star colour for selected and unselected stars.</string>
+    <string name="demo4_description">A customised star drawable for selected and unselected stars. You could also apply custom colours to these if you wished. See example above.</string>
 
     <!-- Customised Behaviour Screen -->
     <string name="custom_behaviour_introduction">An OnUserSelectedRatingListener provides the behaviour for RateTheApp when the rating changes.  A default implementation is provided, but custom implementations can be written to change the default behaviour.\n\nThe source code for these examples can be found on the RateTheApp website.</string>
     <string name="custom_behaviour_button">View Sourcecode</string>
     <string name="custom_behaviour_viewSourceURL">https://github.com/brightec/RateTheApp-Android/blob/master/app/src/main/java/uk/co/brightec/ratetheapp_android/fragments/CustomBehaviourFragment.java</string>
-    <string name="demo4_description">The OnUserSelectedRatingListener has been removed so there is no action when the rating changes.</string>
-    <string name="demo5_description">A custom OnUserSelectedRatingListener has been added that updates a TextField with the current rating.</string>
+    <string name="demo5_description">The OnUserSelectedRatingListener has been removed so there is no action when the rating changes.</string>
+    <string name="demo6_description">A custom OnUserSelectedRatingListener has been added that updates a TextField with the current rating.</string>
     <string name="current_rating">Current rating: </string>
 </resources>
