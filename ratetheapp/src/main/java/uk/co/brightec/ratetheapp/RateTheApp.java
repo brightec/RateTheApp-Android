@@ -41,8 +41,8 @@ public class RateTheApp extends LinearLayout {
     private static final float DEFAULT_RATING = 0.0f;
 
     private String mInstanceName;
-    private String mTitleText;
-    private int mTitleTextAppearanceResId;
+    private String mTitleStr, mMessageStr;
+    private int mTitleTextAppearanceResId, mMessageTextAppearanceResId;
     private int mSelectedStarColour;
     private int mUnselectedStarColour;
     private RatingBar mRatingBar;
@@ -51,6 +51,8 @@ public class RateTheApp extends LinearLayout {
     private float mDefaultRating;
     private float mRating;
     private boolean mSaveRating;
+
+    private TextView mTextTitle, mTextMessage;
 
     public interface OnUserSelectedRatingListener {
         void onRatingChanged(RateTheApp rateTheApp, float rating);
@@ -111,7 +113,11 @@ public class RateTheApp extends LinearLayout {
 
         // Title Text Appearance
         mTitleTextAppearanceResId = a.getResourceId(R.styleable.RateTheApp_rateTheAppTitleTextAppearance, R.style.RateTheAppTitleTextAppearance);
-        mTitleText = a.getString(R.styleable.RateTheApp_rateTheAppTitleText);
+        mTitleStr = a.getString(R.styleable.RateTheApp_rateTheAppTitleText);
+
+        // Message Text Appearance
+        mMessageTextAppearanceResId = a.getResourceId(R.styleable.RateTheApp_rateTheAppMessageTextAppearance, R.style.RateTheAppMessageTextAppearance);
+        mMessageStr = a.getString(R.styleable.RateTheApp_rateTheAppMessageText);
 
         // Stars & Rating
         mNumberOfStars = a.getInt(R.styleable.RateTheApp_rateTheAppNumberOfStars, DEFAULT_NUMBER_OF_STARS);
@@ -134,12 +140,15 @@ public class RateTheApp extends LinearLayout {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         inflater.inflate(R.layout.ratetheapp_layout, this, true);
 
-        mRatingBar = (RatingBar) findViewById(R.id.ratingBar);
+        mRatingBar = (RatingBar) findViewById(R.id.rating_bar);
         mRatingBar.setNumStars(mNumberOfStars);
         mRatingBar.setStepSize(mStepSize);
 
         // Initialise the title
         initTitle();
+
+        // Initialise the message
+        initMessage();
 
         // Initialise the stars
         initStars();
@@ -167,19 +176,37 @@ public class RateTheApp extends LinearLayout {
     }
 
     private void initTitle() {
-        TextView title = (TextView) findViewById(R.id.ratingTitleText);
+        mTextTitle = (TextView) findViewById(R.id.text_rating_title);
         // Hide the title if an empty title text attribute was provided
-        if (mTitleText != null && mTitleText.isEmpty()) {
-            title.setVisibility(GONE);
+        if (mTitleStr != null && mTitleStr.isEmpty()) {
+            mTextTitle.setVisibility(GONE);
         } else {
             // Set the title text if provided
-            if (mTitleText != null) {
-                title.setText(mTitleText);
+            if (mTitleStr != null) {
+                mTextTitle.setText(mTitleStr);
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                title.setTextAppearance(mTitleTextAppearanceResId);
+                mTextTitle.setTextAppearance(mTitleTextAppearanceResId);
             } else {
-                title.setTextAppearance(getContext(), mTitleTextAppearanceResId);
+                mTextTitle.setTextAppearance(getContext(), mTitleTextAppearanceResId);
+            }
+        }
+    }
+
+    private void initMessage() {
+        mTextMessage = (TextView) findViewById(R.id.text_rating_message);
+        // Hide the message if an empty message text attribute was provided
+        if (mMessageStr != null && mMessageStr.isEmpty()) {
+            mTextMessage.setVisibility(GONE);
+        } else {
+            // Set the title text if provided
+            if (mMessageStr != null) {
+                mTextMessage.setText(mMessageStr);
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                mTextMessage.setTextAppearance(mMessageTextAppearanceResId);
+            } else {
+                mTextMessage.setTextAppearance(getContext(), mMessageTextAppearanceResId);
             }
         }
     }

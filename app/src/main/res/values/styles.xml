@@ -36,8 +36,11 @@
     </style>
 
     <style name="Demo.1"/>
-    <style name="Demo.1.TextAppearance" parent="TextAppearance.AppCompat.Subhead">
+    <style name="Demo.1.TitleTextAppearance" parent="TextAppearance.AppCompat.Subhead">
         <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+    <style name="Demo.1.MessageTextAppearance" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">@color/colorAccent</item>
     </style>
 
     <style name="Demo.5"/>

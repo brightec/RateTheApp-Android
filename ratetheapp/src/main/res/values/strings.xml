@@ -18,6 +18,7 @@
 
     <!-- Rate the App -->
     <string name="ratetheapp_title">Rate this app?</string>
+    <string name="ratetheapp_message">Please leave a review. We\'d love to hear how you\'re enjoying the app.</string>
     <string name="ratetheapp_goodrating_title">Thanks!</string>
     <string name="ratetheapp_goodrating_text">Thanks so much!  Would you mind rating us or leaving a review at the App Store?</string>
     <string name="ratetheapp_positive_button">Sure</string>
