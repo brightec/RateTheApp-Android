@@ -102,7 +102,7 @@ The colour of the stars can be changed using the *rateTheAppSelectedStarColor* a
 
 #### Changing the star drawables
 
-The drawables of the stars can be changed using the *rateTheAppStarSelectedDrawable* and *rateTheAppStarUnSelectedDrawable* attributes.
+The drawables of the stars can be changed using the *rateTheAppStarSelectedDrawable* and *rateTheAppStarUnSelectedDrawable* attributes. You can still the drawables colour attribute as above.
 
 <img src="images/demoapp-customisedstars.png" alt="Changing the stars" width="400"/>
 
