@@ -19,6 +19,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -53,5 +54,4 @@
     <style name="Demo.5.TextAppearance" parent="TextAppearance.AppCompat.Subhead">
         <item name="android:textColor">@color/colorPrimaryDark</item>
     </style>
-
 </resources>
