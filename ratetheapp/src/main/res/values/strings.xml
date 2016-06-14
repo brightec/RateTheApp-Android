@@ -27,6 +27,6 @@
 
     <string name="ratetheapp_feedback_emailaddress">mobile@website.com</string>
     <string name="ratetheapp_feedback_subject">App Feedback: Android</string>
-    <string name="ratetheapp_feedback_extra_information" formatted="false">\n\n\n\n\n// Please reply above this line\nInformation that helps us:\n%d stars, Android %s, Platform %s, App Version %s</string>
+    <string name="ratetheapp_feedback_extra_information" formatted="false">\n\n\n\n\n// Please reply above this line\nInformation that helps us:\n%d stars, Android %s, Platform %d, App Version %s</string>
 
 </resources>

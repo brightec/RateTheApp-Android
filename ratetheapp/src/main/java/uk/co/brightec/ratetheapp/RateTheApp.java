@@ -143,8 +143,8 @@ public class RateTheApp extends LinearLayout {
         mNumberOfStars = a.getInt(R.styleable.RateTheApp_rateTheAppNumberOfStars, DEFAULT_NUMBER_OF_STARS);
         mStepSize = a.getFloat(R.styleable.RateTheApp_rateTheAppStepSize, DEFAULT_STEP_SIZE);
         mDefaultRating = a.getFloat(R.styleable.RateTheApp_rateTheAppDefaultRating, DEFAULT_RATING);
-        mSelectedStarColour = a.getColor(R.styleable.RateTheApp_rateTheAppSelectedStarColor, getColor(R.color.RateTheApp_SelectedStarColor));
-        mUnselectedStarColour = a.getColor(R.styleable.RateTheApp_rateTheAppUnselectedStarColor, getColor(R.color.RateTheApp_UnselectedStarColor));
+        mSelectedStarColour = a.getColor(R.styleable.RateTheApp_rateTheAppSelectedStarColor, ContextCompat.getColor(getContext(), R.color.RateTheApp_SelectedStarColor));
+        mUnselectedStarColour = a.getColor(R.styleable.RateTheApp_rateTheAppUnselectedStarColor, ContextCompat.getColor(getContext(), R.color.RateTheApp_UnselectedStarColor));
         mDrawableResUnSelected = a.getResourceId(R.styleable.RateTheApp_rateTheAppStarUnSelectedDrawable, R.drawable.ic_rating_star_border_grey_36dp);
         mDrawableResSelected = a.getResourceId(R.styleable.RateTheApp_rateTheAppStarSelectedDrawable, R.drawable.ic_rating_star_green_36dp);
 
@@ -187,14 +187,6 @@ public class RateTheApp extends LinearLayout {
 
         // Set the default RateChangeListener
         setOnUserSelectedRatingListener(DefaultOnUserSelectedRatingListener.createDefaultInstance(getContext()));
-    }
-
-    private int getColor(int colorResId) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return getResources().getColor(colorResId, null);
-        } else {
-            return getResources().getColor(colorResId);
-        }
     }
 
     private void initTitle() {
