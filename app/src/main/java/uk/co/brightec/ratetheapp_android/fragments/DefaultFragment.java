@@ -28,12 +28,12 @@ import uk.co.brightec.ratetheapp_android.R;
 
 public class DefaultFragment extends Fragment {
 
-    public static DefaultFragment newInstance() {
-        return new DefaultFragment();
-    }
-
     public DefaultFragment() {
         // Required empty public constructor
+    }
+
+    public static DefaultFragment newInstance() {
+        return new DefaultFragment();
     }
 
     @Override

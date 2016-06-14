@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2016 Brightec Ltd
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright 2016 Brightec Ltd
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
@@ -14,24 +13,24 @@
 -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            tools:context="uk.co.brightec.ratetheapp_android.fragments.DefaultFragment"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:context="uk.co.brightec.ratetheapp_android.fragments.DefaultFragment">
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <!-- A CardView that contains introduction -->
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            card_view:cardCornerRadius="4dp"
-            card_view:contentPadding="8dp">
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="16dp"
+                                            card_view:cardCornerRadius="4dp"
+                                            card_view:contentPadding="8dp">
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                           xmlns:tools="http://schemas.android.com/tools"
@@ -47,9 +46,9 @@
 
                 <Button
                     android:id="@+id/btn_viewsource"
+                    style="@style/Demo.Intro.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Demo.Intro.Button"
                     android:text="@string/custom_behaviour_button"/>
 
             </LinearLayout>
@@ -57,46 +56,12 @@
         </android.support.v7.widget.CardView>
 
         <!-- Demo 4, A CardView that demonstrates no behaviour when rating changes -->
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            card_view:cardCornerRadius="4dp"
-            card_view:contentPadding="16dp">
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                          xmlns:tools="http://schemas.android.com/tools"
-                          android:layout_width="match_parent"
-                          android:layout_height="match_parent"
-                          android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="16dp"
-                    android:text="@string/demo4_description"/>
-
-                <!-- A custom rateTheAppName is used to stop this instance of the widget being hidden if the default widget is hidden -->
-                <uk.co.brightec.ratetheapp.RateTheApp
-                    android:id="@+id/noAction"
-                    app:rateTheAppName="noActionWidget"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"/>
-
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <!-- Demo 5, A CardView that demonstrates custom behaviour -->
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            card_view:cardCornerRadius="4dp"
-            card_view:contentPadding="16dp">
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="16dp"
+                                            card_view:cardCornerRadius="4dp"
+                                            card_view:contentPadding="16dp">
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                           xmlns:tools="http://schemas.android.com/tools"
@@ -110,23 +75,54 @@
                     android:paddingBottom="16dp"
                     android:text="@string/demo5_description"/>
 
-                <TextView
-                    android:id="@+id/textView"
+                <!-- A custom rateTheAppName is used to stop this instance of the widget being hidden if the default widget is hidden -->
+                <uk.co.brightec.ratetheapp.RateTheApp
+                    android:id="@+id/noAction"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    app:rateTheAppName="noActionWidget"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <!-- Demo 5, A CardView that demonstrates custom behaviour -->
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="16dp"
+                                            card_view:cardCornerRadius="4dp"
+                                            card_view:contentPadding="16dp">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                          xmlns:tools="http://schemas.android.com/tools"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:paddingBottom="16dp"
-                    style="@style/Demo.5.TextAppearance"
-                    xmlns:tools="http://schemas.android.com/tools"
-                    tools:text="Current Rating: 1.0"/>
+                    android:text="@string/demo6_description"/>
+
+                <TextView android:id="@+id/textView"
+                          style="@style/Demo.5.TextAppearance"
+                          xmlns:tools="http://schemas.android.com/tools"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_horizontal"
+                          android:paddingBottom="16dp"
+                          tools:text="Current Rating: 1.0"/>
 
                 <!-- A custom rateTheAppName is used to stop this instance of the widget being hidden if the default widget is hidden -->
                 <uk.co.brightec.ratetheapp.RateTheApp
                     android:id="@+id/customAction"
-                    app:rateTheAppName="customActionWidget"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"/>
+                    android:layout_gravity="center_horizontal"
+                    app:rateTheAppName="customActionWidget"/>
 
             </LinearLayout>
 

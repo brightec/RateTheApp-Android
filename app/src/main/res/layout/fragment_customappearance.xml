@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2016 Brightec Ltd
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright 2016 Brightec Ltd
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
@@ -14,29 +13,29 @@
 -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
-            tools:context="uk.co.brightec.ratetheapp_android.fragments.DefaultFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:context="uk.co.brightec.ratetheapp_android.fragments.DefaultFragment">
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <!-- A CardView that contains introduction -->
         <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            card_view:cardCornerRadius="4dp"
-            card_view:contentPadding="8dp">
+            app:cardCornerRadius="4dp"
+            app:contentPadding="8dp">
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                          xmlns:tools="http://schemas.android.com/tools"
-                          android:layout_width="match_parent"
-                          android:layout_height="match_parent"
-                          android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -46,9 +45,9 @@
 
                 <Button
                     android:id="@+id/btn_viewsource"
+                    style="@style/Demo.Intro.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Demo.Intro.Button"
                     android:text="@string/custom_appearance_button"/>
 
             </LinearLayout>
@@ -57,18 +56,16 @@
 
         <!-- Demo 1, A CardView that demonstrates a customised title -->
         <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            card_view:cardCornerRadius="4dp"
-            card_view:contentPadding="16dp">
+            app:cardCornerRadius="4dp"
+            app:contentPadding="16dp">
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                          xmlns:tools="http://schemas.android.com/tools"
-                          android:layout_width="match_parent"
-                          android:layout_height="match_parent"
-                          android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -78,32 +75,30 @@
 
                 <!-- A custom rateTheAppName is used to stop this instance of the widget being hidden if the default widget is hidden -->
                 <uk.co.brightec.ratetheapp.RateTheApp
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    app:rateTheAppName="customisedTitleWidget"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    app:rateTheAppMessageText="@string/demo1_customised_message"
+                    app:rateTheAppMessageTextAppearance="@style/Demo.1.MessageTextAppearance"
+                    app:rateTheAppName="customisedTitleWidget"
                     app:rateTheAppTitleText="@string/demo1_customised_title"
-                    app:rateTheAppTitleTextAppearance="@style/Demo.1.TextAppearance"/>
-
+                    app:rateTheAppTitleTextAppearance="@style/Demo.1.TitleTextAppearance"/>
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
 
         <!-- Demo 2, A CardView that demonstrates no title -->
         <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            card_view:cardCornerRadius="4dp"
-            card_view:contentPadding="16dp">
+            app:cardCornerRadius="4dp"
+            app:contentPadding="16dp">
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                          xmlns:tools="http://schemas.android.com/tools"
-                          android:layout_width="match_parent"
-                          android:layout_height="match_parent"
-                          android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -113,11 +108,11 @@
 
                 <!-- A custom rateTheAppName is used to stop this instance of the widget being hidden if the default widget is hidden -->
                 <uk.co.brightec.ratetheapp.RateTheApp
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    app:rateTheAppName="noTitleWidget"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    app:rateTheAppMessageText=""
+                    app:rateTheAppName="noTitleWidget"
                     app:rateTheAppTitleText=""/>
 
             </LinearLayout>
@@ -126,12 +121,42 @@
 
         <!-- Demo 3, A CardView that demonstrates a customised star colour -->
         <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            card_view:cardCornerRadius="4dp"
-            card_view:contentPadding="16dp">
+            app:cardCornerRadius="4dp"
+            app:contentPadding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="16dp"
+                    android:text="@string/demo3_description"/>
+
+                <!-- A custom rateTheAppName is used to stop this instance of the widget being hidden if the default widget is hidden -->
+                <uk.co.brightec.ratetheapp.RateTheApp
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    app:rateTheAppName="customisedStarColourWidget"
+                    app:rateTheAppSelectedStarColor="@color/colorPrimaryDark"
+                    app:rateTheAppUnselectedStarColor="@color/colorPrimary"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <!-- Demo 4, A CardView that demonstrates a customised star drawable -->
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="16dp"
+                                            card_view:cardCornerRadius="4dp"
+                                            card_view:contentPadding="16dp">
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                           xmlns:tools="http://schemas.android.com/tools"
@@ -143,18 +168,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="16dp"
-                    android:text="@string/demo3_description"/>
+                    android:text="@string/demo4_description"/>
 
                 <!-- A custom rateTheAppName is used to stop this instance of the widget being hidden if the default widget is hidden -->
-                <uk.co.brightec.ratetheapp.RateTheApp
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    app:rateTheAppName="customisedStarColourWidget"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    app:rateTheAppSelectedStarColor="@color/colorPrimaryDark"
-                    app:rateTheAppUnselectedStarColor="@color/colorPrimary"/>
-
+                <uk.co.brightec.ratetheapp.RateTheApp xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                      android:layout_width="wrap_content"
+                                                      android:layout_height="wrap_content"
+                                                      android:layout_gravity="center_horizontal"
+                                                      app:rateTheAppName="customisedStarColourWidget"
+                                                      app:rateTheAppStarSelectedDrawable="@drawable/ic_android_selected_36dp"
+                                                      app:rateTheAppStarUnSelectedDrawable="@drawable/ic_android_unselected_36dp"/>
             </LinearLayout>
 
         </android.support.v7.widget.CardView>

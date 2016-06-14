@@ -28,12 +28,12 @@ import uk.co.brightec.ratetheapp_android.R;
 
 public class CustomAppearanceFragment extends Fragment {
 
-    public static CustomAppearanceFragment newInstance() {
-        return new CustomAppearanceFragment();
-    }
-
     public CustomAppearanceFragment() {
         // Required empty public constructor
+    }
+
+    public static CustomAppearanceFragment newInstance() {
+        return new CustomAppearanceFragment();
     }
 
     @Override

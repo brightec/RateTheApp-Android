@@ -19,24 +19,56 @@ package uk.co.brightec.ratetheapp;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.support.annotation.NonNull;
+
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Preconditions;
 
 public class Utils {
 
     private static final String PREFERENCES_FILE = "ratetheapp_settings";
 
     public static String getDeviceName() {
-        String manufacturer = Build.MANUFACTURER;
-        String model = Build.MODEL;
-        if (model.startsWith(manufacturer)) {
-            return capitalize(model);
-        } else {
-            return capitalize(manufacturer) + " " + model;
-        }
+        return formatDeviceName(Build.MANUFACTURER, Build.MODEL);
     }
 
-    private static String capitalize(String s) {
+    /**
+     * Formats the manufacturer and model strings into a human readable device name
+     *
+     * @param manufacturer String e.g. Build.MANUFACTURER
+     * @param model        String e.g. Build.MODEL
+     * @return String Human readable device name e.g. Samsung S6
+     */
+    @VisibleForTesting
+    static String formatDeviceName(@NonNull String manufacturer, @NonNull String model) {
+        Preconditions.checkNotNull(manufacturer, "Cannot pass a null object for manufacturer in Utils.formatDeviceName()");
+        Preconditions.checkNotNull(model, "Cannot pass a null object for model in Utils.formatDeviceName()");
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        if (model.startsWith(manufacturer)) {
+            stringBuilder.append(capitalize(model));
+        } else {
+            stringBuilder.append(capitalize(manufacturer));
+            if (!stringBuilder.toString().isEmpty() && !model.isEmpty()) {
+                stringBuilder.append(" ");
+            }
+            stringBuilder.append(capitalize(model));
+        }
+
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Capitalize function will make the first letter of the first word of the given string to a capital. Only tested in for UK English language. Only the first char will be made upper case.
+     *
+     * @param s String
+     * @return String The capitalized string. null or "" will return "". " t" will return " t".
+     */
+    @VisibleForTesting
+    static String capitalize(String s) {
         if (s == null || s.length() == 0) {
-            return "";
+            return ""; //Should this really return empty for a null?
         }
         char first = s.charAt(0);
         if (Character.isUpperCase(first)) {
@@ -65,6 +97,14 @@ public class Utils {
     }
 
     /**
+     * Helper method to read an app preference
+     */
+    public static Boolean readSharedSetting(Context ctx, String settingName, Boolean defaultValue) {
+        SharedPreferences sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
+        return sharedPref.getBoolean(settingName, defaultValue);
+    }
+
+    /**
      * Helper method to save an app preference
      */
     public static void saveSharedSetting(Context ctx, String settingName, Boolean settingValue) {
@@ -72,13 +112,5 @@ public class Utils {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean(settingName, settingValue);
         editor.apply();
-    }
-
-    /**
-     * Helper method to read an app preference
-     */
-    public static Boolean readSharedSetting(Context ctx, String settingName, Boolean defaultValue) {
-        SharedPreferences sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
-        return sharedPref.getBoolean(settingName, defaultValue);
     }
 }
