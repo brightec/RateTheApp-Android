@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2016 Brightec Ltd
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright 2016 Brightec Ltd
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
@@ -14,20 +13,31 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
 
     <TextView
-        android:id="@+id/ratingTitleText"
+        android:id="@+id/text_rating_title"
         style="@style/RateTheAppTitleTextAppearance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/ratetheapp_title" />
+        android:gravity="center"
+        android:text="@string/ratetheapp_title"/>
+
+    <TextView
+        android:id="@+id/text_rating_message"
+        style="@style/RateTheAppMessageTextAppearance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="@string/ratetheapp_message"/>
 
     <RatingBar
-        android:id="@+id/ratingBar"
-        style="@style/RatingBar" />
+        android:id="@+id/rating_bar"
+        style="@style/RatingBar"
+        android:layout_marginTop="16dp"/>
 
 </LinearLayout>

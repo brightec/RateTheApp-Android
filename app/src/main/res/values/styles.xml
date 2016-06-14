@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2016 Brightec Ltd
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright 2016 Brightec Ltd
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
@@ -20,29 +19,39 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
     <style name="Demo"></style>
+
     <style name="Demo.Intro"></style>
+
     <style name="Demo.Intro.Button" parent="Base.Widget.AppCompat.Button.Borderless.Colored">
         <item name="android:textColor">@color/colorPrimaryDark</item>
     </style>
 
     <style name="Demo.1"/>
-    <style name="Demo.1.TextAppearance" parent="TextAppearance.AppCompat.Subhead">
+
+    <style name="Demo.1.TitleTextAppearance" parent="TextAppearance.AppCompat.Title">
         <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="Demo.1.MessageTextAppearance" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">@color/colorAccent</item>
     </style>
 
     <style name="Demo.5"/>
+
     <style name="Demo.5.TextAppearance" parent="TextAppearance.AppCompat.Subhead">
         <item name="android:textColor">@color/colorPrimaryDark</item>
     </style>
-
 </resources>

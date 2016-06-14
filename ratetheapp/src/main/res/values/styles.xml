@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2016 Brightec Ltd
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright 2016 Brightec Ltd
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
@@ -15,14 +14,15 @@
 
 <resources>
 
-    <style name="RateTheAppTitleTextAppearance" parent="TextAppearance.AppCompat.Body1" />
+    <style name="RateTheAppTitleTextAppearance" parent="TextAppearance.AppCompat.Title"/>
+
+    <style name="RateTheAppMessageTextAppearance" parent="TextAppearance.AppCompat.Body1"/>
 
     <style name="RatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/ratetheapp_stars</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:minHeight">36dp</item>
-        <item name="android:layout_marginTop">16dp</item>
         <item name="android:gravity">center</item>
     </style>
 </resources>
