@@ -20,11 +20,17 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.Shader;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
-import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.annotation.DrawableRes;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -47,6 +53,10 @@ public class RateTheApp extends LinearLayout {
     private int mUnselectedStarColour;
     private RatingBar mRatingBar;
     private int mNumberOfStars;
+    @DrawableRes
+    private int mDrawableResSelected;
+    @DrawableRes
+    private int mDrawableResUnSelected;
     private float mStepSize;
     private float mDefaultRating;
     private float mRating;
@@ -135,6 +145,8 @@ public class RateTheApp extends LinearLayout {
         mDefaultRating = a.getFloat(R.styleable.RateTheApp_rateTheAppDefaultRating, DEFAULT_RATING);
         mSelectedStarColour = a.getColor(R.styleable.RateTheApp_rateTheAppSelectedStarColor, getColor(R.color.RateTheApp_SelectedStarColor));
         mUnselectedStarColour = a.getColor(R.styleable.RateTheApp_rateTheAppUnselectedStarColor, getColor(R.color.RateTheApp_UnselectedStarColor));
+        mDrawableResUnSelected = a.getResourceId(R.styleable.RateTheApp_rateTheAppStarUnSelectedDrawable, R.drawable.ic_rating_star_border_grey_36dp);
+        mDrawableResSelected = a.getResourceId(R.styleable.RateTheApp_rateTheAppStarSelectedDrawable, R.drawable.ic_rating_star_green_36dp);
 
         mSaveRating = a.getBoolean(R.styleable.RateTheApp_rateTheAppSaveRating, true);
 
@@ -222,18 +234,77 @@ public class RateTheApp extends LinearLayout {
     }
 
     private void initStars() {
-        LayerDrawable drawable = (LayerDrawable) mRatingBar.getProgressDrawable();
-        Drawable progress2 = drawable.getDrawable(2);
-        DrawableCompat.setTint(progress2, mSelectedStarColour);
+        Drawable selected = ContextCompat.getDrawable(getContext(), mDrawableResSelected);
+        selected.setColorFilter(new PorterDuffColorFilter(mSelectedStarColour, PorterDuff.Mode.SRC_ATOP));
 
-        Drawable progress1 = drawable.getDrawable(1);
-        DrawableCompat.setTintMode(progress1, PorterDuff.Mode.DST_ATOP);
-        DrawableCompat.setTint(progress1, mSelectedStarColour);
-        DrawableCompat.setTintMode(progress1, PorterDuff.Mode.SRC_ATOP);
-        DrawableCompat.setTint(progress1, mUnselectedStarColour);
+        Drawable unselected = ContextCompat.getDrawable(getContext(), mDrawableResUnSelected);
+        unselected.setColorFilter(new PorterDuffColorFilter(mUnselectedStarColour, PorterDuff.Mode.SRC_ATOP));
 
-        Drawable progress = drawable.getDrawable(0);
-        DrawableCompat.setTint(progress, mUnselectedStarColour);
+        LayerDrawable ld = (LayerDrawable) mRatingBar.getProgressDrawable();
+        ld.setDrawableByLayerId(android.R.id.background, unselected);
+        ld.setDrawableByLayerId(android.R.id.secondaryProgress, unselected);
+        ld.setDrawableByLayerId(android.R.id.progress, selected);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mRatingBar.setProgressDrawableTiled(ld);
+        } else {
+            Drawable tiledDrawable = tileify(ld, false);
+            mRatingBar.setProgressDrawable(tiledDrawable);
+        }
+    }
+
+    /**
+     * Converts a drawable to a tiled version of itself. It will recursively traverse layer and state list drawables.
+     * This method was copied from android.widget.ProgressBar, however it was highlighted in their code that this may be sub optimal.
+     *
+     * @param drawable The drawable to tileify
+     * @param clip     Whether to clip drawable
+     * @return The tiled drawable
+     */
+    private Drawable tileify(Drawable drawable, boolean clip) {
+        if (drawable instanceof LayerDrawable) {
+            final LayerDrawable orig = (LayerDrawable) drawable;
+            final int N = orig.getNumberOfLayers();
+            final Drawable[] outDrawables = new Drawable[N];
+
+            for (int i = 0; i < N; i++) {
+                final int id = orig.getId(i);
+                outDrawables[i] = tileify(orig.getDrawable(i), (id == android.R.id.progress || id == android.R.id.secondaryProgress));
+            }
+
+            final LayerDrawable clone = new LayerDrawable(outDrawables);
+            for (int i = 0; i < N; i++) {
+                clone.setId(i, orig.getId(i));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    clone.setLayerGravity(i, orig.getLayerGravity(i));
+                    clone.setLayerWidth(i, orig.getLayerWidth(i));
+                    clone.setLayerHeight(i, orig.getLayerHeight(i));
+                    clone.setLayerInsetLeft(i, orig.getLayerInsetLeft(i));
+                    clone.setLayerInsetRight(i, orig.getLayerInsetRight(i));
+                    clone.setLayerInsetTop(i, orig.getLayerInsetTop(i));
+                    clone.setLayerInsetBottom(i, orig.getLayerInsetBottom(i));
+                    clone.setLayerInsetStart(i, orig.getLayerInsetStart(i));
+                    clone.setLayerInsetEnd(i, orig.getLayerInsetEnd(i));
+                }
+            }
+
+            return clone;
+        }
+
+        if (drawable instanceof BitmapDrawable) {
+            final BitmapDrawable bitmap = (BitmapDrawable) drawable;
+
+            final BitmapDrawable clone = (BitmapDrawable) bitmap.getConstantState().newDrawable();
+            clone.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
+
+            if (clip) {
+                return new ClipDrawable(clone, Gravity.LEFT, ClipDrawable.HORIZONTAL);
+            } else {
+                return clone;
+            }
+        }
+
+        return drawable;
     }
 
     public boolean shouldShow() {
