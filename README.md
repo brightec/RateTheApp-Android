@@ -121,7 +121,7 @@ The colour of the stars can be changed using the *rateTheAppSelectedStarColor* a
 
 The drawables of the stars can be changed using the *rateTheAppStarSelectedDrawable* and *rateTheAppStarUnSelectedDrawable* attributes. You can still the drawables colour attribute as above.
 
-<img src="images/demoapp-customisedstars.png" alt="Changing the stars" width="400"/>
+<img src="images/demoapp-customdrawable.png" alt="Changing the stars" width="400"/>
 
 ```sh
  <uk.co.brightec.ratetheapp.RateTheApp
