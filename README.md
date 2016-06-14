@@ -62,9 +62,9 @@ The title text and appearance can be changed using the *rateTheAppTitleText* and
 <color name="colorAccent">#FEDB31</color>
 ```
 
-#### Removing the title
+#### Removing the title and message
 
-The title can be removed altogether by setting a blank *rateTheAppTitleText* attribute.
+The title can be removed altogether by setting a blank *rateTheAppTitleText* attribute. Similarly for message.
 
 <img src="images/demoapp-notitle.png" alt="No title" width="400"/>
 
@@ -74,7 +74,8 @@ The title can be removed altogether by setting a blank *rateTheAppTitleText* att
  android:layout_width="wrap_content"
  android:layout_height="wrap_content"
  android:layout_gravity="center_horizontal"
- app:rateTheAppTitleText=""/>
+ app:rateTheAppTitleText=""
+ app:rateTheAppMessageText=""/>
 ```
 
 #### Changing the star colours
