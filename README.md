@@ -22,9 +22,9 @@ Depending on the user's rating, an AlertDialog prompts the user for further acti
 
 ## Changing the appearance
 
-#### Changing the title
+#### Changing the title and message
 
-The title text and appearance can be changed using the *rateTheAppTitleText* and *rateTheAppTitleTextAppearance* attributes.
+The title text and appearance can be changed using the *rateTheAppTitleText* and *rateTheAppTitleTextAppearance* attributes. The message text and appearance can be changed similarly.
 
 <img src="images/demoapp-customisedtitle.png" alt="Changing the title" width="400"/>
 
@@ -35,19 +35,31 @@ The title text and appearance can be changed using the *rateTheAppTitleText* and
   android:layout_height="wrap_content"
   android:layout_gravity="center_horizontal"
   app:rateTheAppTitleText="@string/demo_customised_title"
-  app:rateTheAppTitleTextAppearance="@style/Demo.TextAppearance"/>
+  app:rateTheAppTitleTextAppearance="@style/TitleTextAppearance"
+  app:rateTheAppMessageText="@string/demo_customised_message"
+  app:rateTheAppMessageTextAppearance="@style/MessageTextAppearance"/>
 ```
 
-###### Title text defined in strings.xml
+###### Title and message texts defined in strings.xml
 ```sh
 <string name="demo_customised_title">Would you like to rate this app?</string>
+<string name="demo_customised_message">Please rate us so we can see how you are liking the app.</string>
 ```
 
-###### Title style defined in styles.xml
+###### Title and message styles defined in styles.xml
 ```sh
-<style name="Demo.TextAppearance" parent="TextAppearance.AppCompat.Subhead">
+<style name="TitleTextAppearance" parent="TextAppearance.AppCompat.Title">
   <item name="android:textColor">@color/colorPrimaryDark</item>
 </style>
+<style name="MessageTextAppearance" parent="TextAppearance.AppCompat.Body1">
+  <item name="android:textColor">@color/colorAccent</item>
+</style>
+```
+
+###### Colours defined in colors.xml
+```sh
+<color name="colorPrimaryDark">#0091EA</color>
+<color name="colorAccent">#FEDB31</color>
 ```
 
 #### Removing the title
