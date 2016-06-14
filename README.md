@@ -7,7 +7,6 @@ RateTheApp allows users to rate your app prompting them for further action depen
 ```sh
 <uk.co.brightec.ratetheapp.RateTheApp
  xmlns:app="http://schemas.android.com/apk/res-auto"
- app:rateTheAppTitleText="Rate this app?"
  android:layout_width="wrap_content"
  android:layout_height="wrap_content"/>
 ```
@@ -15,22 +14,22 @@ RateTheApp allows users to rate your app prompting them for further action depen
 Depending on the user's rating, an AlertDialog prompts the user for further action.
 - If a rating of 0, 1 or 2 stars is selected, the user is prompted whether they would like to email the app developer with any issues they might have.  RateTheApp will remain visible so the user can re-rate your app once their issues have been resolved.
 
-<img src="images/default-sorry.png" alt="Default Low Rating" width="400"/>
+<img src="images/default-sorry.png" alt="Default Low Rating" width="300"/>
 - If a rating of 3, 4 or 5 is selected, the user is prompted whether they would like to also leave a rating on the Play Store.  After a positive rating, RateTheApp is removed from view so as not to distract the user from using your app.
 
-<img src="images/default-thankyou.png" alt="Default Positive Rating" width="400"/>
+<img src="images/default-thankyou.png" alt="Default Positive Rating" width="300"/>
 
 ## Installation
 
-```sh
 Using Gradle:
-
+```sh
 dependencies {
   compile 'uk.co.brightec.ratetheapp:ratetheapp:0.9.1'
 }
+```
 
 Or Maven:
-
+```sh
 <dependency>
   <groupId>uk.co.brightec.ratetheapp</groupId>
   <artifactId>ratetheapp</artifactId>
