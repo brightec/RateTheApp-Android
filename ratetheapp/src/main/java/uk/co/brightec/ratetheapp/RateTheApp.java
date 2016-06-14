@@ -227,9 +227,11 @@ public class RateTheApp extends LinearLayout {
 
     private void initStars() {
         Drawable selected = ContextCompat.getDrawable(getContext(), mDrawableResSelected);
+        selected = selected.mutate();
         selected.setColorFilter(new PorterDuffColorFilter(mSelectedStarColour, PorterDuff.Mode.SRC_ATOP));
 
         Drawable unselected = ContextCompat.getDrawable(getContext(), mDrawableResUnSelected);
+        unselected = unselected.mutate();
         unselected.setColorFilter(new PorterDuffColorFilter(mUnselectedStarColour, PorterDuff.Mode.SRC_ATOP));
 
         LayerDrawable ld = (LayerDrawable) mRatingBar.getProgressDrawable();
