@@ -13,10 +13,10 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
 
     <TextView
         android:id="@+id/text_rating_title"
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/ratetheapp_title" />
+        android:text="@string/ratetheapp_title"/>
 
     <TextView
         android:id="@+id/text_rating_message"
@@ -33,11 +33,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:gravity="center"
-        android:text="@string/ratetheapp_message" />
+        android:text="@string/ratetheapp_message"/>
 
     <RatingBar
         android:id="@+id/rating_bar"
         style="@style/RatingBar"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"/>
 
 </LinearLayout>

@@ -14,9 +14,9 @@
 
 <resources>
 
-    <style name="RateTheAppTitleTextAppearance" parent="TextAppearance.AppCompat.Title" />
+    <style name="RateTheAppTitleTextAppearance" parent="TextAppearance.AppCompat.Title"/>
 
-    <style name="RateTheAppMessageTextAppearance" parent="TextAppearance.AppCompat.Body1" />
+    <style name="RateTheAppMessageTextAppearance" parent="TextAppearance.AppCompat.Body1"/>
 
     <style name="RatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/ratetheapp_stars</item>

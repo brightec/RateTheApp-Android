@@ -20,7 +20,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -209,7 +208,8 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
 
     /**
      * Method for obtaining a default feedback email message
-     * @param context A context to get package info and strings against
+     *
+     * @param context  A context to get package info and strings against
      * @param numStars The star rating the user clicked so that this can be addeed to the email
      * @return String The a message to put into the email body
      */

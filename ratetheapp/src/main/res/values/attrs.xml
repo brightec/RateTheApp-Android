@@ -14,17 +14,17 @@
 
 <resources>
     <declare-styleable name="RateTheApp">
-        <attr name="rateTheAppName" format="string" />
-        <attr name="rateTheAppTitleText" format="string" />
-        <attr name="rateTheAppTitleTextAppearance" format="reference" />
-        <attr name="rateTheAppMessageText" format="string" />
-        <attr name="rateTheAppMessageTextAppearance" format="reference" />
-        <attr name="rateTheAppSelectedStarColor" format="color" />
-        <attr name="rateTheAppUnselectedStarColor" format="color" />
-        <attr name="rateTheAppNumberOfStars" format="integer" />
-        <attr name="rateTheAppStepSize" format="float" />
-        <attr name="rateTheAppDefaultRating" format="float" />
-        <attr name="rateTheAppSaveRating" format="boolean" />
+        <attr name="rateTheAppName" format="string"/>
+        <attr name="rateTheAppTitleText" format="string"/>
+        <attr name="rateTheAppTitleTextAppearance" format="reference"/>
+        <attr name="rateTheAppMessageText" format="string"/>
+        <attr name="rateTheAppMessageTextAppearance" format="reference"/>
+        <attr name="rateTheAppSelectedStarColor" format="color"/>
+        <attr name="rateTheAppUnselectedStarColor" format="color"/>
+        <attr name="rateTheAppNumberOfStars" format="integer"/>
+        <attr name="rateTheAppStepSize" format="float"/>
+        <attr name="rateTheAppDefaultRating" format="float"/>
+        <attr name="rateTheAppSaveRating" format="boolean"/>
         <attr name="rateTheAppStarSelectedDrawable" format="reference"/>
         <attr name="rateTheAppStarUnSelectedDrawable" format="reference"/>
     </declare-styleable>

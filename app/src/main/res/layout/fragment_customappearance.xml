@@ -13,11 +13,11 @@
 -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="uk.co.brightec.ratetheapp_android.fragments.DefaultFragment">
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="uk.co.brightec.ratetheapp_android.fragments.DefaultFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,14 +41,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
-                    android:text="@string/custom_appearance_introduction" />
+                    android:text="@string/custom_appearance_introduction"/>
 
                 <Button
                     android:id="@+id/btn_viewsource"
                     style="@style/Demo.Intro.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/custom_appearance_button" />
+                    android:text="@string/custom_appearance_button"/>
 
             </LinearLayout>
 
@@ -71,7 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="16dp"
-                    android:text="@string/demo1_description" />
+                    android:text="@string/demo1_description"/>
 
                 <!-- A custom rateTheAppName is used to stop this instance of the widget being hidden if the default widget is hidden -->
                 <uk.co.brightec.ratetheapp.RateTheApp
@@ -82,7 +82,7 @@
                     app:rateTheAppMessageTextAppearance="@style/Demo.1.MessageTextAppearance"
                     app:rateTheAppName="customisedTitleWidget"
                     app:rateTheAppTitleText="@string/demo1_customised_title"
-                    app:rateTheAppTitleTextAppearance="@style/Demo.1.TitleTextAppearance" />
+                    app:rateTheAppTitleTextAppearance="@style/Demo.1.TitleTextAppearance"/>
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
@@ -104,7 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="16dp"
-                    android:text="@string/demo2_description" />
+                    android:text="@string/demo2_description"/>
 
                 <!-- A custom rateTheAppName is used to stop this instance of the widget being hidden if the default widget is hidden -->
                 <uk.co.brightec.ratetheapp.RateTheApp
@@ -113,7 +113,7 @@
                     android:layout_gravity="center_horizontal"
                     app:rateTheAppMessageText=""
                     app:rateTheAppName="noTitleWidget"
-                    app:rateTheAppTitleText="" />
+                    app:rateTheAppTitleText=""/>
 
             </LinearLayout>
 
@@ -136,7 +136,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="16dp"
-                    android:text="@string/demo3_description" />
+                    android:text="@string/demo3_description"/>
 
                 <!-- A custom rateTheAppName is used to stop this instance of the widget being hidden if the default widget is hidden -->
                 <uk.co.brightec.ratetheapp.RateTheApp
@@ -145,39 +145,39 @@
                     android:layout_gravity="center_horizontal"
                     app:rateTheAppName="customisedStarColourWidget"
                     app:rateTheAppSelectedStarColor="@color/colorPrimaryDark"
-                    app:rateTheAppUnselectedStarColor="@color/colorPrimary" />
+                    app:rateTheAppUnselectedStarColor="@color/colorPrimary"/>
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
 
         <!-- Demo 4, A CardView that demonstrates a customised star drawable -->
         <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            card_view:cardCornerRadius="4dp"
-            card_view:contentPadding="16dp">
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="16dp"
+                                            card_view:cardCornerRadius="4dp"
+                                            card_view:contentPadding="16dp">
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                          xmlns:tools="http://schemas.android.com/tools"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="16dp"
-                    android:text="@string/demo4_description" />
+                    android:text="@string/demo4_description"/>
 
                 <!-- A custom rateTheAppName is used to stop this instance of the widget being hidden if the default widget is hidden -->
                 <uk.co.brightec.ratetheapp.RateTheApp xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    app:rateTheAppName="customisedStarColourWidget"
-                    app:rateTheAppStarSelectedDrawable="@drawable/ic_android_selected_36dp"
-                    app:rateTheAppStarUnSelectedDrawable="@drawable/ic_android_unselected_36dp" />
+                                                      android:layout_width="wrap_content"
+                                                      android:layout_height="wrap_content"
+                                                      android:layout_gravity="center_horizontal"
+                                                      app:rateTheAppName="customisedStarColourWidget"
+                                                      app:rateTheAppStarSelectedDrawable="@drawable/ic_android_selected_36dp"
+                                                      app:rateTheAppStarUnSelectedDrawable="@drawable/ic_android_unselected_36dp"/>
             </LinearLayout>
 
         </android.support.v7.widget.CardView>

@@ -16,12 +16,12 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_default"
-            android:title="@string/drawermenu_introduction_text" />
+            android:title="@string/drawermenu_introduction_text"/>
         <item
             android:id="@+id/nav_custom_appearance"
-            android:title="@string/drawermenu_appearance_text" />
+            android:title="@string/drawermenu_appearance_text"/>
         <item
             android:id="@+id/nav_custom_behaviour"
-            android:title="@string/drawermenu_behaviour_text" />
+            android:title="@string/drawermenu_behaviour_text"/>
     </group>
 </menu>
