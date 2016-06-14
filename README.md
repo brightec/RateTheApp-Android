@@ -238,7 +238,7 @@ rta.setOnUserSelectedRatingListener(new RateTheApp.OnUserSelectedRatingListener(
 
 It is possible to have no action once a user has rated your app, just set the *OnUserSelectedRatingListener* to null.
 
-###### Example from demo app - fragment_custombehaviour.xml
+###### fragment_custombehaviour.xml
 ```sh
 <uk.co.brightec.ratetheapp.RateTheApp
  android:id="@+id/noAction"
@@ -247,7 +247,7 @@ It is possible to have no action once a user has rated your app, just set the *O
  android:layout_gravity="center_horizontal"/>
 ```
 
-###### Example from demo app - CustomBehaviourFragment.java
+###### CustomBehaviourFragment.java
 ```sh
 RateTheApp rta = (RateTheApp) view.findViewById(R.id.noAction);
 rta.setOnUserSelectedRatingListener(null);
