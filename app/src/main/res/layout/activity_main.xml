@@ -45,7 +45,8 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="16dp"
             app:rateTheAppName="rateTheDemo"
-            app:rateTheAppTitleText="How would you rate this demo?"/>
+            app:rateTheAppTitleText=""
+            app:rateTheAppMessageText="How would you rate this demo?"/>
 
     </android.support.design.widget.NavigationView>
 </android.support.v4.widget.DrawerLayout>
