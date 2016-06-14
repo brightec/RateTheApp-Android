@@ -20,6 +20,25 @@ Depending on the user's rating, an AlertDialog prompts the user for further acti
 
 <img src="images/default-thankyou.png" alt="Default Positive Rating" width="400"/>
 
+## Installation
+
+```sh
+Using Gradle:
+
+dependencies {
+  compile 'uk.co.brightec.ratetheapp:ratetheapp:0.9.1'
+}
+
+Or Maven:
+
+<dependency>
+  <groupId>uk.co.brightec.ratetheapp</groupId>
+  <artifactId>ratetheapp</artifactId>
+  <version>0.9.1</version>
+  <type>pom</type>
+</dependency>
+```
+
 ## Changing the appearance
 
 #### Changing the title and message
@@ -286,32 +305,12 @@ The information is stored using the following User Preferences keys
 
 where *XX* is the value of the *rateTheAppName* attribute (which defaults to *rate_the_app* if not specified).  This means that unless the *rateTheAppName* attribute is changed from the default, all instances of the RateTheApp will share the same rating and display values.
 
-## Installation
-
-```sh
-Using Gradle:
-
-dependencies {
-  compile 'uk.co.brightec.ratetheapp:ratetheapp:0.9'
-}
-
-Or Maven:
-
-<dependency>
-  <groupId>uk.co.brightec.ratetheapp</groupId>
-  <artifactId>ratetheapp</artifactId>
-  <version>0.9</version>
-  <type>pom</type>
-</dependency>
-```
-
 ## Project Structure
 
 This project is made up of 
 
 - an *app folder*  - containing a demo app with code examples showing how to use and customise RateTheApp
 - a *ratetheapp folder* - an Android Library containing the RateTheApp Android View
-
 
 ## Contributors
 
