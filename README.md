@@ -192,17 +192,18 @@ The class *DefaultOnUserSelectedRatingListener* provides the default behaviour b
 
 #### Example - displaying the current rating as a number
 
-The following example, taken from the demo app, displays a TextView showing the number of stars awarded to your app.
+The following example, based on the demo app, displays a TextView showing the number of stars awarded to your app.
 
-###### Example from demo app - fragment_custombehaviour.xml
+###### fragment_custombehaviour.xml
 ```sh
 <TextView
- android:id="@+id/textView"
- android:layout_width="wrap_content"
- android:layout_height="wrap_content"
- android:layout_gravity="center_horizontal"
- android:paddingBottom="16dp"
- style="@style/Demo.TextAppearance"/>
+android:id="@+id/textView"
+style="@style/Demo.5.TextAppearance"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="center_horizontal"
+android:paddingBottom="16dp"
+tools:text="Current Rating: 1.0"/>
 
 <uk.co.brightec.ratetheapp.RateTheApp
  android:id="@+id/customAction"
@@ -211,7 +212,7 @@ The following example, taken from the demo app, displays a TextView showing the 
  android:layout_gravity="center_horizontal"/>
 ```
 
-###### Example from demo app - CustomBehaviourFragment.java
+###### CustomBehaviourFragment.java
 ```sh
 // Find the RateTheApp widget
 RateTheApp rta = (RateTheApp) view.findViewById(R.id.customAction);
@@ -228,7 +229,7 @@ rta.setOnUserSelectedRatingListener(new RateTheApp.OnUserSelectedRatingListener(
 });
 ```
 
-###### TextView text defined in strings.xml
+###### strings.xml
 ```sh
 <string name="current_rating">Current rating: </string>
 ```
