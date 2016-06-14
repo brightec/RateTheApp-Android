@@ -6,7 +6,6 @@ RateTheApp allows users to rate your app prompting them for further action depen
 
 ```sh
 <uk.co.brightec.ratetheapp.RateTheApp
- xmlns:app="http://schemas.android.com/apk/res-auto"
  android:layout_width="wrap_content"
  android:layout_height="wrap_content"/>
 ```
