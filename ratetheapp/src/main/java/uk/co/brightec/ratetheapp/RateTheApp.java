@@ -41,8 +41,8 @@ public class RateTheApp extends LinearLayout {
     private static final float DEFAULT_RATING = 0.0f;
 
     private String mInstanceName;
-    private String mTitleTextStr;
-    private int mTitleTextAppearanceResId;
+    private String mTitleStr, mMessageStr;
+    private int mTitleTextAppearanceResId, mMessageTextAppearanceResId;
     private int mSelectedStarColour;
     private int mUnselectedStarColour;
     private RatingBar mRatingBar;
@@ -52,21 +52,23 @@ public class RateTheApp extends LinearLayout {
     private float mRating;
     private boolean mSaveRating;
 
-    private TextView mTextTitle;
-
-    public interface OnUserSelectedRatingListener {
-        void onRatingChanged(RateTheApp rateTheApp, float rating);
-    }
-
+    private TextView mTextTitle, mTextMessage;
     private OnUserSelectedRatingListener mOnUserSelectedRatingListener;
+    private RatingBar.OnRatingBarChangeListener ratingChangeListener = new RatingBar.OnRatingBarChangeListener() {
 
-    public OnUserSelectedRatingListener getOnUserSelectedRatingListener() {
-        return mOnUserSelectedRatingListener;
-    }
+        @Override
+        public void onRatingChanged(RatingBar ratingBar, final float rating, boolean fromUser) {
+            // Save the rating
+            if (mSaveRating) {
+                saveRating(rating);
+            }
 
-    public void setOnUserSelectedRatingListener(OnUserSelectedRatingListener onUserSelectedRatingListener) {
-        mOnUserSelectedRatingListener = onUserSelectedRatingListener;
-    }
+            // If a rateChangeListener was provided, call it
+            if (mOnUserSelectedRatingListener != null && fromUser) {
+                mOnUserSelectedRatingListener.onRatingChanged(RateTheApp.this, rating);
+            }
+        }
+    };
 
     public RateTheApp(Context context) {
         super(context);
@@ -92,15 +94,23 @@ public class RateTheApp extends LinearLayout {
         init();
     }
 
-    private void loadAttributes(AttributeSet attrs){
+    public OnUserSelectedRatingListener getOnUserSelectedRatingListener() {
+        return mOnUserSelectedRatingListener;
+    }
+
+    public void setOnUserSelectedRatingListener(OnUserSelectedRatingListener onUserSelectedRatingListener) {
+        mOnUserSelectedRatingListener = onUserSelectedRatingListener;
+    }
+
+    private void loadAttributes(AttributeSet attrs) {
         loadAttributes(attrs, 0, 0);
     }
 
-    private void loadAttributes(AttributeSet attrs, int defStyleAttr){
+    private void loadAttributes(AttributeSet attrs, int defStyleAttr) {
         loadAttributes(attrs, defStyleAttr, 0);
     }
 
-    private void loadAttributes(AttributeSet attrs, int defStyleAttr, int defStyleRes){
+    private void loadAttributes(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.RateTheApp, defStyleAttr, defStyleRes);
 
@@ -113,7 +123,11 @@ public class RateTheApp extends LinearLayout {
 
         // Title Text Appearance
         mTitleTextAppearanceResId = a.getResourceId(R.styleable.RateTheApp_rateTheAppTitleTextAppearance, R.style.RateTheAppTitleTextAppearance);
-        mTitleTextStr = a.getString(R.styleable.RateTheApp_rateTheAppTitleText);
+        mTitleStr = a.getString(R.styleable.RateTheApp_rateTheAppTitleText);
+
+        // Message Text Appearance
+        mMessageTextAppearanceResId = a.getResourceId(R.styleable.RateTheApp_rateTheAppMessageTextAppearance, R.style.RateTheAppMessageTextAppearance);
+        mMessageStr = a.getString(R.styleable.RateTheApp_rateTheAppMessageText);
 
         // Stars & Rating
         mNumberOfStars = a.getInt(R.styleable.RateTheApp_rateTheAppNumberOfStars, DEFAULT_NUMBER_OF_STARS);
@@ -136,12 +150,15 @@ public class RateTheApp extends LinearLayout {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         inflater.inflate(R.layout.ratetheapp_layout, this, true);
 
-        mRatingBar = (RatingBar) findViewById(R.id.ratingBar);
+        mRatingBar = (RatingBar) findViewById(R.id.rating_bar);
         mRatingBar.setNumStars(mNumberOfStars);
         mRatingBar.setStepSize(mStepSize);
 
         // Initialise the title
         initTitle();
+
+        // Initialise the message
+        initMessage();
 
         // Initialise the stars
         initStars();
@@ -169,19 +186,37 @@ public class RateTheApp extends LinearLayout {
     }
 
     private void initTitle() {
-        mTextTitle = (TextView) findViewById(R.id.ratingTitleText);
+        mTextTitle = (TextView) findViewById(R.id.text_rating_title);
         // Hide the title if an empty title text attribute was provided
-        if (mTitleTextStr != null && mTitleTextStr.isEmpty()) {
+        if (mTitleStr != null && mTitleStr.isEmpty()) {
             mTextTitle.setVisibility(GONE);
         } else {
             // Set the title text if provided
-            if (mTitleTextStr != null) {
-                mTextTitle.setText(mTitleTextStr);
+            if (mTitleStr != null) {
+                mTextTitle.setText(mTitleStr);
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 mTextTitle.setTextAppearance(mTitleTextAppearanceResId);
             } else {
                 mTextTitle.setTextAppearance(getContext(), mTitleTextAppearanceResId);
+            }
+        }
+    }
+
+    private void initMessage() {
+        mTextMessage = (TextView) findViewById(R.id.text_rating_message);
+        // Hide the message if an empty message text attribute was provided
+        if (mMessageStr != null && mMessageStr.isEmpty()) {
+            mTextMessage.setVisibility(GONE);
+        } else {
+            // Set the title text if provided
+            if (mMessageStr != null) {
+                mTextMessage.setText(mMessageStr);
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                mTextMessage.setTextAppearance(mMessageTextAppearanceResId);
+            } else {
+                mTextMessage.setTextAppearance(getContext(), mMessageTextAppearanceResId);
             }
         }
     }
@@ -218,39 +253,37 @@ public class RateTheApp extends LinearLayout {
         return Utils.readSharedSetting(getContext(), mInstanceName + PREF_RATETHEAPP_RATING_SUFFIX, defaultRating);
     }
 
-    public void setRating(float rating) {
-        mRatingBar.setRating(rating);
-    }
-
     public float getRating() {
         return mRatingBar.getRating();
+    }
+
+    public void setRating(float rating) {
+        mRatingBar.setRating(rating);
     }
 
     public void reset() {
         mRatingBar.setRating(0);
     }
 
-    private RatingBar.OnRatingBarChangeListener ratingChangeListener = new RatingBar.OnRatingBarChangeListener() {
-
-        @Override
-        public void onRatingChanged(RatingBar ratingBar, final float rating, boolean fromUser) {
-            // Save the rating
-            if (mSaveRating) {
-                saveRating(rating);
-            }
-
-            // If a rateChangeListener was provided, call it
-            if (mOnUserSelectedRatingListener != null && fromUser) {
-                mOnUserSelectedRatingListener.onRatingChanged(RateTheApp.this, rating);
-            }
-        }
-    };
-
     /**
      * This method returns the TextView which represents the title in the layout. This method is provided for specific use cases where this library has not provided the exact config needed.
+     *
      * @return TextView mTextTitle - The TextView associated with the title
      */
     public TextView getTitleTextView() {
         return mTextTitle;
+    }
+
+    /**
+     * This method returns the TextView which represents the message in the layout. This method is provided for specific use cases where this library has not provided the exact config needed.
+     *
+     * @return TextView mTextMessage - The TextView associated with the message
+     */
+    public TextView getMessageTextView() {
+        return mTextMessage;
+    }
+
+    public interface OnUserSelectedRatingListener {
+        void onRatingChanged(RateTheApp rateTheApp, float rating);
     }
 }

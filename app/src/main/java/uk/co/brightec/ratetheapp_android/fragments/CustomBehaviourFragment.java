@@ -31,12 +31,12 @@ import uk.co.brightec.ratetheapp_android.R;
 
 public class CustomBehaviourFragment extends Fragment {
 
-    public static CustomBehaviourFragment newInstance() {
-        return new CustomBehaviourFragment();
-    }
-
     public CustomBehaviourFragment() {
         // Required empty public constructor
+    }
+
+    public static CustomBehaviourFragment newInstance() {
+        return new CustomBehaviourFragment();
     }
 
     @Override

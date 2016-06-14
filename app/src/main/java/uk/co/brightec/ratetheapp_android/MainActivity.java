@@ -44,6 +44,15 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final float MIN_GOOD_RATING = 3.0f;
+    View.OnClickListener openBrightecWebsiteListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String url = getString(R.string.brightecUrl);
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
+        }
+    };
     private NavigationView mNavigationView;
 
     @Override
@@ -76,17 +85,17 @@ public class MainActivity extends AppCompatActivity
     private void initDemoRatingWidget() {
         RateTheApp demoRating = (RateTheApp) findViewById(R.id.demoRating);
         demoRating.setOnUserSelectedRatingListener(
-            new DefaultOnUserSelectedRatingListener(
-                    MIN_GOOD_RATING,
-                    getString(uk.co.brightec.ratetheapp.R.string.ratetheapp_negative_button),
-                    getString(uk.co.brightec.ratetheapp.R.string.ratetheapp_positive_button),
-                    getString(R.string.demo_goodrating_title),
-                    getString(R.string.demo_goodrating_text),
-                    getString(uk.co.brightec.ratetheapp.R.string.ratetheapp_badrating_title),
-                    getString(R.string.demo_badrating_text),
-                    getString(R.string.demo_feedback_emailaddress),
-                    getString(R.string.demo_feedback_subject),
-                    null));
+                new DefaultOnUserSelectedRatingListener(
+                        MIN_GOOD_RATING,
+                        getString(uk.co.brightec.ratetheapp.R.string.ratetheapp_negative_button),
+                        getString(uk.co.brightec.ratetheapp.R.string.ratetheapp_positive_button),
+                        getString(R.string.demo_goodrating_title),
+                        getString(R.string.demo_goodrating_text),
+                        getString(uk.co.brightec.ratetheapp.R.string.ratetheapp_badrating_title),
+                        getString(R.string.demo_badrating_text),
+                        getString(R.string.demo_feedback_emailaddress),
+                        getString(R.string.demo_feedback_subject),
+                        null));
     }
 
     private void initHeaderView() {
@@ -104,16 +113,6 @@ public class MainActivity extends AppCompatActivity
             website.setOnClickListener(openBrightecWebsiteListener);
         }
     }
-
-    View.OnClickListener openBrightecWebsiteListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            String url = getString(R.string.brightecUrl);
-            Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse(url));
-            startActivity(i);
-        }
-    };
 
     @Override
     public void onBackPressed() {
@@ -168,11 +167,9 @@ public class MainActivity extends AppCompatActivity
         if (demoHolder != null) {
             if (demoHolder instanceof DefaultFragment) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, DefaultFragment.newInstance()).commit();
-            }
-            else if (demoHolder instanceof CustomAppearanceFragment) {
+            } else if (demoHolder instanceof CustomAppearanceFragment) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, CustomAppearanceFragment.newInstance()).commit();
-            }
-            else if (demoHolder instanceof CustomBehaviourFragment) {
+            } else if (demoHolder instanceof CustomBehaviourFragment) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, CustomBehaviourFragment.newInstance()).commit();
             }
         }
@@ -180,6 +177,7 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * Helper method to reset a RateTheApp widget's rating and visibility.
+     *
      * @param rateTheAppName
      */
     private void resetWidget(String rateTheAppName) {
@@ -201,11 +199,9 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_default) {
             getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, DefaultFragment.newInstance()).commit();
-        }
-        else if (id == R.id.nav_custom_appearance) {
+        } else if (id == R.id.nav_custom_appearance) {
             getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, CustomAppearanceFragment.newInstance()).commit();
-        }
-        else if (id == R.id.nav_custom_behaviour) {
+        } else if (id == R.id.nav_custom_behaviour) {
             getSupportFragmentManager().beginTransaction().replace(R.id.demoHolder, CustomBehaviourFragment.newInstance()).commit();
         }
 
