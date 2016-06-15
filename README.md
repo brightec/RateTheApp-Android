@@ -317,7 +317,7 @@ Feel free to use and improve this project - contributions are welcome.
 If you find a problem, please create an issue https://github.com/brightec/RateTheApp-Android/issues (alternatively, fix the code and create a pull request) ;-)
 
 ## License
-
+ 
 Copyright 2016 Brightec Ltd
 
    Licensed under the Apache License, Version 2.0 (the "License");
