@@ -20,15 +20,16 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
 
-public class Utils {
+class Utils {
 
     private static final String PREFERENCES_FILE = "ratetheapp_settings";
 
-    public static String getDeviceName() {
+    static String getDeviceName() {
         return formatDeviceName(Build.MANUFACTURER, Build.MODEL);
     }
 
@@ -81,16 +82,18 @@ public class Utils {
     /**
      * Helper method to read an app preference
      */
-    public static Float readSharedSetting(Context ctx, String settingName, Float defaultValue) {
-        SharedPreferences sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
+    static Float readSharedSetting(String settingName, Float defaultValue) {
+        SharedPreferences sharedPref = Application.getInstance().getSharedPreferences(PREFERENCES_FILE,
+                Context.MODE_PRIVATE);
         return sharedPref.getFloat(settingName, defaultValue);
     }
 
     /**
      * Helper method to save an app preference
      */
-    public static void saveSharedSetting(Context ctx, String settingName, Float settingValue) {
-        SharedPreferences sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
+    static void saveSharedSetting(String settingName, Float settingValue) {
+        SharedPreferences sharedPref = Application.getInstance().getSharedPreferences(PREFERENCES_FILE,
+                Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putFloat(settingName, settingValue);
         editor.apply();
@@ -99,18 +102,28 @@ public class Utils {
     /**
      * Helper method to read an app preference
      */
-    public static Boolean readSharedSetting(Context ctx, String settingName, Boolean defaultValue) {
-        SharedPreferences sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
+    static Boolean readSharedSetting(String settingName, Boolean defaultValue) {
+        SharedPreferences sharedPref = Application.getInstance().getSharedPreferences(PREFERENCES_FILE,
+                Context.MODE_PRIVATE);
         return sharedPref.getBoolean(settingName, defaultValue);
     }
 
     /**
      * Helper method to save an app preference
      */
-    public static void saveSharedSetting(Context ctx, String settingName, Boolean settingValue) {
-        SharedPreferences sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
+    static void saveSharedSetting(String settingName, Boolean settingValue) {
+        SharedPreferences sharedPref = Application.getInstance().getSharedPreferences(PREFERENCES_FILE,
+                Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean(settingName, settingValue);
         editor.apply();
+    }
+
+    static String getInstanceNameFromRateTheAppName(@Nullable String rateTheAppName) {
+        String instanceName = RateTheApp.INSTANCE_PREFIX;
+        if (rateTheAppName != null) {
+            instanceName += "_" + rateTheAppName;
+        }
+        return instanceName;
     }
 }

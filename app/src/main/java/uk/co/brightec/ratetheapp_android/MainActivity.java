@@ -19,6 +19,7 @@ package uk.co.brightec.ratetheapp_android;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -31,8 +32,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import uk.co.brightec.ratetheapp.DefaultOnUserSelectedRatingListener;
+import uk.co.brightec.ratetheapp.InstanceSettings;
 import uk.co.brightec.ratetheapp.RateTheApp;
-import uk.co.brightec.ratetheapp.Utils;
 import uk.co.brightec.ratetheapp_android.fragments.CustomAppearanceFragment;
 import uk.co.brightec.ratetheapp_android.fragments.CustomBehaviourFragment;
 import uk.co.brightec.ratetheapp_android.fragments.DefaultFragment;
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -151,16 +152,16 @@ public class MainActivity extends AppCompatActivity
      */
     private void resetDemoData() {
         // Reset the default widget
-        resetWidget(null);
+        InstanceSettings.getInstanceSettings().resetWidget();
 
         // Reset the Custom Appearance widgets
-        resetWidget("customisedTitleWidget");
-        resetWidget("noTitleWidget");
-        resetWidget("customisedStarColourWidget");
+        InstanceSettings.getInstanceSettings("customisedTitleWidget").resetWidget();
+        InstanceSettings.getInstanceSettings("noTitleWidget").resetWidget();
+        InstanceSettings.getInstanceSettings("customisedStarColourWidget").resetWidget();
 
         // Reset the Custom Behaviour widgets
-        resetWidget("noActionWidget");
-        resetWidget("customActionWidget");
+        InstanceSettings.getInstanceSettings("noActionWidget").resetWidget();
+        InstanceSettings.getInstanceSettings("customActionWidget").resetWidget();
 
         // Reload the current fragment to show reset data
         Fragment demoHolder = getSupportFragmentManager().findFragmentById(R.id.demoHolder);
@@ -175,25 +176,8 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    /**
-     * Helper method to reset a RateTheApp widget's rating and visibility.
-     *
-     * @param rateTheAppName
-     */
-    private void resetWidget(String rateTheAppName) {
-        String instanceName = RateTheApp.PREF_RATETHEAPP_PREFIX;
-        if (rateTheAppName != null) {
-            instanceName += "_" + rateTheAppName;
-        }
-        // Reset the widget visibility to true
-        Utils.saveSharedSetting(this, instanceName + RateTheApp.PREF_RATETHEAPP_SHOW_SUFFIX, true);
-        // Rest the widget rating to zero
-        Utils.saveSharedSetting(this, instanceName + RateTheApp.PREF_RATETHEAPP_RATING_SUFFIX, 0f);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
