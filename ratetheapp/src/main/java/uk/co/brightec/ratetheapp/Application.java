@@ -16,16 +16,13 @@
 
 package uk.co.brightec.ratetheapp;
 
-import org.junit.Test;
+public class Application extends android.app.Application {
 
-import static org.junit.Assert.assertEquals;
+    public static Application instance;
 
-/**
- * To work on unit tests, switch the Test Artifact in the Build Variants view.
- */
-public class ExampleUnitTest {
-    @Test
-    public void addition_isCorrect() throws Exception {
-        assertEquals(4, 2 + 2);
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        instance = this;
     }
 }
