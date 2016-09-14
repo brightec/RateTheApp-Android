@@ -83,7 +83,7 @@ class Utils {
      * Helper method to read an app preference
      */
     static Float readSharedSetting(String settingName, Float defaultValue) {
-        SharedPreferences sharedPref = Application.instance.getSharedPreferences(PREFERENCES_FILE,
+        SharedPreferences sharedPref = Application.getInstance().getSharedPreferences(PREFERENCES_FILE,
                 Context.MODE_PRIVATE);
         return sharedPref.getFloat(settingName, defaultValue);
     }
@@ -92,7 +92,7 @@ class Utils {
      * Helper method to save an app preference
      */
     static void saveSharedSetting(String settingName, Float settingValue) {
-        SharedPreferences sharedPref = Application.instance.getSharedPreferences(PREFERENCES_FILE,
+        SharedPreferences sharedPref = Application.getInstance().getSharedPreferences(PREFERENCES_FILE,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putFloat(settingName, settingValue);
@@ -103,7 +103,7 @@ class Utils {
      * Helper method to read an app preference
      */
     static Boolean readSharedSetting(String settingName, Boolean defaultValue) {
-        SharedPreferences sharedPref = Application.instance.getSharedPreferences(PREFERENCES_FILE,
+        SharedPreferences sharedPref = Application.getInstance().getSharedPreferences(PREFERENCES_FILE,
                 Context.MODE_PRIVATE);
         return sharedPref.getBoolean(settingName, defaultValue);
     }
@@ -112,7 +112,7 @@ class Utils {
      * Helper method to save an app preference
      */
     static void saveSharedSetting(String settingName, Boolean settingValue) {
-        SharedPreferences sharedPref = Application.instance.getSharedPreferences(PREFERENCES_FILE,
+        SharedPreferences sharedPref = Application.getInstance().getSharedPreferences(PREFERENCES_FILE,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean(settingName, settingValue);

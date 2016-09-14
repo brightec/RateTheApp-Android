@@ -18,11 +18,15 @@ package uk.co.brightec.ratetheapp;
 
 public class Application extends android.app.Application {
 
-    public static Application instance;
+    private static Application sInstance;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        instance = this;
+        sInstance = this;
+    }
+
+    public static Application getInstance() {
+        return sInstance;
     }
 }

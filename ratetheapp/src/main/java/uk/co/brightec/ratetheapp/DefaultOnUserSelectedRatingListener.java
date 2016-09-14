@@ -70,7 +70,7 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
      */
     @SuppressWarnings({"unused"})
     public static DefaultOnUserSelectedRatingListener createDefaultInstance() {
-        return createDefaultInstance(Application.instance.getString(R.string
+        return createDefaultInstance(Application.getInstance().getString(R.string
                 .ratetheapp_feedback_emailaddress));
     }
 
@@ -101,14 +101,14 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
     public static DefaultOnUserSelectedRatingListener createDefaultInstance(String emailTo) {
         return new DefaultOnUserSelectedRatingListener(
                 DEFAULT_MIN_GOOD_RATING,
-                Application.instance.getString(R.string.ratetheapp_negative_button),
-                Application.instance.getString(R.string.ratetheapp_positive_button),
-                Application.instance.getString(R.string.ratetheapp_goodrating_title),
-                Application.instance.getString(R.string.ratetheapp_goodrating_text),
-                Application.instance.getString(R.string.ratetheapp_badrating_title),
-                Application.instance.getString(R.string.ratetheapp_badrating_text),
+                Application.getInstance().getString(R.string.ratetheapp_negative_button),
+                Application.getInstance().getString(R.string.ratetheapp_positive_button),
+                Application.getInstance().getString(R.string.ratetheapp_goodrating_title),
+                Application.getInstance().getString(R.string.ratetheapp_goodrating_text),
+                Application.getInstance().getString(R.string.ratetheapp_badrating_title),
+                Application.getInstance().getString(R.string.ratetheapp_badrating_text),
                 emailTo,
-                Application.instance.getString(R.string.ratetheapp_feedback_subject),
+                Application.getInstance().getString(R.string.ratetheapp_feedback_subject),
                 null);
     }
 
@@ -295,7 +295,7 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     rateTheApp.hidePermanently();
-                    gotoAppStore(rateTheApp.getContext());
+                    goToAppStore(rateTheApp.getContext());
                 }
             });
             alertDialog.setNegativeButton(mNegativeButtonText, new DialogInterface.OnClickListener() {
@@ -330,8 +330,8 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
      *
      * @param context Context
      */
-    private void gotoAppStore(Context context) {
-        String appPackageName = Application.instance.getPackageName();
+    private void goToAppStore(Context context) {
+        String appPackageName = Application.getInstance().getPackageName();
         try {
             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" +
                     appPackageName)));
@@ -357,7 +357,7 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
         }
         intent.putExtra(Intent.EXTRA_TEXT, mFeedbackEmailMessage);
 
-        context.startActivity(Intent.createChooser(intent, Application.instance.getString(
+        context.startActivity(Intent.createChooser(intent, Application.getInstance().getString(
                 R.string.email_intent_chooser_title)));
     }
 
@@ -371,11 +371,12 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
     String getDefaultEmailMessage(int numStars) {
         String version = "Unknown";
         try {
-            version = Application.instance.getPackageManager().getPackageInfo(Application.instance.getPackageName(), 0)
+            version = Application.getInstance().getPackageManager().getPackageInfo(Application.getInstance()
+                    .getPackageName(), 0)
                     .versionName;
         } catch (PackageManager.NameNotFoundException ignored) {
         }
 
-        return Application.instance.getString(R.string.ratetheapp_feedback_extra_information, numStars, Utils.getDeviceName(), Build.VERSION.SDK_INT, version);
+        return Application.getInstance().getString(R.string.ratetheapp_feedback_extra_information, numStars, Utils.getDeviceName(), Build.VERSION.SDK_INT, version);
     }
 }
