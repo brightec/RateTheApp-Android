@@ -99,7 +99,7 @@ The title can be removed altogether by setting a blank *rateTheAppTitleText* att
 
 The colour of the stars can be changed using the *rateTheAppSelectedStarColor* and *rateTheAppUnselectedStarColor* attributes.
 
-<img src="images/demoapp-customisedstars.png" alt="Changing the stars" width="400"/>
+<img src="images/demoapp-customised-stars.png" alt="Changing the stars" width="400"/>
 
 ```sh
  <uk.co.brightec.ratetheapp.RateTheApp
