@@ -2,7 +2,7 @@
 
 RateTheApp allows users to rate your app prompting them for further action depending on the rating they gave.
 
-<img src="images/ratetheapp.png" alt="RateTheApp" width="400"/>
+<img src="images/default-ratetheapp.png" alt="RateTheApp" width="400"/>
 
 ```sh
 <uk.co.brightec.ratetheapp.RateTheApp
@@ -13,10 +13,10 @@ RateTheApp allows users to rate your app prompting them for further action depen
 Depending on the user's rating, an AlertDialog prompts the user for further action.
 - If a rating of 0, 1 or 2 stars is selected, the user is prompted whether they would like to email the app developer with any issues they might have.  RateTheApp will remain visible so the user can re-rate your app once their issues have been resolved.
 
-<img src="images/default-sorry.png" alt="Default Low Rating" width="300"/>
+<img src="images/default-dialog-sorry.png" alt="Default Low Rating" width="300"/>
 - If a rating of 3, 4 or 5 is selected, the user is prompted whether they would like to also leave a rating on the Play Store.  After a positive rating, RateTheApp is removed from view so as not to distract the user from using your app.
 
-<img src="images/default-thankyou.png" alt="Default Positive Rating" width="300"/>
+<img src="images/default-dialog-thankyou.png" alt="Default Positive Rating" width="300"/>
 
 ## Installation
 
@@ -39,11 +39,13 @@ Or Maven:
 
 ## Changing the appearance
 
+Note that all the following customisations can be combined together to get the appearance you want.
+
 #### Changing the title and message
 
 The title text and appearance can be changed using the *rateTheAppTitleText* and *rateTheAppTitleTextAppearance* attributes. The message text and appearance can be changed similarly.
 
-<img src="images/demoapp-customisedtitle.png" alt="Changing the title" width="400"/>
+<img src="images/customised-title.png" alt="Changing the title" width="400"/>
 
 ```sh
  <uk.co.brightec.ratetheapp.RateTheApp
@@ -83,7 +85,7 @@ The title text and appearance can be changed using the *rateTheAppTitleText* and
 
 The title can be removed altogether by setting a blank *rateTheAppTitleText* attribute. Similarly for message.
 
-<img src="images/demoapp-notitle.png" alt="No title" width="400"/>
+<img src="images/customised-notitle.png" alt="No title" width="400"/>
 
 ```sh
 <uk.co.brightec.ratetheapp.RateTheApp
@@ -99,7 +101,7 @@ The title can be removed altogether by setting a blank *rateTheAppTitleText* att
 
 The colour of the stars can be changed using the *rateTheAppSelectedStarColor* and *rateTheAppUnselectedStarColor* attributes.
 
-<img src="images/demoapp-customisedstars.png" alt="Changing the stars" width="400"/>
+<img src="images/customised-stars.png" alt="Changing the stars" width="400"/>
 
 ```sh
  <uk.co.brightec.ratetheapp.RateTheApp
@@ -119,9 +121,9 @@ The colour of the stars can be changed using the *rateTheAppSelectedStarColor* a
 
 #### Changing the star drawables
 
-The drawables of the stars can be changed using the *rateTheAppStarSelectedDrawable* and *rateTheAppStarUnSelectedDrawable* attributes. You can still the drawables colour attribute as above.
+The drawables of the stars can be changed using the *rateTheAppStarSelectedDrawable* and *rateTheAppStarUnSelectedDrawable* attributes. You can use either normal png drawables or you can use svg's. Notes: You will need to include the desired spacing in the drawable file itself; You can still use the drawables colour attribute as above.
 
-<img src="images/demoapp-customiseddrawable.png" alt="Changing the stars" width="400"/>
+<img src="images/customised-drawable.png" alt="Changing the stars" width="400"/>
 
 ```sh
  <uk.co.brightec.ratetheapp.RateTheApp
@@ -161,8 +163,8 @@ The class *DefaultOnUserSelectedRatingListener* provides the default behaviour o
 <string name="ratetheapp_goodrating_title">Thank you!</string>
 <string name="ratetheapp_goodrating_text">Thanks, that\'s great to hear!  Would you mind rating us or leaving a review on the Google Play Store?\n\nThanks again,\nThe Brightec Team</string>
 ```
-<img src="images/demoapp-lowrating.png" alt="Customised low Rating" width="400"/>
-<img src="images/demoapp-positiverating.png" alt="Customised positive Rating" width="400"/>
+<img src="images/customised-dialog-badrating.png" alt="Customised low Rating" width="400"/>
+<img src="images/customised-dialog-goodrating.png" alt="Customised positive Rating" width="400"/>
 
 ###### Example showing how to set the text in code.
 ```sh
@@ -174,7 +176,7 @@ if (defaultListener != null) {
 }
 ```
 
-<img src="images/code-customised-thankyou.png" alt="Customised thankyou in code" width="400"/>
+<img src="images/customised-dialog-thankyou.png" alt="Customised thankyou in code" width="400"/>
 
 #### Changing the email template text
 
