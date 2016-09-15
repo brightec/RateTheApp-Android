@@ -23,8 +23,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
-
-import com.google.common.annotations.VisibleForTesting;
+import android.support.annotation.VisibleForTesting;
 
 /**
  * The default OnRatingChangeListener that offers to take the user to the play store if a good rating was given, otherwise it prompts
@@ -60,13 +59,13 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
     /**
      * The creates a default instance of this OnUserSelectedRatingListener.
      * Override the string resources to easily changes these values. Or use the setters provided.
-     * <p/>
      * Default values are (see createDefaultInstance(String) for other defaults):
      * <ul>
      * <li>mFeedbackEmailTo - mobile@website.com - R.string.ratetheapp_feedback_emailaddress</li>
      * </ul>
      *
-     * @see .DefaultOnUserSelectedRatingListener.createDefaultInstance(String)
+     * @return DefaultOnUserSelectedRatingListener
+     * @see DefaultOnUserSelectedRatingListener#createDefaultInstance(String)
      */
     @SuppressWarnings({"unused"})
     public static DefaultOnUserSelectedRatingListener createDefaultInstance() {
@@ -77,7 +76,6 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
     /**
      * The creates a default instance of this OnUserSelectedRatingListener.
      * Override the string resources to easily changes these values. Or use the setters provided.
-     * <p/>
      * Default values are:
      * <ul>
      * <li>mMinGoodRating - 3 - DefaultOnUserSelectedRatingListener.DEFAULT_MIN_GOOD_RATING</li>
@@ -144,6 +142,8 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
 
     /**
      * Set the text which is set on the negative button in the resulting alert dialog
+     *
+     * @param negativeButtonText String
      */
     @SuppressWarnings({"unused"})
     public void setNegativeButtonText(String negativeButtonText) {
@@ -162,6 +162,8 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
 
     /**
      * Set the text which is set on the positive button in the resulting alert dialog
+     *
+     * @param positiveButtonText String
      */
     @SuppressWarnings({"unused"})
     public void setPositiveButtonText(String positiveButtonText) {
@@ -182,6 +184,8 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
     /**
      * Set the text which is set as the title in the resulting alert dialog if the rating was
      * considered good
+     *
+     * @param goodRatingTitle String
      */
     @SuppressWarnings({"unused"})
     public void setGoodRatingTitle(String goodRatingTitle) {
@@ -202,6 +206,8 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
     /**
      * Set the text which is set as the message in the resulting alert dialog if the rating was
      * considered good
+     *
+     * @param goodRatingMessage String
      */
     @SuppressWarnings({"unused"})
     public void setGoodRatingMessage(String goodRatingMessage) {
@@ -222,6 +228,8 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
     /**
      * Set the text which is set as the title in the resulting alert dialog if the rating was
      * considered bad
+     *
+     * @param badRatingTitle String
      */
     @SuppressWarnings({"unused"})
     public void setBadRatingTitle(String badRatingTitle) {
@@ -242,6 +250,8 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
     /**
      * Set the text which is set as the message in the resulting alert dialog if the rating was
      * considered bad
+     *
+     * @param badRatingMessage String
      */
     @SuppressWarnings({"unused"})
     public void setBadRatingMessage(String badRatingMessage) {
@@ -260,6 +270,8 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
 
     /**
      * Set the email address feedback would be sent to
+     *
+     * @param feedbackEmailTo String
      */
     @SuppressWarnings({"unused"})
     public void setFeedbackEmailTo(String feedbackEmailTo) {
@@ -278,6 +290,8 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
 
     /**
      * Set the subject which a feedback email would have
+     *
+     * @param feedbackEmailSubject String
      */
     @SuppressWarnings({"unused"})
     public void setFeedbackEmailSubject(String feedbackEmailSubject) {
