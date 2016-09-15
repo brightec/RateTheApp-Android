@@ -83,7 +83,7 @@ The title text and appearance can be changed using the *rateTheAppTitleText* and
 
 The title can be removed altogether by setting a blank *rateTheAppTitleText* attribute. Similarly for message.
 
-<img src="images/demoapp-notitle.png" alt="No title" width="400"/>
+<img src="images/demoapp-customised-notitle.png" alt="No title" width="400"/>
 
 ```sh
 <uk.co.brightec.ratetheapp.RateTheApp
