@@ -19,25 +19,14 @@ package uk.co.brightec.ratetheapp;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.Shader;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ClipDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StyleRes;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 /**
@@ -58,7 +47,7 @@ public class RateTheApp extends LinearLayout {
     @StyleRes
     private int mTitleTextAppearanceResId, mMessageTextAppearanceResId;
     @ColorInt
-    private int mSelectedStarColour, mUnselectedStarColour;
+    private Integer mSelectedStarColour, mUnselectedStarColour;
     private RatingBar mRatingBar;
     private int mNumberOfStars = DEFAULT_NUMBER_OF_STARS;
     @DrawableRes
@@ -140,17 +129,24 @@ public class RateTheApp extends LinearLayout {
         mNumberOfStars = a.getInt(R.styleable.RateTheApp_rateTheAppNumberOfStars, DEFAULT_NUMBER_OF_STARS);
         mStepSize = a.getFloat(R.styleable.RateTheApp_rateTheAppStepSize, DEFAULT_STEP_SIZE);
         mDefaultRating = a.getFloat(R.styleable.RateTheApp_rateTheAppDefaultRating, DEFAULT_RATING);
-        if (isInEditMode()) {
-            mSelectedStarColour = a.getColor(R.styleable.RateTheApp_rateTheAppSelectedStarColor,
-                    Color.YELLOW);
-            mUnselectedStarColour = a.getColor(R.styleable.RateTheApp_rateTheAppUnselectedStarColor,
-                    Color.LTGRAY);
+
+        int colorInt = a.getColor(R.styleable.RateTheApp_rateTheAppSelectedStarColor, -1);
+        if (colorInt == -1) {
+            mSelectedStarColour = null;
         } else {
-            mSelectedStarColour = a.getColor(R.styleable.RateTheApp_rateTheAppSelectedStarColor, ContextCompat.getColor(getContext(), R.color.RateTheApp_SelectedStarColor));
-            mUnselectedStarColour = a.getColor(R.styleable.RateTheApp_rateTheAppUnselectedStarColor, ContextCompat.getColor(getContext(), R.color.RateTheApp_UnselectedStarColor));
+            mSelectedStarColour = colorInt;
         }
-        mDrawableResUnSelected = a.getResourceId(R.styleable.RateTheApp_rateTheAppStarUnSelectedDrawable, R.drawable.ic_rating_star_border_grey_36dp);
-        mDrawableResSelected = a.getResourceId(R.styleable.RateTheApp_rateTheAppStarSelectedDrawable, R.drawable.ic_rating_star_green_36dp);
+        colorInt = a.getColor(R.styleable.RateTheApp_rateTheAppUnselectedStarColor, -1);
+        if (colorInt == -1) {
+            mUnselectedStarColour = null;
+        } else {
+            mUnselectedStarColour = colorInt;
+        }
+
+        mDrawableResUnSelected = a.getResourceId(R.styleable
+                .RateTheApp_rateTheAppStarUnSelectedDrawable, R.drawable.ic_star_inactive_grey_50dp);
+        mDrawableResSelected = a.getResourceId(R.styleable
+                .RateTheApp_rateTheAppStarSelectedDrawable, R.drawable.ic_star_active_orange_50dp);
 
         mSaveRating = a.getBoolean(R.styleable.RateTheApp_rateTheAppSaveRating, true);
 
@@ -183,20 +179,30 @@ public class RateTheApp extends LinearLayout {
         initMessage();
 
         // Initialise the stars
-        initStars();
+        mRatingBar.initStars(mDrawableResSelected, mSelectedStarColour, mDrawableResUnSelected,
+                mUnselectedStarColour);
 
-        // Set previously saved rating (else use default rating)
-        float rating = mInstanceSettings.getSavedRating(-1f);
-        if (rating == -1f) {
+
+        float rating;
+        if (isInEditMode()) {
+            //Show some rating for editor
             rating = mDefaultRating;
+        } else {
+            // Set previously saved rating (else use default rating)
+            rating = mInstanceSettings.getSavedRating(-1f);
+            if (rating == -1f) {
+                rating = mDefaultRating;
+            }
         }
 
         mRatingBar.setRating(rating);
 
         mRatingBar.setOnRatingBarChangeListener(ratingChangeListener);
 
-        // Set the default RateChangeListener
-        setOnUserSelectedRatingListener(DefaultOnUserSelectedRatingListener.createDefaultInstance());
+        if (!isInEditMode()) {
+            // Set the default RateChangeListener
+            setOnUserSelectedRatingListener(DefaultOnUserSelectedRatingListener.createDefaultInstance());
+        }
 
         addView(rootView);
     }
@@ -235,82 +241,6 @@ public class RateTheApp extends LinearLayout {
                 mTextMessage.setTextAppearance(getContext(), mMessageTextAppearanceResId);
             }
         }
-    }
-
-    private void initStars() {
-        Drawable selected = ContextCompat.getDrawable(getContext(), mDrawableResSelected);
-        selected = selected.mutate();
-        selected.setColorFilter(new PorterDuffColorFilter(mSelectedStarColour, PorterDuff.Mode.SRC_ATOP));
-
-        Drawable unselected = ContextCompat.getDrawable(getContext(), mDrawableResUnSelected);
-        unselected = unselected.mutate();
-        unselected.setColorFilter(new PorterDuffColorFilter(mUnselectedStarColour, PorterDuff.Mode.SRC_ATOP));
-
-        LayerDrawable ld = (LayerDrawable) mRatingBar.getProgressDrawable();
-        ld.setDrawableByLayerId(android.R.id.background, unselected);
-        ld.setDrawableByLayerId(android.R.id.secondaryProgress, unselected);
-        ld.setDrawableByLayerId(android.R.id.progress, selected);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mRatingBar.setProgressDrawableTiled(ld);
-        } else {
-            Drawable tiledDrawable = tileify(ld, false);
-            mRatingBar.setProgressDrawable(tiledDrawable);
-        }
-    }
-
-    /**
-     * Converts a drawable to a tiled version of itself. It will recursively traverse layer and state list drawables.
-     * This method was copied from android.widget.ProgressBar, however it was highlighted in their code that this may be sub optimal.
-     *
-     * @param drawable The drawable to tileify
-     * @param clip     Whether to clip drawable
-     * @return The tiled drawable
-     */
-    private Drawable tileify(Drawable drawable, boolean clip) {
-        if (drawable instanceof LayerDrawable) {
-            final LayerDrawable orig = (LayerDrawable) drawable;
-            final int N = orig.getNumberOfLayers();
-            final Drawable[] outDrawables = new Drawable[N];
-
-            for (int i = 0; i < N; i++) {
-                final int id = orig.getId(i);
-                outDrawables[i] = tileify(orig.getDrawable(i), (id == android.R.id.progress || id == android.R.id.secondaryProgress));
-            }
-
-            final LayerDrawable clone = new LayerDrawable(outDrawables);
-            for (int i = 0; i < N; i++) {
-                clone.setId(i, orig.getId(i));
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    clone.setLayerGravity(i, orig.getLayerGravity(i));
-                    clone.setLayerWidth(i, orig.getLayerWidth(i));
-                    clone.setLayerHeight(i, orig.getLayerHeight(i));
-                    clone.setLayerInsetLeft(i, orig.getLayerInsetLeft(i));
-                    clone.setLayerInsetRight(i, orig.getLayerInsetRight(i));
-                    clone.setLayerInsetTop(i, orig.getLayerInsetTop(i));
-                    clone.setLayerInsetBottom(i, orig.getLayerInsetBottom(i));
-                    clone.setLayerInsetStart(i, orig.getLayerInsetStart(i));
-                    clone.setLayerInsetEnd(i, orig.getLayerInsetEnd(i));
-                }
-            }
-
-            return clone;
-        }
-
-        if (drawable instanceof BitmapDrawable) {
-            final BitmapDrawable bitmap = (BitmapDrawable) drawable;
-
-            final BitmapDrawable clone = (BitmapDrawable) bitmap.getConstantState().newDrawable();
-            clone.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
-
-            if (clip) {
-                return new ClipDrawable(clone, Gravity.START, ClipDrawable.HORIZONTAL);
-            } else {
-                return clone;
-            }
-        }
-
-        return drawable;
     }
 
     /**

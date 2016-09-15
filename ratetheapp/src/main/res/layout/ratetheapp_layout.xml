@@ -36,9 +36,12 @@
         android:gravity="center"
         android:text="@string/ratetheapp_message"/>
 
-    <RatingBar
+    <uk.co.brightec.ratetheapp.RatingBar
         android:id="@+id/rating_bar"
-        style="@style/RatingBar"
-        android:layout_marginTop="16dp"/>
+        style="@android:style/Widget.RatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:minHeight="36dp"/>
 
 </LinearLayout>
