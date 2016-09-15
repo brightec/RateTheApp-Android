@@ -2,7 +2,7 @@
 
 RateTheApp allows users to rate your app prompting them for further action depending on the rating they gave.
 
-<img src="images/ratetheapp.png" alt="RateTheApp" width="400"/>
+<img src="images/rate-the-app.png" alt="RateTheApp" width="400"/>
 
 ```sh
 <uk.co.brightec.ratetheapp.RateTheApp
