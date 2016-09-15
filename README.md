@@ -39,6 +39,8 @@ Or Maven:
 
 ## Changing the appearance
 
+Note that all the following customisations can be combined together to get the appearance you want.
+
 #### Changing the title and message
 
 The title text and appearance can be changed using the *rateTheAppTitleText* and *rateTheAppTitleTextAppearance* attributes. The message text and appearance can be changed similarly.
@@ -119,7 +121,7 @@ The colour of the stars can be changed using the *rateTheAppSelectedStarColor* a
 
 #### Changing the star drawables
 
-The drawables of the stars can be changed using the *rateTheAppStarSelectedDrawable* and *rateTheAppStarUnSelectedDrawable* attributes. You can still the drawables colour attribute as above.
+The drawables of the stars can be changed using the *rateTheAppStarSelectedDrawable* and *rateTheAppStarUnSelectedDrawable* attributes. You can use either normal png drawables or you can use svg's. Notes: You will need to include the desired spacing in the drawable file itself; You can still use the drawables colour attribute as above.
 
 <img src="images/customised-drawable.png" alt="Changing the stars" width="400"/>
 
