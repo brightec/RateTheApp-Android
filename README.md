@@ -43,7 +43,7 @@ Or Maven:
 
 The title text and appearance can be changed using the *rateTheAppTitleText* and *rateTheAppTitleTextAppearance* attributes. The message text and appearance can be changed similarly.
 
-<img src="images/demoapp-customisedtitle.png" alt="Changing the title" width="400"/>
+<img src="images/demoapp-customised-title.png" alt="Changing the title" width="400"/>
 
 ```sh
  <uk.co.brightec.ratetheapp.RateTheApp
