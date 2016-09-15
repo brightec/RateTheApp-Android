@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/cardview_margin"
             app:cardCornerRadius="4dp"
-            app:contentPadding="16dp">
+            app:contentPadding="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -77,7 +77,8 @@
                 <uk.co.brightec.ratetheapp.RateTheApp
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"/>
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="16dp"/>
 
             </LinearLayout>
 
