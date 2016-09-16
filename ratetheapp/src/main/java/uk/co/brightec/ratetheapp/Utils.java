@@ -17,7 +17,10 @@
 package uk.co.brightec.ratetheapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -25,7 +28,7 @@ import android.support.annotation.VisibleForTesting;
 
 import com.google.common.base.Preconditions;
 
-class Utils {
+public class Utils {
 
     private static final String PREFERENCES_FILE = "ratetheapp_settings";
 
@@ -154,5 +157,59 @@ class Utils {
             instanceName += "_" + rateTheAppName;
         }
         return instanceName;
+    }
+
+    /**
+     * Start activity which would offer to send an email
+     *
+     * @param context      Context
+     * @param emailTo      String
+     * @param emailSubject String
+     * @param emailMessage String
+     */
+    public static void sendEmail(Context context, String emailTo, String emailSubject, String
+            emailMessage) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("message/rfc822");
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{emailTo});
+        intent.putExtra(Intent.EXTRA_SUBJECT, emailSubject);
+        intent.putExtra(Intent.EXTRA_TEXT, emailMessage);
+
+        context.startActivity(Intent.createChooser(intent, context.getString(
+                R.string.email_intent_chooser_title)));
+    }
+
+    /**
+     * Method for obtaining a default feedback email message
+     *
+     * @param context  Context
+     * @param numStars The star rating the user clicked so that this can be addeed to the email
+     * @return String The a message to put into the email body
+     */
+    public static String getDefaultEmailMessage(Context context, int numStars) {
+        String version = "Unknown";
+        try {
+            version = context.getPackageManager().getPackageInfo(context.getPackageName(), 0)
+                    .versionName;
+        } catch (PackageManager.NameNotFoundException ignored) {
+        }
+
+        return context.getString(R.string.ratetheapp_feedback_extra_information, numStars, Utils.getDeviceName(), Build.VERSION.SDK_INT, version);
+    }
+
+    /**
+     * Start activity which would present the playstore on our apps page
+     *
+     * @param context Context
+     */
+    public static void goToAppStore(Context context) {
+        String appPackageName = context.getPackageName();
+        try {
+            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" +
+                    appPackageName)));
+        } catch (android.content.ActivityNotFoundException anfe) {
+            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google" +
+                    ".com/store/apps/details?id=" + appPackageName)));
+        }
     }
 }
