@@ -90,11 +90,8 @@ public class RatingBar extends android.widget.RatingBar {
 
         // If there's a bitmap that's not wrapped with a ClipDrawable or
         // ScaleDrawable, we'll need to wrap it and apply tiling.
-        if (dr instanceof BitmapDrawable || dr instanceof VectorDrawable) {
-            return true;
-        }
+        return dr instanceof BitmapDrawable || dr instanceof VectorDrawable;
 
-        return false;
     }
 
     /**
@@ -207,7 +204,7 @@ public class RatingBar extends android.widget.RatingBar {
             clone.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
 
             if (clip) {
-                return new ClipDrawable(clone, Gravity.LEFT, ClipDrawable.HORIZONTAL);
+                return new ClipDrawable(clone, Gravity.START, ClipDrawable.HORIZONTAL);
             } else {
                 return clone;
             }

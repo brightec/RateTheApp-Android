@@ -16,6 +16,7 @@
 
 package uk.co.brightec.ratetheapp;
 
+import android.content.Context;
 import android.support.annotation.Nullable;
 
 public class InstanceSettings {
@@ -23,9 +24,11 @@ public class InstanceSettings {
     private static final String PREF_SHOW_SUFFIX = "_show";
     private static final String PREF_RATING_SUFFIX = "_rating";
 
+    private Context mContext;
     private String mInstanceName;
 
-    InstanceSettings(String instanceName) {
+    InstanceSettings(Context context, String instanceName) {
+        mContext = context;
         mInstanceName = instanceName;
     }
 
@@ -34,11 +37,12 @@ public class InstanceSettings {
      * Note: If you are using the 'app:rateTheAppName' you need to provide the rateTheAppName you
      * want the InstanceSettings of.
      *
+     * @param context Context
      * @return InstanceSettings
      */
     @SuppressWarnings({"unused"})
-    public static InstanceSettings getInstanceSettings() {
-        return getInstanceSettings(null);
+    public static InstanceSettings getInstanceSettings(Context context) {
+        return getInstanceSettings(context, null);
     }
 
     /**
@@ -46,13 +50,15 @@ public class InstanceSettings {
      * Note: If you are using the 'app:rateTheAppName' you need to provide the rateTheAppName you
      * want the InstanceSettings of.
      *
+     * @param context        Context
      * @param rateTheAppName String
      * @return InstanceSettings
      */
     @SuppressWarnings({"unused"})
-    public static InstanceSettings getInstanceSettings(@Nullable String rateTheAppName) {
+    public static InstanceSettings getInstanceSettings(Context context, @Nullable String
+            rateTheAppName) {
         String instanceName = Utils.getInstanceNameFromRateTheAppName(rateTheAppName);
-        return new InstanceSettings(instanceName);
+        return new InstanceSettings(context, instanceName);
     }
 
     /**
@@ -61,14 +67,14 @@ public class InstanceSettings {
      * @return boolean TRUE if should be shown
      */
     public boolean shouldShow() {
-        return Utils.readSharedSetting(mInstanceName + PREF_SHOW_SUFFIX, true);
+        return Utils.readSharedSetting(mContext, mInstanceName + PREF_SHOW_SUFFIX, true);
     }
 
     /**
      * Set the given instance of RateTheApp to hide permanently
      */
     public void hidePermanently() {
-        Utils.saveSharedSetting(mInstanceName + PREF_SHOW_SUFFIX, false);
+        Utils.saveSharedSetting(mContext, mInstanceName + PREF_SHOW_SUFFIX, false);
     }
 
     /**
@@ -77,7 +83,7 @@ public class InstanceSettings {
      * @param rating float
      */
     public void saveRating(float rating) {
-        Utils.saveSharedSetting(mInstanceName + PREF_RATING_SUFFIX, rating);
+        Utils.saveSharedSetting(mContext, mInstanceName + PREF_RATING_SUFFIX, rating);
     }
 
     /**
@@ -88,7 +94,7 @@ public class InstanceSettings {
      * @return float
      */
     public float getSavedRating(float defaultRating) {
-        return Utils.readSharedSetting(mInstanceName + PREF_RATING_SUFFIX, defaultRating);
+        return Utils.readSharedSetting(mContext, mInstanceName + PREF_RATING_SUFFIX, defaultRating);
     }
 
     /**
@@ -96,7 +102,7 @@ public class InstanceSettings {
      */
     public void resetWidget() {
         // Reset the widget visibility to true
-        Utils.saveSharedSetting(mInstanceName + PREF_SHOW_SUFFIX, true);
+        Utils.saveSharedSetting(mContext, mInstanceName + PREF_SHOW_SUFFIX, true);
         // Rest the widget rating to zero
         saveRating(0f);
     }

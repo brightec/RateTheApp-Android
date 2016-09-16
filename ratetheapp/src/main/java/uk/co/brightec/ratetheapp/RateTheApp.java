@@ -155,7 +155,7 @@ public class RateTheApp extends LinearLayout {
 
     private void init() {
         //Create our Settings object
-        mInstanceSettings = new InstanceSettings(mInstanceName);
+        mInstanceSettings = new InstanceSettings(getContext(), mInstanceName);
 
         if (!isInEditMode() && !shouldShow()) {
             this.setVisibility(GONE);
@@ -201,7 +201,8 @@ public class RateTheApp extends LinearLayout {
 
         if (!isInEditMode()) {
             // Set the default RateChangeListener
-            setOnUserSelectedRatingListener(DefaultOnUserSelectedRatingListener.createDefaultInstance());
+            setOnUserSelectedRatingListener(DefaultOnUserSelectedRatingListener
+                    .createDefaultInstance(getContext()));
         }
 
         addView(rootView);

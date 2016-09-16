@@ -64,12 +64,13 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
      * <li>mFeedbackEmailTo - mobile@website.com - R.string.ratetheapp_feedback_emailaddress</li>
      * </ul>
      *
+     * @param context Context To fetch a string against
      * @return DefaultOnUserSelectedRatingListener
-     * @see DefaultOnUserSelectedRatingListener#createDefaultInstance(String)
+     * @see DefaultOnUserSelectedRatingListener#createDefaultInstance(Context, String)
      */
     @SuppressWarnings({"unused"})
-    public static DefaultOnUserSelectedRatingListener createDefaultInstance() {
-        return createDefaultInstance(Application.getInstance().getString(R.string
+    public static DefaultOnUserSelectedRatingListener createDefaultInstance(Context context) {
+        return createDefaultInstance(context, context.getString(R.string
                 .ratetheapp_feedback_emailaddress));
     }
 
@@ -87,26 +88,29 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
      * <li>mBadRatingTitle - Hi There! - R.string.ratetheapp_badrating_title</li>
      * <li>mBadRatingMessage - I’m really sorry to hear that you don’t like our app. Would you mind
      * sending me your
-     * thoughts on how we can improve the app? I’ll respond directly. Thanks for your help. - R.string.ratetheapp_badrating_text</li>
+     * thoughts on how we can improve the app? I’ll respond directly. Thanks for your help. - R
+     * .string.ratetheapp_badrating_text</li>
      * <li>mFeedbackEmailSubject - App Feedback: Android - R.string.ratetheapp_feedback_subject</li>
      * <li>mFeedbackEmailMessage - null</li>
      * </ul>
      *
+     * @param context Context To fetch strings against
      * @param emailTo String
      * @return DefaultOnUserSelectedRatingListener
      */
     @SuppressWarnings({"unused"})
-    public static DefaultOnUserSelectedRatingListener createDefaultInstance(String emailTo) {
+    public static DefaultOnUserSelectedRatingListener createDefaultInstance(Context context,
+                                                                            String emailTo) {
         return new DefaultOnUserSelectedRatingListener(
                 DEFAULT_MIN_GOOD_RATING,
-                Application.getInstance().getString(R.string.ratetheapp_negative_button),
-                Application.getInstance().getString(R.string.ratetheapp_positive_button),
-                Application.getInstance().getString(R.string.ratetheapp_goodrating_title),
-                Application.getInstance().getString(R.string.ratetheapp_goodrating_text),
-                Application.getInstance().getString(R.string.ratetheapp_badrating_title),
-                Application.getInstance().getString(R.string.ratetheapp_badrating_text),
+                context.getString(R.string.ratetheapp_negative_button),
+                context.getString(R.string.ratetheapp_positive_button),
+                context.getString(R.string.ratetheapp_goodrating_title),
+                context.getString(R.string.ratetheapp_goodrating_text),
+                context.getString(R.string.ratetheapp_badrating_title),
+                context.getString(R.string.ratetheapp_badrating_text),
                 emailTo,
-                Application.getInstance().getString(R.string.ratetheapp_feedback_subject),
+                context.getString(R.string.ratetheapp_feedback_subject),
                 null);
     }
 
@@ -345,7 +349,7 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
      * @param context Context
      */
     private void goToAppStore(Context context) {
-        String appPackageName = Application.getInstance().getPackageName();
+        String appPackageName = context.getPackageName();
         try {
             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" +
                     appPackageName)));
@@ -367,30 +371,30 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
         intent.putExtra(Intent.EXTRA_EMAIL, new String[]{mFeedbackEmailTo});
         intent.putExtra(Intent.EXTRA_SUBJECT, mFeedbackEmailSubject);
         if (mFeedbackEmailMessage == null) {
-            mFeedbackEmailMessage = getDefaultEmailMessage(numStars);
+            mFeedbackEmailMessage = getDefaultEmailMessage(context, numStars);
         }
         intent.putExtra(Intent.EXTRA_TEXT, mFeedbackEmailMessage);
 
-        context.startActivity(Intent.createChooser(intent, Application.getInstance().getString(
+        context.startActivity(Intent.createChooser(intent, context.getString(
                 R.string.email_intent_chooser_title)));
     }
 
     /**
      * Method for obtaining a default feedback email message
      *
+     * @param context  Context
      * @param numStars The star rating the user clicked so that this can be addeed to the email
      * @return String The a message to put into the email body
      */
     @VisibleForTesting
-    String getDefaultEmailMessage(int numStars) {
+    String getDefaultEmailMessage(Context context, int numStars) {
         String version = "Unknown";
         try {
-            version = Application.getInstance().getPackageManager().getPackageInfo(Application.getInstance()
-                    .getPackageName(), 0)
+            version = context.getPackageManager().getPackageInfo(context.getPackageName(), 0)
                     .versionName;
         } catch (PackageManager.NameNotFoundException ignored) {
         }
 
-        return Application.getInstance().getString(R.string.ratetheapp_feedback_extra_information, numStars, Utils.getDeviceName(), Build.VERSION.SDK_INT, version);
+        return context.getString(R.string.ratetheapp_feedback_extra_information, numStars, Utils.getDeviceName(), Build.VERSION.SDK_INT, version);
     }
 }
