@@ -152,16 +152,16 @@ public class MainActivity extends AppCompatActivity
      */
     private void resetDemoData() {
         // Reset the default widget
-        InstanceSettings.getInstanceSettings().resetWidget();
+        InstanceSettings.getInstanceSettings(this).resetWidget();
 
         // Reset the Custom Appearance widgets
-        InstanceSettings.getInstanceSettings("customisedTitleWidget").resetWidget();
-        InstanceSettings.getInstanceSettings("noTitleWidget").resetWidget();
-        InstanceSettings.getInstanceSettings("customisedStarColourWidget").resetWidget();
+        InstanceSettings.getInstanceSettings(this, "customisedTitleWidget").resetWidget();
+        InstanceSettings.getInstanceSettings(this, "noTitleWidget").resetWidget();
+        InstanceSettings.getInstanceSettings(this, "customisedStarColourWidget").resetWidget();
 
         // Reset the Custom Behaviour widgets
-        InstanceSettings.getInstanceSettings("noActionWidget").resetWidget();
-        InstanceSettings.getInstanceSettings("customActionWidget").resetWidget();
+        InstanceSettings.getInstanceSettings(this, "noActionWidget").resetWidget();
+        InstanceSettings.getInstanceSettings(this, "customActionWidget").resetWidget();
 
         // Reload the current fragment to show reset data
         Fragment demoHolder = getSupportFragmentManager().findFragmentById(R.id.demoHolder);
