@@ -71,13 +71,15 @@ public class CustomBehaviourFragment extends Fragment {
 
         // Initialise the text view to the current rating
         final TextView textView = (TextView) view.findViewById(R.id.textView);
-        textView.setText(getString(R.string.current_rating) + " " + rta.getRating());
+        String textStr = getString(R.string.current_rating) + " " + rta.getRating();
+        textView.setText(textStr);
 
         // Add a custom OnUserSelectedRatingListener to update the text view
         rta.setOnUserSelectedRatingListener(new RateTheApp.OnUserSelectedRatingListener() {
             @Override
             public void onRatingChanged(RateTheApp rateTheApp, float rating) {
-                textView.setText(getString(R.string.current_rating) + " " + rating);
+                String textStr = getString(R.string.current_rating) + " " + rating;
+                textView.setText(textStr);
             }
         });
 

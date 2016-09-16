@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!-- Copyright 2016 Brightec Ltd
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Brightec Ltd
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
@@ -154,7 +155,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_margin="@dimen/cardview_margin"
             app:cardCornerRadius="4dp"
             app:contentPadding="16dp">
 
@@ -177,7 +178,8 @@
                     app:rateTheAppName="customisedStarColourWidget"
                     app:rateTheAppSelectedStarColor="@android:color/holo_green_dark"
                     app:rateTheAppStarSelectedDrawable="@drawable/ic_android_selected_36dp"
-                    app:rateTheAppStarUnSelectedDrawable="@drawable/ic_android_unselected_36dp"/>
+                    app:rateTheAppStarUnSelectedDrawable="@drawable/ic_android_unselected_36dp"
+                    app:rateTheAppUnselectedStarColor="@android:color/darker_gray"/>
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
