@@ -19,11 +19,6 @@ package uk.co.brightec.ratetheapp;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
-import android.support.annotation.VisibleForTesting;
 
 /**
  * The default OnRatingChangeListener that offers to take the user to the play store if a good rating was given, otherwise it prompts
@@ -43,7 +38,11 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
     private String mFeedbackEmailSubject;
     private String mFeedbackEmailMessage;
 
-    public DefaultOnUserSelectedRatingListener(float minGoodRating, String negativeButtonText, String positiveButtonText, String goodRatingTitle, String goodRatingMessage, String badRatingTitle, String badRatingMessage, String feedbackEmailTo, String feedbackEmailSubject, String feedbackEmailMessage) {
+    public DefaultOnUserSelectedRatingListener(float minGoodRating, String negativeButtonText,
+                                               String positiveButtonText, String goodRatingTitle,
+                                               String goodRatingMessage, String badRatingTitle,
+                                               String badRatingMessage, String feedbackEmailTo,
+                                               String feedbackEmailSubject, String feedbackEmailMessage) {
         mMinGoodRating = minGoodRating;
         mNegativeButtonText = negativeButtonText;
         mPositiveButtonText = positiveButtonText;
@@ -313,7 +312,7 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     rateTheApp.hidePermanently();
-                    goToAppStore(rateTheApp.getContext());
+                    Utils.goToAppStore(rateTheApp.getContext());
                 }
             });
             alertDialog.setNegativeButton(mNegativeButtonText, new DialogInterface.OnClickListener() {
@@ -330,7 +329,12 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
             alertDialog.setPositiveButton(mPositiveButtonText, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    sendEmail(rateTheApp.getContext(), (int) rating);
+                    if (mFeedbackEmailMessage == null) {
+                        mFeedbackEmailMessage = Utils.getDefaultEmailMessage(
+                                rateTheApp.getContext(), ((int) rating));
+                    }
+                    Utils.sendEmail(rateTheApp.getContext(), mFeedbackEmailTo,
+                            mFeedbackEmailSubject, mFeedbackEmailMessage);
                 }
             });
             alertDialog.setNegativeButton(mNegativeButtonText, new DialogInterface.OnClickListener() {
@@ -341,60 +345,5 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
             });
             alertDialog.create().show();
         }
-    }
-
-    /**
-     * Start activity which would present the playstore on our apps page
-     *
-     * @param context Context
-     */
-    private void goToAppStore(Context context) {
-        String appPackageName = context.getPackageName();
-        try {
-            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" +
-                    appPackageName)));
-        } catch (android.content.ActivityNotFoundException anfe) {
-            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google" +
-                    ".com/store/apps/details?id=" + appPackageName)));
-        }
-    }
-
-    /**
-     * Start activity which would offer to send an email
-     *
-     * @param context  Context
-     * @param numStars int
-     */
-    private void sendEmail(Context context, int numStars) {
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("message/rfc822");
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{mFeedbackEmailTo});
-        intent.putExtra(Intent.EXTRA_SUBJECT, mFeedbackEmailSubject);
-        if (mFeedbackEmailMessage == null) {
-            mFeedbackEmailMessage = getDefaultEmailMessage(context, numStars);
-        }
-        intent.putExtra(Intent.EXTRA_TEXT, mFeedbackEmailMessage);
-
-        context.startActivity(Intent.createChooser(intent, context.getString(
-                R.string.email_intent_chooser_title)));
-    }
-
-    /**
-     * Method for obtaining a default feedback email message
-     *
-     * @param context  Context
-     * @param numStars The star rating the user clicked so that this can be addeed to the email
-     * @return String The a message to put into the email body
-     */
-    @VisibleForTesting
-    String getDefaultEmailMessage(Context context, int numStars) {
-        String version = "Unknown";
-        try {
-            version = context.getPackageManager().getPackageInfo(context.getPackageName(), 0)
-                    .versionName;
-        } catch (PackageManager.NameNotFoundException ignored) {
-        }
-
-        return context.getString(R.string.ratetheapp_feedback_extra_information, numStars, Utils.getDeviceName(), Build.VERSION.SDK_INT, version);
     }
 }
