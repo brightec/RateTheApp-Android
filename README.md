@@ -23,7 +23,7 @@ Depending on the user's rating, an AlertDialog prompts the user for further acti
 Using Gradle:
 ```sh
 dependencies {
-  compile 'uk.co.brightec.ratetheapp:ratetheapp:1.0.1'
+  compile 'uk.co.brightec.ratetheapp:ratetheapp:1.0.2'
 }
 ```
 
@@ -32,7 +32,7 @@ Or Maven:
 <dependency>
   <groupId>uk.co.brightec.ratetheapp</groupId>
   <artifactId>ratetheapp</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <type>pom</type>
 </dependency>
 ```
