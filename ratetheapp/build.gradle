@@ -14,7 +14,7 @@ ext {
     siteUrl = 'https://github.com/brightec/RateTheApp-Android'
     gitUrl = 'https://github.com/brightec/RateTheApp-Android.git'
 
-    libraryVersion = '1.0.1'
+    libraryVersion = '1.0.2'
 
     developerId = 'nickh'
     developerName = 'Nick Holcombe'
@@ -32,8 +32,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 24
-        versionCode 3
-        versionName "1.0.1"
+        versionCode 4
+        versionName "1.0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
