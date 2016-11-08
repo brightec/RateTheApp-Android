@@ -154,7 +154,7 @@ The class *DefaultOnUserSelectedRatingListener* provides the default behaviour o
 <string name="ratetheapp_positive_button">Sure</string>
 <string name="ratetheapp_negative_button">No Thanks</string>
 <string name="ratetheapp_badrating_title">Hi There!</string>
-<string name="ratetheapp_badrating_text">I’m really sorry to hear that you don’t like our app. Would you mind sending me your thoughts on how we can improve the app? I’ll respond directly. Thanks for your help.</string>
+<string name="ratetheapp_badrating_text">I’m really sorry to hear that you don’t like our app. Would you mind sending me your thoughts on how we can improve it? I’ll respond directly. Thanks for your help.</string>
 ```
 
 ###### Example overriding some string definitions - from the demo app, strings.xml
