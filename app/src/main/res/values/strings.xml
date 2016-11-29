@@ -21,6 +21,7 @@
     <string name="drawermenu_introduction_text">Introduction to RateTheApp</string>
     <string name="drawermenu_appearance_text">Changing the appearance</string>
     <string name="drawermenu_behaviour_text">Changing the behaviour</string>
+    <string name="ratetheapp_feedback_emailaddress">ratetheapp@brightec.co.uk</string>
 
     <!-- Brightec Developer Details -->
     <string name="madeByBrightec">Made by Brightec</string>
