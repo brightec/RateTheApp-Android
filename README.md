@@ -9,6 +9,9 @@ RateTheApp allows users to rate your app prompting them for further action depen
  android:layout_width="wrap_content"
  android:layout_height="wrap_content"/>
 ```
+```sh
+<string name="ratetheapp_feedback_emailaddress">feedback@yourdomain.co.uk</string>
+```
 
 Depending on the user's rating, an AlertDialog prompts the user for further action.
 - If a rating of 0, 1 or 2 stars is selected, the user is prompted whether they would like to email the app developer with any issues they might have.  RateTheApp will remain visible so the user can re-rate your app once their issues have been resolved.
@@ -186,15 +189,15 @@ As with the AlertDialog, the class *DefaultOnUserSelectedRatingListener* provide
 
 ###### String definitions from ratetheapp/strings.xml used by the email template
 ```sh
-<string name="ratetheapp_feedback_emailaddress">mobile@website.com</string>
+<string name="ratetheapp_feedback_emailaddress"/>
 <string name="ratetheapp_feedback_subject">App Feedback: Android</string>
 <string name="ratetheapp_feedback_extra_information" formatted="false">\n\n\n\n\n// Please reply above this line\nInformation that helps us:\n%d stars, Android %s, Platform %s, App Version %s</string>
 ```
 
-###### Example overriding some strings definitions - from the demo app, strings.xml
+###### Example overriding some strings definitions - strings.xml
 ```sh
-<string name="ratetheapp_feedback_emailaddress">support@brightec.co.uk</string>
-<string name="ratetheapp_feedback_subject">RateTheApp Demo Feedback</string>
+<string name="ratetheapp_feedback_emailaddress">feedback@yourdomain.co.uk</string>
+<string name="ratetheapp_feedback_subject">Feedback - Android</string>
 ```
 
 ## Changing the behaviour
