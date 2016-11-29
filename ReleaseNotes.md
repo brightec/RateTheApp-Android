@@ -1,5 +1,8 @@
 # Release notes #
 
+### v1.0.2 ###
+* Updated the default listener bad rating string to be more conversational.
+
 ### v1.0.1 ###
 * Made the `Utils.sendEmail()`, `Utils.getDefaultEmailMessage()` and `Utils.goToAppStore()` public.
 

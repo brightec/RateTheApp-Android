@@ -25,10 +25,16 @@
     <string name="ratetheapp_positive_button">Sure</string>
     <string name="ratetheapp_negative_button">No Thanks</string>
     <string name="ratetheapp_badrating_title">Hi There!</string>
-    <string name="ratetheapp_badrating_text">I’m really sorry to hear that you don’t like our app. Would you mind sending me your thoughts on how we can improve the app? I’ll respond directly. Thanks for your help.</string>
+    <string name="ratetheapp_badrating_text">I’m really sorry to hear that you don’t like our
+        app. Would you mind sending me your thoughts on how we can improve it? I’ll respond 
+        directly. Thanks for your help.</string>
 
-    <string name="ratetheapp_feedback_emailaddress">mobile@website.com</string>
+    <string name="ratetheapp_feedback_emailaddress"/>
     <string name="ratetheapp_feedback_subject">App Feedback: Android</string>
     <string name="ratetheapp_feedback_extra_information" formatted="false">\n\n\n\n\n// Please reply above this line\nInformation that helps us:\n%d stars, Android %s, Platform %d, App Version %s</string>
 
+    <string name="error_email_title">Oops</string>
+    <string name="error_email_message">Sorry something went wrong trying to send this email.</string>
+
+    <string name="action_ok">OK</string>
 </resources>

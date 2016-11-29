@@ -19,12 +19,14 @@ package uk.co.brightec.ratetheapp;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 
 /**
  * The default OnRatingChangeListener that offers to take the user to the play store if a good rating was given, otherwise it prompts
  * the user to email the app developer to provide feedback.
  */
 public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSelectedRatingListener {
+    private static final String TAG = DefaultOnUserSelectedRatingListener.class.getSimpleName();
     private static final float DEFAULT_MIN_GOOD_RATING = 3;
 
     private float mMinGoodRating;
@@ -333,8 +335,19 @@ public class DefaultOnUserSelectedRatingListener implements RateTheApp.OnUserSel
                         mFeedbackEmailMessage = Utils.getDefaultEmailMessage(
                                 rateTheApp.getContext(), ((int) rating));
                     }
-                    Utils.sendEmail(rateTheApp.getContext(), mFeedbackEmailTo,
-                            mFeedbackEmailSubject, mFeedbackEmailMessage);
+                    if (mFeedbackEmailTo == null || mFeedbackEmailTo.isEmpty()) {
+                        Log.e(TAG, "You must provide a 'ratetheapp_feedback_emailaddress' in " +
+                                "strings.xml or call 'setFeedbackEmailTo()' for this default " +
+                                "listener to be able to send an email on bad rating");
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+                        alertDialog.setTitle(R.string.error_email_title);
+                        alertDialog.setMessage(R.string.error_email_message);
+                        alertDialog.setPositiveButton(R.string.action_ok, null);
+                        alertDialog.create().show();
+                    } else {
+                        Utils.sendEmail(rateTheApp.getContext(), mFeedbackEmailTo,
+                                mFeedbackEmailSubject, mFeedbackEmailMessage);
+                    }
                 }
             });
             alertDialog.setNegativeButton(mNegativeButtonText, new DialogInterface.OnClickListener() {

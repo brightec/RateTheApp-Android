@@ -9,6 +9,9 @@ RateTheApp allows users to rate your app prompting them for further action depen
  android:layout_width="wrap_content"
  android:layout_height="wrap_content"/>
 ```
+```sh
+<string name="ratetheapp_feedback_emailaddress">feedback@yourdomain.co.uk</string>
+```
 
 Depending on the user's rating, an AlertDialog prompts the user for further action.
 - If a rating of 0, 1 or 2 stars is selected, the user is prompted whether they would like to email the app developer with any issues they might have.  RateTheApp will remain visible so the user can re-rate your app once their issues have been resolved.
@@ -23,7 +26,7 @@ Depending on the user's rating, an AlertDialog prompts the user for further acti
 Using Gradle:
 ```sh
 dependencies {
-  compile 'uk.co.brightec.ratetheapp:ratetheapp:1.0.1'
+  compile 'uk.co.brightec.ratetheapp:ratetheapp:1.0.2'
 }
 ```
 
@@ -32,7 +35,7 @@ Or Maven:
 <dependency>
   <groupId>uk.co.brightec.ratetheapp</groupId>
   <artifactId>ratetheapp</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <type>pom</type>
 </dependency>
 ```
@@ -154,7 +157,7 @@ The class *DefaultOnUserSelectedRatingListener* provides the default behaviour o
 <string name="ratetheapp_positive_button">Sure</string>
 <string name="ratetheapp_negative_button">No Thanks</string>
 <string name="ratetheapp_badrating_title">Hi There!</string>
-<string name="ratetheapp_badrating_text">I’m really sorry to hear that you don’t like our app. Would you mind sending me your thoughts on how we can improve the app? I’ll respond directly. Thanks for your help.</string>
+<string name="ratetheapp_badrating_text">I’m really sorry to hear that you don’t like our app. Would you mind sending me your thoughts on how we can improve it? I’ll respond directly. Thanks for your help.</string>
 ```
 
 ###### Example overriding some string definitions - from the demo app, strings.xml
@@ -186,15 +189,15 @@ As with the AlertDialog, the class *DefaultOnUserSelectedRatingListener* provide
 
 ###### String definitions from ratetheapp/strings.xml used by the email template
 ```sh
-<string name="ratetheapp_feedback_emailaddress">mobile@website.com</string>
+<string name="ratetheapp_feedback_emailaddress"/>
 <string name="ratetheapp_feedback_subject">App Feedback: Android</string>
 <string name="ratetheapp_feedback_extra_information" formatted="false">\n\n\n\n\n// Please reply above this line\nInformation that helps us:\n%d stars, Android %s, Platform %s, App Version %s</string>
 ```
 
-###### Example overriding some strings definitions - from the demo app, strings.xml
+###### Example overriding some strings definitions - strings.xml
 ```sh
-<string name="ratetheapp_feedback_emailaddress">support@brightec.co.uk</string>
-<string name="ratetheapp_feedback_subject">RateTheApp Demo Feedback</string>
+<string name="ratetheapp_feedback_emailaddress">feedback@yourdomain.co.uk</string>
+<string name="ratetheapp_feedback_subject">Feedback - Android</string>
 ```
 
 ## Changing the behaviour
