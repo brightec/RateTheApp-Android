@@ -1,3 +1,7 @@
+:warning: **Announcement: This library is no longer being actively developed.**  
+
+We, at Brightec, strongly support the steps and efforts that Google and others have taken in ensuring the Play Store remains a trustworthy experience, protecting end-users from harm and malware.  Having reviewed the current Play Store guidelines, we feel that it is no longer appropriate for us to be actively developing or promoting the library.   Whilst we don't believe it breaches any current guidelines, we feel it could be perceived as going against the spirit of the guidelines.   Existing users of the library are free to take a different viewpoint and continue to use the library should they so choose.   For reference the particular guidelines reviewed are https://android-developers.googleblog.com/2016/11/keeping-it-real-improving-reviews-and-ratings-in-google-play.html and https://play.google.com/about/storelisting-promotional/ratings-reviews-installs/
+
 # RateTheApp
 
 RateTheApp allows users to rate your app prompting them for further action depending on the rating they gave.
